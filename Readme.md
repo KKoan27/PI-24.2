@@ -3,9 +3,11 @@
 
 - Quando feito o pull, utilze o comando "npm install" no terminal, para que possa baixar arquivos de compilação para vizualizar o site (tudo isso dentro da pasta do projeto)
 
+### CRIE SUA BRANCH
+Para fazer os PR, faça uma branch com seu nome e faça push apenas nele.
 
 ### Documentar tudo
 No push que fizer, coloque um titulo esclarecedor sobre a alteração e na descrição seja o mais claro possivel também
 
 ### Reunião
-Toda vez que fazer algum push, não faça o pull request direto, anote para cada reunião de toda semana podermos conversar sobre alterações que todos fizeram no código.
+Toda vez que fazer algum push, não faça o pull request direto a branch MAIN , anote para cada reunião de toda semana podermos conversar sobre alterações que todos fizeram no código.
