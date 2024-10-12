@@ -7,7 +7,7 @@ function Cabeçalho(){
             <h1>OctoCore</h1>
             <h3>home</h3>
             <h3>shop</h3>
-            
+            <input type="text" />
         </header>
     )
 }
