@@ -5,6 +5,7 @@ function Cabeçalho(){
         <header>
             <img src={Logo} />
             <h1>OctoCore</h1>
+            <input type="text" />
         </header>
     )
 }
