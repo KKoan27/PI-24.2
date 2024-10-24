@@ -1,17 +1,21 @@
 import './App.css';
 import Rodape from './Componentes/Footer';
 import Cabeçalho from './Componentes/Header';
+import HomeSlider from './Componentes/HomeSlider';
 
 function App() {
   return (
-    <body>
-      <div className= "Cabecalho">  <Cabeçalho/> </div>
+    <div id="root">
+      <div className="Cabecalho">
+        <Cabeçalho />
+      </div>
       <main>
-        <h1> Ola mundo</h1>
+        <HomeSlider />
       </main>
-      <div className = "Rodape"> <Rodape/> </div>
-    </body>
-   
+      <div className="Rodape">
+        <Rodape />
+      </div>
+    </div>
   );
 }
 
