@@ -12,7 +12,7 @@ body {
 
 
 main {
-  flex: 1; /* Faz o conteúdo principal ocupar o restante da tela */
+  flex: 1;
   background-color: #171717;
   color: white;
   display: flex;
