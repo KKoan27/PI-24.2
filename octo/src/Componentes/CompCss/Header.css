@@ -1,1 +1,12 @@
-
+.Cabecalho header {
+    background-color: #171717;
+    flex: 0 0 80px; /* Altura fixa para o cabeçalho */
+    display: flex;
+    align-items: center; /* Centraliza verticalmente */
+    flex-direction: row;
+    justify-content: start;
+    padding: 15px;
+    gap: 20px;
+    width: 100%;
+  }
+  

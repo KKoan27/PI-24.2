@@ -1,0 +1,64 @@
+/* Configurações gerais */
+#app {
+    height: 100%;
+}
+  
+html, body {
+    position: relative;
+    height: 100%;
+    overflow-x: hidden; /* Evita o scroll lateral */
+}
+  
+body {
+    background-color: #171717; 
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #171717;
+    margin: 0;
+    padding: 0;
+}
+  
+/* Swiper */
+.swiper {
+    width: 1500px; /* Define a largura para 1500 pixels */
+    height: 640px; /* Define a altura para 640 pixels */
+    overflow: hidden; /* Garante que não vaze conteúdo */
+}
+  
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #171717;
+    
+    /* Centraliza texto no slide */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Garante que o slide ocupe toda a altura do swiper */
+}
+
+.swiper-slide img {
+    width: auto; /* Faz a imagem ocupar toda a largura do slide */
+    height: 100%; /* Faz a imagem ocupar toda a altura do slide */
+    object-fit: cover; /* Cobre o slide sem distorcer */
+}
+
+/* Media Queries para responsividade */
+@media (max-width: 1500px) {
+    .swiper {
+        width: 100%; /* Ajusta a largura para 100% em telas menores */
+        height: auto; /* Mantém a proporção da altura */
+    }
+}
+
+@media (max-width: 768px) {
+    .swiper-slide {
+        height: 150px; /* Reduz a altura do slide em telas menores */
+    }
+    @media (max-width: 768px) {
+        .swiper-slide img {
+            width: 100%; /* Ajusta a largura para 100% em telas menores */
+            height: auto; /* Altura automática para manter a proporção */
+        }
+    }
+}
