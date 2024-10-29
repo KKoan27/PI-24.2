@@ -3,7 +3,7 @@ import "./CompCss/Header.css"
 function Cabeçalho(){
     return(
         <header>
-            <img src={Logo} 
+            <img src={Logo}/>
         </header>
     )
 }
