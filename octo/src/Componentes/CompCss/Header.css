@@ -1,12 +1,40 @@
-.Cabecalho header {
+.Cabecalho .Cabecalho header  {
     background-color: #171717;
     flex: 0 0 80px; /* Altura fixa para o cabeçalho */
     display: flex;
     align-items: center; /* Centraliza verticalmente */
     flex-direction: row;
+    padding-left: 20px;
+    gap: 15%;
     justify-content: start;
     padding: 15px;
     gap: 20px;
     width: 100%;
+    
   }
-  
+  #HeaderOp{
+    display: flex;
+    justify-self: center;
+    font-weight: bold;
+    gap: 20px;
+    width: 100%;
+  }
+#active-link {
+  background-color: rgb(139, 44, 245);
+ 
+  border-radius: 25px;
+}
+/* ISSO AQUI E PARA DAR EFEITO E COR PARA AS OPÇÕES */
+  #HeaderOp a {
+    text-decoration: none; 
+    padding: 2ch;
+    color:white; 
+}
+
+/* Efeito de hover para os links */
+#HeaderOp a:hover {
+    font-weight: bold;
+  }
+
+    /* Estilo padrão para os links */
+
