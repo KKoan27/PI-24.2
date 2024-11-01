@@ -5,7 +5,9 @@ header{
     align-items: center; /* Centraliza verticalmente */
     flex-direction: row;
     padding-left: 20px;
+    gap: 15%;
     width: 100%;
+
     
   }
 
@@ -14,21 +16,26 @@ header{
   #HeaderOp{
     display: flex;
     justify-self: center;
-
+    font-weight: bold;
     gap: 20px;
   }
 
 
+  
+#active-link {
+  background-color: rgb(139, 44, 245);
+ 
+  border-radius: 25px;
+}
 /* ISSO AQUI E PARA DAR EFEITO E COR PARA AS OPÇÕES */
   #HeaderOp a {
-    color: #ffffff; 
     text-decoration: none; 
-    padding: 2ch; 
+    padding: 2ch;
+    color:white; 
 }
 
 /* Efeito de hover para os links */
 #HeaderOp a:hover {
-    color: rgb(81, 44, 245); 
     font-weight: bold;
   }
 
@@ -37,15 +44,4 @@ header{
 
 
 
-#active-link {
-    background-color: rgb(139, 44, 245);
-    color:#171717;
-    font-weight: bold;
-}
-
-#active-link {
-  background-color: rgb(139, 44, 245);
-  color:#171717;
-  font-weight: bold;
-}
 

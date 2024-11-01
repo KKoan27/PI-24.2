@@ -12,14 +12,11 @@ function App() {
       <BrowserRouter>
       <Cabeçalho/>
       <Routes>
-
           <Route path = "/" element={<HomeSlider/>}></Route>
           <Route path = "/Login" element={<Login/>}></Route>
           <Route path = "/PCs-gamer" element={<PCgamer></PCgamer>}></Route>
           <Route path = "/Atendimento" element={<Atendimento/>}></Route>
           <Route path = "/Monte-seu-PC" element={<MontePC/>}></Route>
-          
-        
       </Routes>
       <div id = "rodape">
       <Rodape/>
