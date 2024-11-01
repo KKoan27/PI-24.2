@@ -3,10 +3,4 @@
     background-color: #171717; 
     color: #fff; /* exemplo de cor do texto */
     padding: 20px; /* exemplo de padding */
-    display: flex;
-    flex-flow: row wrap; 
-    justify-content: space-around;
 }
-
-
-

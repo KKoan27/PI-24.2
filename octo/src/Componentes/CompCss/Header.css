@@ -1,22 +1,15 @@
-header{
+.Cabecalho header {
     background-color: #171717;
     flex: 0 0 80px; /* Altura fixa para o cabeçalho */
     display: flex;
     align-items: center; /* Centraliza verticalmente */
     flex-direction: row;
-    padding-left: 20px;
-    width: 100%;
-    
-  }
-
-
-
-  #HeaderOp{
-    display: flex;
-    justify-self: center;
-
+    justify-content: start;
+    padding: 15px;
     gap: 20px;
+    width: 100%;
   }
+
 
 
 /* ISSO AQUI E PARA DAR EFEITO E COR PARA AS OPÇÕES */
@@ -44,5 +37,6 @@ header{
     border-color: #ffffff ;
     
 }
+
 
 
