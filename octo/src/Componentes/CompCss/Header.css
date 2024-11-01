@@ -1,4 +1,4 @@
-header{
+.Cabecalho header {
     background-color: #171717;
     flex: 0 0 80px; /* Altura fixa para o cabeçalho */
     display: flex;
@@ -10,18 +10,13 @@ header{
 
     
   }
-
-
-
   #HeaderOp{
     display: flex;
     justify-self: center;
     font-weight: bold;
     gap: 20px;
+    width: 100%;
   }
-
-
-  
 #active-link {
   background-color: rgb(139, 44, 245);
  
@@ -40,8 +35,4 @@ header{
   }
 
     /* Estilo padrão para os links */
-
-
-
-
 

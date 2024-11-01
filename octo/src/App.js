@@ -1,7 +1,6 @@
 import './App.css';
 import Rodape from './Componentes/Footer';
 import Cabeçalho from './Componentes/Header';
-import {BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomeSlider from './Componentes/HomeSlider';
 import Login from './Componentes/PAGINAS/Login'
 import MontePC from './Componentes/PAGINAS/Monte-seu-PC';
@@ -21,9 +20,8 @@ function App() {
       <div id = "rodape">
       <Rodape/>
       </div>
-  </BrowserRouter>
-)
-    
+    </div>
+  );
 }
 
 export default App;

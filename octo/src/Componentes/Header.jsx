@@ -1,9 +1,6 @@
 import Logo from "../Imagens/Logo.png"
 import "./CompCss/Header.css"
-import {Link, useLocation} from 'react-router-dom'
 function Cabeçalho(){
-
-     const location = useLocation(); 
     return(
         <header className=" Cabecalho">
              <img src={Logo} alt="OctoLogo"/>
@@ -19,7 +16,6 @@ function Cabeçalho(){
             </nav>
 
         </header>
-        
     )
 }
 export default Cabeçalho
