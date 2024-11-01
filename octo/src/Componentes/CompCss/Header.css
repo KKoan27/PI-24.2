@@ -28,7 +28,7 @@ header{
 
 /* Efeito de hover para os links */
 #HeaderOp a:hover {
-    color: rgb(81, 44, 245); 
+    color: rgb(153, 152, 156); 
     font-weight: bold;
   }
 
@@ -40,12 +40,9 @@ header{
 #active-link {
     background-color: rgb(139, 44, 245);
     color:#171717;
-    font-weight: bold;
+    border-radius: 25px;
+    border-color: #ffffff ;
+    
 }
 
-#active-link {
-  background-color: rgb(139, 44, 245);
-  color:#171717;
-  font-weight: bold;
-}
 
