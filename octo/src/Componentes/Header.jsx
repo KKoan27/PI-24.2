@@ -4,10 +4,12 @@ import { Box, Drawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, 
 import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
-import InfoIcon from '@mui/icons-material/Info';
-import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
-import InboxIcon from '@mui/icons-material/Inbox';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import ConstructionIcon from '@mui/icons-material/Construction';
+import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
+import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import Logo from '../Imagens/Logo.png';
+import './CompCss/Sidebar.css';
 import './CompCss/Header.css';
 
 const Header = () => {
@@ -23,12 +25,13 @@ const Header = () => {
 
     const drawerList = (
         <Box
-            sx={{ width: 250 }}
+            className="sidebar"
+            sx={{ width: 300 }}
             role="presentation"
             onClick={toggleDrawer(false)}
             onKeyDown={toggleDrawer(false)}
         >
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', padding: '0 16px' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', padding: '0' }}>
                 <ListItem disablePadding>
                     <ListItemButton component={Link} to="/">
                         <ListItemIcon>
@@ -41,33 +44,48 @@ const Header = () => {
                 <ListItem disablePadding>
                     <ListItemButton component={Link} to="/about">
                         <ListItemIcon>
-                            <InfoIcon />
+                            <ExitToAppIcon />
                         </ListItemIcon>
-                        <ListItemText primary="About" />
+                        <ListItemText primary="Login" />
                     </ListItemButton>
                 </ListItem>
             </Box>
-    
-            <Divider />
-    
-            <List>
+        
+            
                 <ListItem disablePadding>
                     <ListItemButton component={Link} to="/contact">
                         <ListItemIcon>
-                            <PermContactCalendarIcon />
+                            <HomeIcon />
                         </ListItemIcon>
-                        <ListItemText primary="Contact" />
+                        <ListItemText primary="Home" />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
                     <ListItemButton>
                         <ListItemIcon>
-                            <InboxIcon />
+                            <ConstructionIcon />
                         </ListItemIcon>
-                        <ListItemText primary="Inbox" />
+                        <ListItemText primary="PC’s Gamer" />
                     </ListItemButton>
                 </ListItem>
-            </List>
+            
+                <ListItem disablePadding>
+                    <ListItemButton component={Link} to="/contact">
+                        <ListItemIcon>
+                            <SportsEsportsIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Monte seu PC" />
+                    </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                    <ListItemButton>
+                        <ListItemIcon>
+                            <SupportAgentIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Suporte" />
+                    </ListItemButton>
+                </ListItem>
+            
         </Box>
     );
 
