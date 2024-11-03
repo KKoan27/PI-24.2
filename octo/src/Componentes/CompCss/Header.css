@@ -1,12 +1,30 @@
-.Cabecalho header {
-    background-color: #171717;
-    flex: 0 0 80px; /* Altura fixa para o cabeçalho */
-    display: flex;
-    align-items: center; /* Centraliza verticalmente */
-    flex-direction: row;
-    justify-content: start;
-    padding: 15px;
-    gap: 20px;
-    width: 100%;
-  }
-  
+
+.Cabecalho {
+  background-color: #171717;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Espalha o conteúdo para manter o logo e o menu separados */
+  padding: 0 20px; /* Espaço nas laterais */
+  color: #fff;
+}
+
+
+
+#HeaderOp {
+  display: flex;
+  gap: 20px;
+}
+
+/* Estilos dos links */
+#HeaderOp a {
+  color: #ffffff;
+  text-decoration: none;
+  padding: 2ch;
+}
+
+#active-link {
+  background-color: rgb(139, 44, 245);
+  color: #171717;
+  font-weight: bold;
+  border-radius: 5px; /* Para um visual mais suave nas bordas */
+}
