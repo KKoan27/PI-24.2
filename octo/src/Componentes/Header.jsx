@@ -8,6 +8,7 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import ConstructionIcon from '@mui/icons-material/Construction';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
+import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import Logo from '../Imagens/Logo.png';
 import './CompCss/Sidebar.css';
 import './CompCss/Header.css';
@@ -33,16 +34,16 @@ const Header = () => {
         >
             <Box sx={{ display: 'flex', justifyContent: 'space-between', padding: '0' }}>
                 <ListItem disablePadding>
-                    <ListItemButton component={Link} to="/">
+                    <ListItemButton component={Link} to="/Login">
                         <ListItemIcon>
-                            <PermIdentityIcon/>
+                            <PermIdentityIcon />
                         </ListItemIcon>
                         <ListItemText primary="Minha conta" />
                     </ListItemButton>
                 </ListItem>
-    
+                <span className="divider"></span>
                 <ListItem disablePadding>
-                    <ListItemButton component={Link} to="/about">
+                    <ListItemButton component={Link} to="/Login">
                         <ListItemIcon>
                             <ExitToAppIcon />
                         </ListItemIcon>
@@ -50,42 +51,42 @@ const Header = () => {
                     </ListItemButton>
                 </ListItem>
             </Box>
-        
-            
-                <ListItem disablePadding>
-                    <ListItemButton component={Link} to="/contact">
-                        <ListItemIcon>
-                            <HomeIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Home" />
-                    </ListItemButton>
-                </ListItem>
-                <ListItem disablePadding>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <ConstructionIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="PC’s Gamer" />
-                    </ListItemButton>
-                </ListItem>
-            
-                <ListItem disablePadding>
-                    <ListItemButton component={Link} to="/contact">
-                        <ListItemIcon>
-                            <SportsEsportsIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Monte seu PC" />
-                    </ListItemButton>
-                </ListItem>
-                <ListItem disablePadding>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <SupportAgentIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Suporte" />
-                    </ListItemButton>
-                </ListItem>
-            
+
+
+            <ListItem disablePadding>
+                <ListItemButton component={Link} to="/">
+                    <ListItemIcon>
+                        <HomeIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Home" />
+                </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding component={Link} to="/PCs-gamer">
+                <ListItemButton>
+                    <ListItemIcon>
+                        <ConstructionIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="PC’s Gamer" />
+                </ListItemButton>
+            </ListItem>
+
+            <ListItem disablePadding>
+                <ListItemButton component={Link} to="/Monte-seu-PC">
+                    <ListItemIcon>
+                        <SportsEsportsIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Monte seu PC" />
+                </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding component={Link} to="/Atendimento">
+                <ListItemButton>
+                    <ListItemIcon>
+                        <SupportAgentIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Suporte" />
+                </ListItemButton>
+            </ListItem>
+
         </Box>
     );
 
@@ -98,12 +99,71 @@ const Header = () => {
                     <MenuIcon sx={{ color: 'white' }} />
                     <span style={{ color: 'white', marginLeft: '8px' }}>Departamentos</span>
                 </IconButton>
-                <Link id={location.pathname === "/" ? "active-link" : "home-link"} to="/">Home</Link>
-                <Link id={location.pathname === "/PCs-gamer" ? "active-link" : "pc-gamer-link"} to="/PCs-gamer">PC's Gamer</Link>
-                <Link id={location.pathname === "/Monte-seu-PC" ? "active-link" : "monte-pc-link"} to="/Monte-seu-PC">Monte seu PC</Link>
-                <Link id={location.pathname === "/Atendimento" ? "active-link" : "atendimento-link"} to="/Atendimento">Atendimento</Link>
-                <Link id={location.pathname === "/Login" ? "active-link" : "login-link"} to="/Login">Login</Link>
+
+                <Link
+                    id={location.pathname === "/" ? "active-link" : "home-link"}
+                    to="/"
+                    className="header-link"
+                >
+                    <HomeIcon className="header-icon" />
+                    Home
+                </Link>
+
+                <Link
+                    id={location.pathname === "/PCs-gamer" ? "active-link" : "pc-gamer-link"}
+                    to="/PCs-gamer"
+                    className="header-link"
+                >
+                    <ConstructionIcon className="header-icon" />
+                    PC's Gamer
+                </Link>
+
+                <Link
+                    id={location.pathname === "/Monte-seu-PC" ? "active-link" : "monte-pc-link"}
+                    to="/Monte-seu-PC"
+                    className="header-link"
+                >
+                    <SportsEsportsIcon className="header-icon" />
+                    Monte seu PC
+                </Link>
+
+                <Link
+                    id={location.pathname === "/Atendimento" ? "active-link" : "atendimento-link"}
+                    to="/Atendimento"
+                    className="header-link"
+                >
+                    <SupportAgentIcon className="header-icon" />
+                    Atendimento
+                </Link>
+
+                <Link
+                    id={location.pathname === "/MinhaConta" ? "active-link" : "MinhaConta-link"}
+                    to="/MinhaConta"
+                    className="header-link"
+                >
+                    <PermIdentityIcon className="header-icon" />
+                    Minha Conta
+                </Link>
+                <span className="divider"></span>
+                <Link
+                    id={location.pathname === "/Login" ? "active-link" : "login-link"}
+                    to="/Login"
+                    className="header-link"
+                >
+                    <ExitToAppIcon className="header-icon" />
+                    Login
+                </Link>
+
+
+                <Link
+                    id={location.pathname === "/Carrinho" ? "active-link" : "Carrinho-link"}
+                    to="/Carrinho"
+                    className="header-link"
+                >
+                    <LocalGroceryStoreIcon className="header-icon" />
+                </Link>
             </nav>
+
 
             <Drawer anchor="left" open={isDrawerOpen} onClose={toggleDrawer(false)}>
                 {drawerList}

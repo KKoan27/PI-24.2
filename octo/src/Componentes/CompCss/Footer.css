@@ -5,8 +5,10 @@
     padding: 20px; /* exemplo de padding */
     display: flex;
     flex-flow: row wrap; 
+    padding: 1rem;
     justify-content: space-around;
 }
 
-
+  
+  
 
