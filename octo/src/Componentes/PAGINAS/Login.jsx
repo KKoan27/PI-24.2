@@ -1,4 +1,5 @@
-
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../CompCss/Login.css';
 import Logo2 from '../../Imagens/Logo2.png';
 
@@ -34,7 +35,6 @@ const Login = () => {
           <div className="modal-content">
             <button className="close-button" onClick={handleCloseModal}>×</button>
             <img src={Logo2} alt="LogoBranca" />
-            <h2>Login</h2>
             <form onSubmit={handleSubmit}>
               <div className="form-group">
                 <label htmlFor="email">Email:</label>
@@ -61,6 +61,6 @@ const Login = () => {
       )}
     </div>
   );
-};
+};  
 
 export default Login;

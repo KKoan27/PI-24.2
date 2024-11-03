@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Box, Drawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Divider } from '@mui/material';
+import { Box, Drawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
@@ -10,11 +10,13 @@ import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import Logo from '../Imagens/Logo.png';
+import Logo2 from '../Imagens/Logo2.png';
 import './CompCss/Sidebar.css';
 import './CompCss/Header.css';
 
 const Header = () => {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const location = useLocation();
 
     const toggleDrawer = (open) => (event) => {
@@ -22,6 +24,20 @@ const Header = () => {
             return;
         }
         setIsDrawerOpen(open);
+    };
+
+    const handleOpenModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log('Formulário enviado');
+        handleCloseModal();
     };
 
     const drawerList = (
@@ -43,7 +59,7 @@ const Header = () => {
                 </ListItem>
                 <span className="divider"></span>
                 <ListItem disablePadding>
-                    <ListItemButton component={Link} to="/Login">
+                    <ListItemButton onClick={handleOpenModal}>
                         <ListItemIcon>
                             <ExitToAppIcon />
                         </ListItemIcon>
@@ -51,7 +67,6 @@ const Header = () => {
                     </ListItemButton>
                 </ListItem>
             </Box>
-
 
             <ListItem disablePadding>
                 <ListItemButton component={Link} to="/">
@@ -145,15 +160,10 @@ const Header = () => {
                     Minha Conta
                 </Link>
                 <span className="divider"></span>
-                <Link
-                    id={location.pathname === "/Login" ? "active-link" : "login-link"}
-                    to="/Login"
-                    className="header-link"
-                >
+                <ListItemButton onClick={handleOpenModal} className="header-link">
                     <ExitToAppIcon className="header-icon" />
                     Login
-                </Link>
-
+                </ListItemButton>
 
                 <Link
                     id={location.pathname === "/Carrinho" ? "active-link" : "Carrinho-link"}
@@ -164,6 +174,32 @@ const Header = () => {
                 </Link>
             </nav>
 
+            {/* Modal de Login */}
+            {isModalOpen && (
+                <div className="modal-overlay" onClick={handleCloseModal}>
+                    <div className="modal-content">
+                        <button className="close-button" onClick={handleCloseModal}>×</button>
+                        <img src={Logo2} alt="LogoBranca" />
+                        <h2>Login</h2>
+                        <form onSubmit={handleSubmit}>
+                            <div className="form-group">
+                                <label htmlFor="email">Email:</label>
+                                <input type="email" id="email" placeholder="username@gmail.com" required />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="password">Senha:</label>
+                                <input type="password" id="password" placeholder="Senha" required />
+                            </div>
+
+                            <Link to="/forgot-password" className="link-forgot">Esqueceu a senha?</Link>
+
+                            <button type="submit" className='login-button'>Entrar</button>
+
+                            <Link to="/register" className="link-register">Criar conta</Link>
+                        </form>
+                    </div>
+                </div>
+            )}
 
             <Drawer anchor="left" open={isDrawerOpen} onClose={toggleDrawer(false)}>
                 {drawerList}
