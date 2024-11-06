@@ -14,8 +14,8 @@ function App() {
   return (
     <BrowserRouter>
       <Cabeçalho />
+      <main>
       <Routes>
-
         <Route path="/" element={<HomeSlider />}></Route>
         <Route path="/PCs-gamer" element={<PCgamer></PCgamer>}></Route>
         <Route path="/Monte-seu-PC" element={<MontePC />}></Route>
@@ -23,11 +23,10 @@ function App() {
         <Route path="/MinhaConta" element={<MinhaConta />}></Route>
         <Route path="/Login" element={<Login />}></Route>
         <Route path="/Carrinho" element={<Carrinho />}></Route>
-
       </Routes>
-      <div id="rodape">
-        <Rodape />
-      </div>
+      </main>
+
+      <Rodape />
     </BrowserRouter>
   )
 
