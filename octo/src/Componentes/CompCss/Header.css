@@ -1,21 +1,20 @@
-
 .Cabecalho {
   background-color: #171717;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: space-between; /* Espalha o conteúdo para manter o logo e o menu separados */
-  padding: 0 20px; /* Espaço nas laterais */
+  padding: 0 20px; 
   color: #fff;
 }
-
 
 
 #HeaderOp {
   display: flex;
   gap: 20px;
+  flex-grow: 1;   
+  justify-content: center; 
 }
 
-/* Estilos dos links */
 #HeaderOp a {
   color: #ffffff;
   text-decoration: none;
@@ -23,8 +22,43 @@
 }
 
 #active-link {
-  background-color: rgb(139, 44, 245);
-  color: #171717;
   font-weight: bold;
-  border-radius: 5px; /* Para um visual mais suave nas bordas */
+  border-radius: 5px; 
+}
+
+.header-link {
+  display: flex;
+  align-items: center;
+  color: white;
+  font-size: 16px;         
+  font-weight: bold;
+  margin-left: 10px;       
+  text-decoration: none;    
+  padding: 4px 10px;       
+}
+
+.header-icon {
+  margin-right: 4px;     
+}
+
+.header-link {
+  display: flex;            
+  align-items: center;      
+  color: white;
+  font-size: 16px;          
+  font-weight: bold;
+  margin-left: 10px;       
+  text-decoration: none;   
+}
+
+#login-area {
+  display: flex;
+  align-items: center;
+}
+
+.divider {
+  height: 100%; /* Ocupe toda a altura do cabeçalho */
+  width: 1px;
+  background-color: #fff;
+  margin: 0 10px;
 }
