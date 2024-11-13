@@ -1,0 +1,42 @@
+.kraken-page {
+    background-color: #000;
+    color: #fff;
+  }
+  
+  .banner {
+    text-align: center;
+    color: #a260ff;
+  }
+.tilte{
+
+position: absolute;
+width: 1022.4px;
+height: 0px;
+left: 818.6px;
+top: 433.92px;
+font-family: 'Inter';
+font-style: normal;
+font-weight: 600;
+font-size: 96px;
+line-height: 0%;
+/* identical to box height, or 0px */
+letter-spacing: 0.01em;
+}
+  .specifications {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    color: #a260ff;
+  }
+  
+  .spec-column {
+    flex: 1;
+    margin: 10px;
+  }
+  
+  .description {
+    text-align: center;
+    margin: 20px;
+  }
+  
+  

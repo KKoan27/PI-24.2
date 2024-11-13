@@ -21,7 +21,7 @@ body {
 /* Swiper */
 .swiper {
     width: 1500px; /* Define a largura para 1500 pixels */
-    height: 640px; /* Define a altura para 640 pixels */
+    height: auto; 
     overflow: hidden; /* Garante que não vaze conteúdo */
 }
   
@@ -38,28 +38,29 @@ body {
 }
 
 .swiper-slide img {
-    width: auto; /* Faz a imagem ocupar toda a largura do slide */
-    height: 100%; /* Faz a imagem ocupar toda a altura do slide */
+    width: auto;
+    height: auto;
     object-fit: cover; /* Cobre o slide sem distorcer */
 }
 
 /* Media Queries para responsividade */
-@media (max-width: 1500px) {
+@media (max-width: 768px) {
     .swiper {
-        width: 100%; /* Ajusta a largura para 100% em telas menores */
-        height: auto; /* Mantém a proporção da altura */
+        width: 100%; /* Largura máxima do contêiner */
+        height: auto; /* Altura automática para manter proporção */
     }
 }
 
+/* Ajuste para telas pequenas */
 @media (max-width: 768px) {
     .swiper-slide {
-        height: 150px; /* Reduz a altura do slide em telas menores */
+        height: 150px; /* Altura reduzida para telas pequenas */
     }
-    @media (max-width: 768px) {
-        .swiper-slide img {
-            width: 100%; /* Ajusta a largura para 100% em telas menores */
-            height: auto; /* Altura automática para manter a proporção */
-        }
-    }
+}
+
+/* Altura mínima para evitar que as imagens desapareçam */
+.swiper-slide img {
+    min-height: 200px;
+    width: 100%;
 }
 
