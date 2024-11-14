@@ -13,10 +13,12 @@ import Logo from '../Imagens/Logo.png';
 import Logo2 from '../Imagens/Logo2.png';
 import './CompCss/Sidebar.css';
 import './CompCss/Header.css';
+import './CompCss/Cadastro.css';
 
 const Header = () => {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isCadastroModalOpen, setIsCadastroModalOpen] = useState(false);
     const location = useLocation();
 
     const toggleDrawer = (open) => (event) => {
@@ -32,6 +34,15 @@ const Header = () => {
 
     const handleCloseModal = () => {
         setIsModalOpen(false);
+    };
+
+    const handleOpenCadastroModal = () => {
+        setIsModalOpen(false); // Fecha o modal de login
+        setIsCadastroModalOpen(true); // Abre o modal de cadastro
+    };
+
+    const handleCloseCadastroModal = () => {
+        setIsCadastroModalOpen(false);
     };
 
     const handleSubmit = (e) => {
@@ -101,7 +112,6 @@ const Header = () => {
                     <ListItemText primary="Suporte" />
                 </ListItemButton>
             </ListItem>
-
         </Box>
     );
 
@@ -177,7 +187,7 @@ const Header = () => {
             {/* Modal de Login */}
             {isModalOpen && (
                 <div className="modal-overlay" onClick={handleCloseModal}>
-                    <div className="modal-content">
+                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                         <button className="close-button" onClick={handleCloseModal}>×</button>
                         <img src={Logo2} alt="LogoBranca" />
                         <h2>Login</h2>
@@ -195,13 +205,47 @@ const Header = () => {
 
                             <button type="submit" className='login-button'>Entrar</button>
 
-                            <Link to="/register" className="link-register">Criar conta</Link>
+                            <Link
+                                onClick={handleOpenCadastroModal}
+                                className="link-register"
+                            >
+                                Criar conta
+                            </Link>
+
                         </form>
                     </div>
                 </div>
             )}
 
-            <Drawer anchor="left" open={isDrawerOpen} onClose={toggleDrawer(false)}>
+            {/* Modal de Cadastro */}
+            {isCadastroModalOpen && (
+                <div className="modal-overlay" onClick={handleCloseCadastroModal}>
+                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                        <button className="close-button" onClick={handleCloseCadastroModal}>×</button>
+                        <img src={Logo2} alt="LogoBranca" />
+
+                        <h2>Criar Conta</h2>
+                        <form>
+                            <div className="form-group">
+                                <label htmlFor="username">Nome de Usuário:</label>
+                                <input type="text" id="username" placeholder="Nome de usuário" required />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="email">Email:</label>
+                                <input type="email" id="email" placeholder="username@gmail.com" required />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="password">Senha:</label>
+                                <input type="password" id="password" placeholder="Crie uma senha" required />
+                            </div>
+
+                            <button type="submit" className='register-button'>Cadastrar</button>
+                        </form>
+                    </div>
+                </div>
+            )}
+
+            <Drawer anchor="right" open={isDrawerOpen} onClose={toggleDrawer(false)}>
                 {drawerList}
             </Drawer>
         </header>
