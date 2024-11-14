@@ -139,7 +139,7 @@ const Header = () => {
                     to="/PCs-gamer"
                     className="header-link"
                 >
-                    <ConstructionIcon className="header-icon" />
+                    <SportsEsportsIcon className="header-icon" />
                     PC's Gamer
                 </Link>
 
@@ -148,7 +148,7 @@ const Header = () => {
                     to="/Monte-seu-PC"
                     className="header-link"
                 >
-                    <SportsEsportsIcon className="header-icon" />
+                    <ConstructionIcon className="header-icon" />
                     Monte seu PC
                 </Link>
 
@@ -245,7 +245,7 @@ const Header = () => {
                 </div>
             )}
 
-            <Drawer anchor="right" open={isDrawerOpen} onClose={toggleDrawer(false)}>
+            <Drawer anchor="left" open={isDrawerOpen} onClose={toggleDrawer(false)}>
                 {drawerList}
             </Drawer>
         </header>
