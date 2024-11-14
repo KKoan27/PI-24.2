@@ -90,7 +90,7 @@ const Header = () => {
             <ListItem disablePadding component={Link} to="/PCs-gamer">
                 <ListItemButton>
                     <ListItemIcon>
-                        <ConstructionIcon />
+                        <SportsEsportsIcon />
                     </ListItemIcon>
                     <ListItemText primary="PC’s Gamer" />
                 </ListItemButton>
@@ -99,7 +99,7 @@ const Header = () => {
             <ListItem disablePadding>
                 <ListItemButton component={Link} to="/Monte-seu-PC">
                     <ListItemIcon>
-                        <SportsEsportsIcon />
+                        <ConstructionIcon />
                     </ListItemIcon>
                     <ListItemText primary="Monte seu PC" />
                 </ListItemButton>
