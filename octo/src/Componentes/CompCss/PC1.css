@@ -1,0 +1,134 @@
+/* pc1.css */
+
+/* Estilos para a Home (Primeira Seção) */
+.home-section {
+  padding: 60px 20px;
+  background-color: #0A0A0A;
+  color: #FFFFFF;
+  text-align: center;
+}
+
+.home-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+
+.pc-image {
+  max-width: 500px;
+  height: auto;
+  margin: 20px 0;
+}
+
+.price-text {
+  font-size: 24px;
+  color: #8F00FF;
+}
+
+.buy-button {
+  padding: 15px 30px;
+  background-color: #8F00FF;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.buy-button:hover {
+  background-color: #7100cc;
+}
+
+/* Estilos para a Seção de Personalização */
+.customization-section {
+  padding: 60px 20px;
+  background-color: #0A0A0A;
+  color: #FFFFFF;
+  text-align: center;
+}
+
+.customization-header {
+  margin-bottom: 50px;
+}
+
+.customization-header h2 {
+  font-size: 24px;
+  color: #FFFFFF;
+  margin-bottom: 10px;
+}
+.custom-icon {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+}
+
+.custom-icon img {
+  width: 60px;
+  height: auto;
+}
+
+
+.customization-options {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.config-category {
+  max-width: 300px;
+  text-align: left;
+}
+
+.config-item {
+  margin-bottom: 30px;
+}
+
+.config-item strong {
+  display: block;
+  font-size: 18px;
+  color: #FFFFFF;
+  margin-bottom: 10px;
+}
+
+.options {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.option-button {
+  background-color: transparent;
+  color: #8F00FF;
+  border: 2px solid #8F00FF;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.option-button:hover {
+  background-color: #8F00FF;
+  color: #0A0A0A;
+}
+
+/* Estilo para o botão de scroll */
+.scroll-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 15px 25px;
+  background-color: #8F00FF;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.scroll-button:hover {
+  background-color: #7100cc;
+}
