@@ -52,18 +52,18 @@
     margin: 10px 0; 
   }
   
-  .login-button {
+  .login-button, .send-button, .register-button {
     margin-top: 10px; 
     padding: 10px 20px;
     border: none;
-    background-color: rgba(0, 52, 101, 1);
-    color: white;
+    background-color: #FFFFFF;
+    color: #171717;
     border-radius: 8px;
     cursor: pointer;
     width: 250px; 
     height: 40px;
   }
-  
+
   .form-group {
     display: flex;
     flex-direction: column;
