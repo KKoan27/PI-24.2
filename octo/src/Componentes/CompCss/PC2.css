@@ -21,9 +21,9 @@
   margin-top: 10px;
 }
 
-.option-button {
+.option-button2 {
   background-color: white;      
-  border: 2px solid #8F00FF; 
+  border: 2px solid #009DFF; 
   color: #171717;
   padding: 10px 15px;
   cursor: pointer;
@@ -31,7 +31,7 @@
   transition: 0.3s ease, color 0.3s ease; 
 }
 
-.option-button:hover {
+.option-button2:hover {
   background-color: #171717;
   color: #ffffff;
 }
@@ -39,11 +39,12 @@
 .Logo {
   max-width: 100%;
   height: auto;
-  margin-top: 80px;
-  margin-bottom: 20px; 
+  margin-top: 110px;
+  margin-bottom: 40px; 
   display: block;
   text-align: center;
 }
+
 
 .banner {
   display: flex;
@@ -100,7 +101,7 @@
 }
 
 .product-title .Wave {
-  color: #8000FF; 
+  color: #009DFF; 
 }
 
 .title-wrapper {

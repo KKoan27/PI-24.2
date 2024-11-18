@@ -69,11 +69,16 @@ function PC1() {
 
                 <p className="description-text">
                     Desencadeie o poder das profundezas com o Kraken, um computador projetado para dominar todas as dimensões do desempenho. Como a lenda do monstro marinho que emerge do abismo, o Kraken traz à tona uma experiência de jogo inigualável, onde confiabilidade, velocidade e design de vanguarda se encontram para criar uma máquina imbatível.
+                    <br /><br />
                     Com o desempenho imbatível das placas de vídeo com Ray Tracing e DLSS, sua jornada pelos mundos virtuais será inebriante, com gráficos deslumbrantes e realismo impressionante. Cada detalhe ganha vida em alta definição, graças à potência das tecnologias mais avançadas.
+                    <br /><br />
                     Equipado com memórias DDR5, o Kraken eleva o seu gameplay a outro nível, com módulos de até 5200MHz de frequência, garantindo o máximo desempenho no barramento de dados. Sinta a velocidade inacreditável do SSD de última geração, com transferências de dados superiores a 7000MB por segundo.
+                    <br /><br />
                     Seja para abrir jogos ou carregar aplicações, o Kraken faz tudo acontecer num piscar de olhos. Com WiFi 6 e Bluetooth 5.2, você estará sempre conectado à velocidade da luz, com mínima latência e máxima estabilidade, pronto para qualquer desafio online.
+                    <br /><br />
                     Liberte o poder do Kraken e mergulhe de cabeça na próxima era do gaming.
                 </p>
+
             </section>
         </div>
 
