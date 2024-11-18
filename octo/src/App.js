@@ -24,12 +24,9 @@ function App() {
           <Route path="/Atendimento" element={<Atendimento />}></Route>
           <Route path="/MinhaConta" element={<MinhaConta />}></Route>
           <Route path="/Carrinho" element={<Carrinho />}></Route>
-          <Route path="/" element={<HomeSlider />} />
           <Route path="/PC1" element={<PC1 />} />
           <Route path="/PC2" element={<PC2 />} />
           <Route path="/PC3" element={<PC3 />} />
-
-
         </Routes>
       </main>
 

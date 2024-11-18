@@ -36,10 +36,10 @@ const HomeSlider = () => {
           <SwiperSlide onClick={() => handleSlideClick('/pc1')}>
           <img src={Banner1} alt="Slide 1" style={{width: '100%', height: 'auto', maxHeight: 'auto', objectFit: 'cover'}} />
           </SwiperSlide>
-          <SwiperSlide onClick={() => handleSlideClick('/pc12')}>
+          <SwiperSlide onClick={() => handleSlideClick('/pc2')}>
           <img src={Banner2} alt="Slide 2"  style={{width: '100%', height: 'auto', maxHeight: 'auto', objectFit: 'cover'}} />
           </SwiperSlide>
-          <SwiperSlide onClick={() => handleSlideClick('/pc12')} >
+          <SwiperSlide onClick={() => handleSlideClick('/pc3')} >
           <img src={Banner3} alt="Slide 3"  style={{width: '100%', height: 'auto', maxHeight: 'auto', objectFit: 'cover'}} />
           </SwiperSlide>
         </Swiper>
