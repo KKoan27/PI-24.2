@@ -53,7 +53,7 @@ function PC3() {
 
                 <div className="spec-column">
                     <h2>Refrigeração</h2>
-                    <p>Water Cooler NZXT Kraken Elite 360</p>
+                    <p>Water Cooler NZXT Dante Elite 360</p>
                     <div className="options">
                         <button className="option-button3">Elite 360</button>
                     </div>
@@ -61,7 +61,7 @@ function PC3() {
             </section>
 
             <section className="product-description">
-                <h1 className="product-title">PC GAMER <span className="kraken">KRAKEN</span></h1>
+                <h1 className="product-title">PC GAMER <span className="Dante">Dante</span></h1>
                 <div className="separator-wrapper">
                     <div className="separator white"></div>
                     <div className="separator gray"></div>
