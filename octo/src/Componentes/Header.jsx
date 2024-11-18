@@ -19,6 +19,7 @@ const Header = () => {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isCadastroModalOpen, setIsCadastroModalOpen] = useState(false);
+    const [isForgotPasswordModalOpen, setIsForgotPasswordModalOpen] = useState(false);
     const location = useLocation();
 
     const toggleDrawer = (open) => (event) => {
@@ -45,6 +46,15 @@ const Header = () => {
         setIsCadastroModalOpen(false);
     };
 
+    const handleOpenForgotPasswordModal = () => {
+        setIsModalOpen(false); // Fecha o modal de login
+        setIsForgotPasswordModalOpen(true); // Abre o modal de recuperação de senha
+    };
+    
+    const handleCloseForgotPasswordModal = () => {
+        setIsForgotPasswordModalOpen(false);
+    };
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log('Formulário enviado');
@@ -201,14 +211,17 @@ const Header = () => {
                                 <input type="password" id="password" placeholder="Senha" required />
                             </div>
 
-                            <Link to="/forgot-password" className="link-forgot">Esqueceu a senha?</Link>
+                            <Link
+                                onClick={handleOpenForgotPasswordModal} 
+                                className="link-forgot">
+                                Esqueceu a senha?
+                            </Link>
 
                             <button type="submit" className='login-button'>Entrar</button>
 
                             <Link
                                 onClick={handleOpenCadastroModal}
-                                className="link-register"
-                            >
+                                className="link-register">
                                 Criar conta
                             </Link>
 
@@ -239,7 +252,30 @@ const Header = () => {
                                 <input type="password" id="password" placeholder="Crie uma senha" required />
                             </div>
 
-                            <button type="submit" className='register-button'>Cadastrar</button>
+                            <button type="submit" className='send-button'>Enviar</button>
+                        </form>
+                    </div>
+                </div>
+            )}
+            {/* Modal de Recuperar Senha */}
+            {isForgotPasswordModalOpen && (
+                <div className="modal-overlay" onClick={handleCloseForgotPasswordModal}>
+                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                    <button className="close-button" onClick={handleCloseForgotPasswordModal}>×</button>
+                    <img src={Logo2} alt="LogoBranca" />
+
+                        <h2>Recuperar Senha</h2>
+                        <form>
+                            <div className="form-group">
+                                <label htmlFor="username">Nome de Usuário:</label>
+                                <input type="text" id="username" placeholder="Nome de usuário" required />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="email">Email:</label>
+                                <input type="email" id="email" placeholder="username@gmail.com" required />
+                            </div>
+
+                            <button type="submit" className='register-button'>Link para resetar senha enviado!</button>
                         </form>
                     </div>
                 </div>

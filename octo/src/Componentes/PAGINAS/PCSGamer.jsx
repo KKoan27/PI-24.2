@@ -7,4 +7,5 @@ export default function PCgamer(){
             <h1>Os pczin pronto vai ta aqui</h1>
         </div>
 
+
     )}
