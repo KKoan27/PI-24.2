@@ -1,26 +1,32 @@
 import React, { useState } from "react";
 import "../CompCss/MontePC.css";
+// Exemplo de importação de ícones do Material-UI
+import MemoryIcon from "@mui/icons-material/Memory";
+import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
+import StorageIcon from "@mui/icons-material/Storage";
+import VideogameAssetIcon from "@mui/icons-material/VideogameAsset";
 
 export default function MontePC() {
   const [selected, setSelected] = useState(""); // Estado para armazenar o item selecionado
 
+  // Lista de itens da sidebar com texto e ícones
   const items = [
-    "Processador",
-    "Placa Mãe",
-    "Memória",
-    "Placa de vídeo",
-    "SSD",
-    "HD",
-    "Cooler",
-    "Fonte",
-    "Gabinete",
-    "Fans",
-    "Sistema Operacional",
-    "Software",
+    { name: "Processador", icon: <MemoryIcon /> },
+    { name: "Placa Mãe", icon: <SettingsApplicationsIcon /> },
+    { name: "Memória", icon: <MemoryIcon /> },
+    { name: "Placa de vídeo", icon: <VideogameAssetIcon /> },
+    { name: "SSD", icon: <StorageIcon /> },
+    { name: "HD", icon: <StorageIcon /> },
+    { name: "Cooler", icon: <SettingsApplicationsIcon /> },
+    { name: "Fonte", icon: <SettingsApplicationsIcon /> },
+    { name: "Gabinete", icon: <SettingsApplicationsIcon /> },
+    { name: "Fans", icon: <SettingsApplicationsIcon /> },
+    { name: "Sistema Operacional", icon: <SettingsApplicationsIcon /> },
+    { name: "Software", icon: <SettingsApplicationsIcon /> },
   ];
 
   const handleSelection = (item) => {
-    setSelected(item); // Atualiza o estado com o botão selecionado
+    setSelected(item); // Define o botão clicado como selecionado
   };
 
   return (
@@ -31,11 +37,12 @@ export default function MontePC() {
             <li
               key={index}
               className={`sidebar-item ${
-                selected === item ? "selected" : "deselected"
+                selected === item.name ? "selected" : "deselected"
               }`}
-              onClick={() => handleSelection(item)} // Define o botão clicado como selecionado
+              onClick={() => handleSelection(item.name)} 
             >
-              {item}
+              <span className="icon">{item.icon}</span> {/* Ícone */}
+              <span className="text">{item.name}</span> {/* Texto */}
             </li>
           ))}
         </ul>

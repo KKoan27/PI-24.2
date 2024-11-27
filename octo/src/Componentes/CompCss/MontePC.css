@@ -28,8 +28,20 @@
     cursor: pointer;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     transition: background-color 0.3s ease;
+  }
+  
+  /* Para os ícones */
+  .sidebar-item .icon {
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Para o texto */
+  .sidebar-item .text {
+    flex: 1;
   }
   
   /* Estilo quando o botão está selecionado */
