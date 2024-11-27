@@ -1,0 +1,44 @@
+.Main-MontePC {
+    display: flex;
+    height: 100vh;
+    background-color: #171717; /* Fundo escuro */
+  }
+  
+  .sidebar {
+    width: 250px;
+    background-color: #171717;
+    padding: 10px;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebar-item {
+    background-color: rgba(143, 0, 255, 0.54); /* Cor roxa com transparência */
+    color: white;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    text-align: left;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Estilo quando o botão está selecionado */
+  .sidebar-item.selected {
+    background-color: #8f00ff; /* Roxo sólido */
+  }
+  
+  /* Estilo para botões não selecionados */
+  .sidebar-item.deselected:hover {
+    background-color: rgba(143, 0, 255, 0.8); /* Roxo menos transparente ao passar o mouse */
+  }
+  
