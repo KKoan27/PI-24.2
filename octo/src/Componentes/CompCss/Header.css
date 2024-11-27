@@ -1,40 +1,64 @@
-.Cabecalho .Cabecalho header  {
-    background-color: #171717;
-    flex: 0 0 80px; /* Altura fixa para o cabeçalho */
-    display: flex;
-    align-items: center; /* Centraliza verticalmente */
-    flex-direction: row;
-    padding-left: 20px;
-    gap: 15%;
-    justify-content: start;
-    padding: 15px;
-    gap: 20px;
-    width: 100%;
-    
-  }
-  #HeaderOp{
-    display: flex;
-    justify-self: center;
-    font-weight: bold;
-    gap: 20px;
-    width: 100%;
-  }
+.Cabecalho {
+  background-color: #171717;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between; /* Espalha o conteúdo para manter o logo e o menu separados */
+  padding: 0 20px; 
+  color: #fff;
+}
+
+
+#HeaderOp {
+  display: flex;
+  gap: 20px;
+  flex-grow: 1;   
+  justify-content: center; 
+}
+
+#HeaderOp a {
+  color: #ffffff;
+  text-decoration: none;
+  padding: 2ch;
+}
+
 #active-link {
-  background-color: rgb(139, 44, 245);
- 
-  border-radius: 25px;
-}
-/* ISSO AQUI E PARA DAR EFEITO E COR PARA AS OPÇÕES */
-  #HeaderOp a {
-    text-decoration: none; 
-    padding: 2ch;
-    color:white; 
+  font-weight: bold;
+  border-radius: 5px; 
 }
 
-/* Efeito de hover para os links */
-#HeaderOp a:hover {
-    font-weight: bold;
-  }
+.header-link {
+  display: flex;
+  align-items: center;
+  color: white;
+  font-size: 16px;         
+  font-weight: bold;
+  margin-left: 10px;       
+  text-decoration: none;    
+  padding: 4px 10px;       
+}
 
-    /* Estilo padrão para os links */
+.header-icon {
+  margin-right: 4px;     
+}
 
+.header-link {
+  display: flex;            
+  align-items: center;      
+  color: white;
+  font-size: 16px;          
+  font-weight: bold;
+  margin-left: 10px;       
+  text-decoration: none;   
+}
+
+#login-area {
+  display: flex;
+  align-items: center;
+}
+
+.divider {
+  height: 100%; /* Ocupe toda a altura do cabeçalho */
+  width: 1px;
+  background-color: #fff;
+  margin: 0 10px;
+}

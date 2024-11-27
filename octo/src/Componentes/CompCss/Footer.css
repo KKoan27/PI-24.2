@@ -1,6 +1,67 @@
-.rodape-especial {
-    text-align: left; /* ou qualquer outro alinhamento desejado */
-    background-color: #171717; 
-    color: #fff; /* exemplo de cor do texto */
-    padding: 20px; /* exemplo de padding */
-}
+.Rodape {
+    background-color: #171717;
+    color: #fff;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    padding: 2rem 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .Rodape__left,
+  .Rodape__right {
+    flex: 1; 
+    max-width: 300px;  }
+  
+  .Rodape__center {
+    flex: 0 0 auto; 
+    margin: 0 2rem;
+  }
+  
+  .Rodape__center img {
+    width: auto;
+    height: auto;
+  }
+  
+  .Rodape__left h4,
+  .Rodape__right h4 {
+    color: #a25aff;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+  }
+  
+  .Rodape__left ul,
+  .Rodape__right ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .Rodape__left ul li,
+  .Rodape__right ul li {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .icon {
+    color: #a25aff; 
+    margin-right: 0.5rem;
+    font-size: 1rem; 
+  }  
+  
+  @media (max-width: 768px) {
+    .Rodape {
+      flex-direction: column; 
+      text-align: center; 
+    }
+  
+    .Rodape__left,
+    .Rodape__right {
+      max-width: none; 
+      margin: 1rem 0;
+    }
+  
+    .Rodape__center {
+      margin: 2rem 0;
+    }
+  }
+  
