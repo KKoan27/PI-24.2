@@ -1,4 +1,5 @@
 import React  from "react";
+import '../CompCss/Monte-seu-PC.css';
 
 export default function MontePC(){
     return(
