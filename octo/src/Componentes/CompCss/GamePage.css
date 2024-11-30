@@ -72,3 +72,60 @@
 .game-item a:hover {
     background-color: rgba(0, 0, 0, 0.9);
 }
+
+
+  
+  /* Texto do título e descrição centralizados */
+  h1, h3, p {
+    text-align: center; /* Centraliza o texto */
+    max-width: 730px; /* Limita a largura máxima do texto */
+    width: 100%;
+    margin: 0 auto 10px auto; /* Centraliza e adiciona espaçamento inferior */
+  }
+  
+  /* Centraliza as imagens das seções */
+  .image-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    width: 100%;
+  }
+  
+  /* Estilo para as imagens */
+  .game-image {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    margin-top: 10px;
+    object-fit: cover; /* Mantém a imagem proporcional */
+  }
+  
+  /* Estilo do banner com adaptação para dispositivos móveis */
+  div[style*="background-image"] {
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 300px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+  
+  /* Media Queries para telas menores */
+  @media (max-width: 768px) {
+    .page-container {
+      padding: 10px; /* Menos padding em telas menores */
+    }
+  
+    .game-image {
+      max-width: 100%; /* Ajusta as imagens para ocuparem toda a largura */
+    }
+  
+    div[style*="background-image"] {
+      height: 250px; /* Reduz a altura do banner em telas menores */
+    }
+  
+    h1, h3, p {
+      font-size: 16px; /* Ajusta o tamanho da fonte em telas pequenas */
+    }
+  }
+  
