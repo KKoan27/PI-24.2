@@ -22,6 +22,9 @@ const MonteSeuPC = () => {
   const [carrinho, setCarrinho] = useState([]);
   const [total, setTotal] = useState(0);
   const [finish, setFinish] = useState(false);
+  const [expandDescricao, setExpandDescricao] = useState(false);
+  const [expandTecnicas, setExpandTecnicas] = useState(false);
+
   useEffect(() => {
     setProdutoSelecionado((() => {
       // se a categoria ativa tem um produto no carrinho, retorna o produto do carrinho
@@ -154,27 +157,27 @@ const MonteSeuPC = () => {
               </section>
               {produtoSelecionado.descricao && (
                 <section className="detalhes-block detalhes-descricao">  
-                  <h2>
+                  <h2 onClick={() => setExpandDescricao((current) => !current)}>
                     <span className="detalhes-block-titulo">
                       <i>icon</i>
                       Descrição
                     </span>
                     <i>--</i>
                   </h2>
-                  <p className="detalhes-block-conteudo">
+                  <p className={`detalhes-block-conteudo ${expandDescricao ? "expandido" : ""}`}>
                     {produtoSelecionado.descricao}
                   </p>
                 </section>
               )}
               <section className="detalhes-block detalhes-informacoes-tecnicas">
-                <h2>
+                <h2 onClick={() => setExpandTecnicas((current) => !current)}>
                   <span className="detalhes-block-titulo">
                     <i>icon</i>
                     Informações Técnicas
                   </span>
                   <i>--</i>
                 </h2>
-                <div className="detalhes-block-conteudo">
+                <div className={`detalhes-block-conteudo ${expandTecnicas ? "expandido" : ""}`}>
                   <ul>
                     {produtoSelecionado.consumo && <li>Consumo: {produtoSelecionado.consumo}W</li>}
                   </ul>
