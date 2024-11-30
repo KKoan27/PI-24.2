@@ -85,18 +85,27 @@ const MonteSeuPC = () => {
       <div className="produto-detalhes">
         {produtoSelecionado ? (
           <div className="detalhes">
-            <img
-              src={produtoSelecionado.linkImagem}
-              alt={produtoSelecionado.nome}
-              className="detalhes-imagem"
-            />
-            <h2 className="detalhes-nome">{produtoSelecionado.nome}</h2>
-            <p className="detalhes-descricao">
+            <section>
+              <img
+                src={produtoSelecionado.linkImagem}
+                alt={produtoSelecionado.nome}
+                className="detalhes-imagem"
+              />
+              <h2 className="detalhes-nome">{produtoSelecionado.nome}</h2>
+              <p className="detalhes-preco">
+                <strong>Preço:</strong> R${produtoSelecionado.valorUnitario}
+              </p>
+            </section>
+            <section className="detalhes-descricao">
+              <h2>Descrição</h2>
               {produtoSelecionado.descricao}
-            </p>
-            <p className="detalhes-preco">
-              <strong>Preço:</strong> R${produtoSelecionado.valorUnitario}
-            </p>
+            </section>
+            <section className="detalhes-informacoes-tecnicas">
+              <h2>Informações Técnicas</h2>
+              <ul>
+                <li>Consumo: {produtoSelecionado.consumo}</li>
+              </ul>
+            </section>
           </div>
         ) : (
           <p className="nenhum-detalhe">Selecione um produto para ver os detalhes.</p>
