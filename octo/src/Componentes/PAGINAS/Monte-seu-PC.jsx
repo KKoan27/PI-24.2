@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import '../CompCss/Monte-seu-PC.css';
 
 const MonteSeuPC = () => {
@@ -23,15 +22,21 @@ const MonteSeuPC = () => {
   const [produtoSelecionado, setProdutoSelecionado] = useState(null);
 
   useEffect(() => {
-    // Chama os produtos da categoria ativa
+    // Chama os produtos da categoria ativa usando fetch
     const buscarProdutosPorCategoria = async (categoria) => {
       try {
-        const response = await axios.get(
-          `http://localhost/seu-projeto/api/produtos.php?categoria=${categoria}`
+        const response = await fetch(
+          `http://localhost/octocore_api/endpoints/produtos/produtos.php?categoria=${categoria}`
         );
-        setProdutos(response.data);
+        const {data} = await response.json();
+        if (Array.isArray(data)){
+          setProdutos(data);        
+        } else {
+          setProdutos([])
+        }
       } catch (error) {
         console.error("Erro ao buscar produtos:", error);
+        setProdutos([])
       }
     };
 
@@ -45,9 +50,7 @@ const MonteSeuPC = () => {
         {categorias.map((categoria, index) => (
           <button
             key={index}
-            className={`categoria ${
-              categoria === categoriaAtiva ? "ativa" : ""
-            }`}
+            className={`categoria ${categoria === categoriaAtiva ? "ativa" : ""}`}
             onClick={() => setCategoriaAtiva(categoria)}
           >
             {categoria}
