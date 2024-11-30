@@ -43,7 +43,7 @@ const games = [
   { name: 'Fortnite', img: Fortnite, link: '/fortnite' },
   { name: 'Valorant', img: Valorant, link: '/valorant' },
   { name: 'League Of Legends', img: Lol, link: '/leagueoflegends' },
-  { name: 'GTA V', img: GTA, link: '/GTA-V' },
+  { name: 'GTA V', img: GTA, link: '/gtav' },
   { name: 'CS:GO', img: CSGO, link: '/csgo' },
   { name: 'Cyberpunk 2077', img: Cyberpunk, link: '/cyberpunk2077' },
   { name: 'Starfield', img: Starfild, link: '/starfield' },
