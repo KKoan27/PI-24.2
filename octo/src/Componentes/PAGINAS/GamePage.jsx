@@ -17,10 +17,10 @@ const GamePage = () => {
       <div
         style={{
           backgroundImage: `url(${gameInfo.bannerImage})`,
-          backgroundSize: 'cover', // Garante que a imagem ocupe toda a área sem distorcer
-          backgroundPosition: 'center', // Centraliza a imagem no container
-          height: '300px', // Altura fixa para o banner
-          borderRadius: '10px', // Bordas arredondadas
+          backgroundSize: 'cover', 
+          backgroundPosition: 'center', 
+          height: '300px',
+          borderRadius: '10px', 
           marginBottom: '20px',
         }}
       ></div>
@@ -50,9 +50,9 @@ const GamePage = () => {
                 src={section.image}
                 alt={section.title}
                 style={{
-                  width: '100%', // Limita a largura máxima da imagem ao tamanho do container
-                  maxWidth: '600px', // Define um limite máximo para a largura
-                  height: 'auto', // Mantém a proporção da imagem
+                  width: '100%', 
+                  maxWidth: '600px', 
+                  height: 'auto', 
                   marginTop: '10px',
                 }}
               />

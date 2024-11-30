@@ -2,7 +2,7 @@
   background-color: #171717;
   display: flex;
   align-items: stretch;
-  justify-content: space-between; /* Espalha o conteúdo para manter o logo e o menu separados */
+  justify-content: space-between; 
   padding: 0 20px; 
   color: #fff;
 }
