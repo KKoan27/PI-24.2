@@ -23,7 +23,15 @@ const MonteSeuPC = () => {
   const [total, setTotal] = useState(0);
   const [finish, setFinish] = useState(false);
   useEffect(() => {
-    setProdutoSelecionado(null);
+    setProdutoSelecionado((() => {
+      // se a categoria ativa tem um produto no carrinho, retorna o produto do carrinho
+      const produtoCarrinho = carrinho.find(item => item.categoria === categoriaAtiva.id);
+      if (produtoCarrinho){
+        return produtoCarrinho;
+      }
+
+      return null;
+    }));
     // Chama os produtos da categoria ativa usando fetch
     const buscarProdutosPorCategoria = async (categoria) => {
       try {
@@ -109,7 +117,7 @@ const MonteSeuPC = () => {
           {produtos.length > 0 ? (
             produtos.map((produto, index) => (
               <div
-                className="produto-card"
+                className={`produto-card ${produtoSelecionado?.idProduto === produto.idProduto ? "produto-card--selecionado" : ""}`}
                 key={index}
                 onClick={() => setProdutoSelecionado(produto)} // Define o produto selecionado ao clicar
               >
@@ -128,43 +136,61 @@ const MonteSeuPC = () => {
         </div>
 
         {/* Detalhes do Produto Selecionado */}
-        <div className="produto-detalhes">
+        <article className="produto-detalhes">
           {produtoSelecionado ? (
-            <div className="detalhes">
-              <section>
+            <>
+              <section className="detalhes-block">
                 <img
                   src={produtoSelecionado.linkImagem}
                   alt={produtoSelecionado.nome}
                   className="detalhes-imagem"
                 />
-                <h2 className="detalhes-nome">{produtoSelecionado.nome}</h2>
-                <p className="detalhes-preco">
-                  <strong>Preço:</strong> R${produtoSelecionado.valorUnitario}
-                </p>
+                <div className="detalhes-conteudo detalhes-conteudo--main">
+                  <h1 className="detalhes-nome">{produtoSelecionado.nome}</h1>
+                  <p className="detalhes-preco">
+                    <strong>Preço:</strong> R${produtoSelecionado.valorUnitario}
+                  </p>
+                </div>
               </section>
               {produtoSelecionado.descricao && (
-                <section className="detalhes-descricao">  
-                  <h2>Descrição</h2>
-                  {produtoSelecionado.descricao}
+                <section className="detalhes-block detalhes-descricao">  
+                  <h2>
+                    <span className="detalhes-block-titulo">
+                      <i>icon</i>
+                      Descrição
+                    </span>
+                    <i>--</i>
+                  </h2>
+                  <p className="detalhes-block-conteudo">
+                    {produtoSelecionado.descricao}
+                  </p>
                 </section>
               )}
-              <section className="detalhes-informacoes-tecnicas">
-                <h2>Informações Técnicas</h2>
-                <ul>
-                  {produtoSelecionado.consumo && <li>Consumo: {produtoSelecionado.consumo}W</li>}
-                </ul>
+              <section className="detalhes-block detalhes-informacoes-tecnicas">
+                <h2>
+                  <span className="detalhes-block-titulo">
+                    <i>icon</i>
+                    Informações Técnicas
+                  </span>
+                  <i>--</i>
+                </h2>
+                <div className="detalhes-block-conteudo">
+                  <ul>
+                    {produtoSelecionado.consumo && <li>Consumo: {produtoSelecionado.consumo}W</li>}
+                  </ul>
+                </div>
               </section>
-            </div>
+            </>
           ) : (
             <p className="nenhum-detalhe">Selecione um produto para ver os detalhes.</p>
           )}
-        </div>
+        </article>
       </div>
       <nav className="botoes-navegacao">
-        <span className="total-preco">R${Number(total).toFixed(2)} no pix</span>
+        <span className="total-preco"><strong>R${Number(total).toFixed(2)}</strong> no pix</span>
         <div className="botoes-navegacao-container">
-          <button className="botao-adicionar" onClick={handleAdicionar} disabled={produtoSelecionado === null}>Adicionar</button>
-          {finish && <button className="botao-finalizar" onClick={handleFinalizar}>Finalizar</button>}
+          <button className="botao-navegacao botao-adicionar" onClick={handleAdicionar} disabled={produtoSelecionado === null}>Adicionar</button>
+          {finish && <button className="botao-navegacao botao-finalizar" onClick={handleFinalizar}>Finalizar</button>}
         </div>
       </nav>
     </div>

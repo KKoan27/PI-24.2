@@ -6,15 +6,17 @@ body {
   color: #fff;
 }
 
+body * {
+  box-sizing: border-box;
+}
+
 .container {
-  height: 100vh;
   width: 100%;
 }
 
 .content {
   display: flex;
   width: 100%;
-  height: calc(100% - 100px - 122px);
   position: relative;
 }
 
@@ -69,7 +71,12 @@ body {
   background-color: #2d2d2d38;
   text-align: left;
   padding: 15px;
-  flex: 1 1 200px;
+  flex: 1 1 300px;
+  max-width: 300px;
+}
+
+.produto-card--selecionado {
+  outline: solid 3px #8f00ff80;
 }
 
 .produto-imagem {
@@ -97,8 +104,42 @@ body {
   margin-top: 20px;
 }
 
-.detalhes .detalhes-imagem {
-  width: 100px;
+.detalhes-imagem {
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+  max-height: 280px;
+}
+
+.detalhes-block {
+  margin-bottom: 20px;
+}
+
+.detalhes-block h2 {
+  background-color: #232323;
+  padding: 10px;
+  font-weight: bold;
+  color: #fff;
+  font-size: 16px;
+  height: 71px;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.detalhes-block-titulo {
+  display: flex;
+  gap: 10px;
+}
+
+.detalhes-block-conteudo {
+  padding: 10px;
+}
+
+.detalhes-conteudo--main {
+  padding: 10px;
+  background-color: #232323;
 }
 
 .produto-detalhes {
@@ -106,11 +147,60 @@ body {
   flex: 1;
 }
 
-.botoes-navegacao{
-  bottom: 0;
+.botoes-navegacao {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 100px;
+  background-color: #2E2E2E;
+  margin: 0 -20px;
+  width: calc(100% + 40px);
+  padding: 16px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 4;
+  padding: 8px 50px;
+}
+
+.botao-navegacao:disabled {
+  background-color: #6a0dad;
+  cursor: not-allowed;
+  filter: grayscale(0.5);
+  opacity: 0.5;
+}
+.botao-navegacao {
+  border: none;
+  padding: 20px 26px;
+  background-color: #8F00FF;
+  cursor: pointer;
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.botao-navegacao:hover {
+  background-color: #6a0dad;
+}
+
+.botao-finalizar {
+  background-color: #4CAF50;
+}
+
+.botao-finalizar:hover {
+  background-color: #45a049;
+}
+
+.botoes-navegacao-container {
+  display: flex;
+  gap: 20px;
+}
+
+.total-preco {
+  font-weight: 100;
+  font-size: 20px;
 }
