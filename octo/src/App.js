@@ -2,11 +2,12 @@ import './App.css';
 import Rodape from './Componentes/Footer';
 import Cabeçalho from './Componentes/Header';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import HomeSlider from './Componentes/HomeSlider';
+import HomeSlider from './Componentes/Home';
 import MontePC from './Componentes/PAGINAS/Monte-seu-PC';
 import Atendimento from './Componentes/PAGINAS/Atendimento';
 import PCgamer from './Componentes/PAGINAS/PCSGamer';
 import MinhaConta from './Componentes/PAGINAS/MinhaConta';
+import GamePage from './Componentes/PAGINAS/GamePage';
 import Carrinho from './Componentes/PAGINAS/Carrinho';
 import PC1 from './Componentes/PAGINAS/PC1';
 import PC2 from './Componentes/PAGINAS/PC2';
@@ -19,6 +20,7 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<HomeSlider />}></Route>
+          <Route path="/:game" element={<GamePage />} />
           <Route path="/PCs-gamer" element={<PCgamer></PCgamer>}></Route>
           <Route path="/Monte-seu-PC" element={<MontePC />}></Route>
           <Route path="/Atendimento" element={<Atendimento />}></Route>
