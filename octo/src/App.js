@@ -8,7 +8,7 @@ import Atendimento from './Componentes/PAGINAS/Atendimento';
 import PCgamer from './Componentes/PAGINAS/PCSGamer';
 import MinhaConta from './Componentes/PAGINAS/MinhaConta';
 import GamePage from './Componentes/PAGINAS/GamePage';
-import Carrinho from './Componentes/PAGINAS/Carrinho';
+import Carrinho from './Componentes/PAGINAS/ProductPage';
 import PC1 from './Componentes/PAGINAS/PC1';
 import PC2 from './Componentes/PAGINAS/PC2';
 import PC3 from './Componentes/PAGINAS/PC3';
