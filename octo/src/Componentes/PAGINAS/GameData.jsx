@@ -23,15 +23,15 @@ const gameData = {
           {
             title: 'Por que Minecraft exige um bom PC?',
             content: `
-              Minecraft é um jogo que, apesar de seu visual simples à primeira vista, exige potência para rodar com gráficos detalhados, vastos mundos e mods pesados. Para uma experiência ininterrupta e sem quedas de desempenho, você precisa de uma máquina que entregue **alta performance** a cada jogada. O **PC Kraken** é projetado para fornecer tudo o que você precisa para explorar, construir e criar sem limitações.  
-              **Desempenho suave e gráficos impressionantes** garantem que você nunca perca uma experiência imersiva enquanto constrói seus maiores projetos ou explora mundos infinitos.
+              Minecraft é um jogo que, apesar de seu visual simples à primeira vista, exige potência para rodar com gráficos detalhados, vastos mundos e mods pesados. Para uma experiência ininterrupta e sem quedas de desempenho, você precisa de uma máquina que entregue alta performance a cada jogada. O PC Kraken é projetado para fornecer tudo o que você precisa para explorar, construir e criar sem limitações.  
+              Desempenho suave e gráficos impressionantes garantem que você nunca perca uma experiência imersiva enquanto constrói seus maiores projetos ou explora mundos infinitos.
             `,
             image: Kraken,
           },
           {
             title: 'Prepare-se para uma jogabilidade superior',
             content: `
-              O **PC Kraken para Minecraft** foi projetado para entregar o máximo de **desempenho** e **qualidade visual**. Com um **processador Intel Core i7** de última geração e uma **placa de vídeo NVIDIA RTX 3060**, você poderá rodar Minecraft com gráficos incríveis, mundos vastos e velocidade impressionante, sem travamentos. **Jogabilidade suave e carregamento rápido** garantem que sua experiência seja a melhor possível, seja jogando sozinho ou com seus amigos em servidores multiplayer.
+              O PC Kraken para Minecraft foi projetado para entregar o máximo de desempenho e qualidade visual. Com um processador Intel Core i7 de última geração e uma placa de vídeo NVIDIA RTX 3060, você poderá rodar Minecraft com gráficos incríveis, mundos vastos e velocidade impressionante, sem travamentos. Jogabilidade suave e carregamento rápido garantem que sua experiência seja a melhor possível, seja jogando sozinho ou com seus amigos em servidores multiplayer.
             `,
           },
         ],
@@ -213,11 +213,11 @@ const gameData = {
             title: 'A experiência de um universo aberto',
             content: `
               <p>
-                Em Starfield, a exploração espacial vai muito além do comum, e a qualidade dos gráficos faz toda a diferença. Para aproveitar ao máximo o jogo, é essencial um PC com uma placa de vídeo potente, como a **NVIDIA RTX 3070**, que oferece desempenho ideal para texturas de alta qualidade e mundos imersivos.
+                Em Starfield, a exploração espacial vai muito além do comum, e a qualidade dos gráficos faz toda a diferença. Para aproveitar ao máximo o jogo, é essencial um PC com uma placa de vídeo potente, como a NVIDIA RTX 3070, que oferece desempenho ideal para texturas de alta qualidade e mundos imersivos.
               </p>
               <ul>
                 <li><strong>Texturas de alta definição:</strong> Starfield possui um universo vasto, e com o PC Kraken, você pode explorar cada detalhe com clareza e riqueza de cores.</li>
-                <li><strong>Gráficos realistas:</strong> A combinação do **Intel Core i7 de 12ª geração** com a **NVIDIA RTX 3070** garante uma performance impressionante, sem comprometer a fluidez durante as aventuras espaciais.</li>
+                <li><strong>Gráficos realistas:</strong> A combinação do Intel Core i7 de 12ª geração com a NVIDIA RTX 3070 garante uma performance impressionante, sem comprometer a fluidez durante as aventuras espaciais.</li>
                 <li><strong>Desempenho sem falhas:</strong> Mesmo nos momentos mais intensos de exploração e combate, o Kraken mantém a performance estável, sem travamentos ou quedas de FPS.</li>
               </ul>
             `,
@@ -230,14 +230,14 @@ const gameData = {
         bannerImage: CSGO,
         description: 'CS:GO exige precisão e alta taxa de quadros. Um PC poderoso pode fazer toda a diferença nas partidas competitivas, garantindo a fluidez necessária para se destacar no jogo.',
         specifications: [
-          { feature: 'Processador', value: 'Intel Core i5 ou superior' },
-          { feature: 'Memória RAM', value: '8GB ou mais' },
+          { feature: 'Processador', value: 'Intel Core i9 ou superior' },
+          { feature: 'Memória RAM', value: '16GB ou mais' },
           { feature: 'Placa de vídeo', value: 'NVIDIA GTX 1050 ou superior' },
         ],
         sections: [
           {
             title: 'Competitividade e fluidez',
-            content: 'CS:GO é um jogo altamente competitivo, e para ter a vantagem sobre os adversários, você precisa de uma máquina que consiga manter a fluidez e a precisão com uma alta taxa de FPS. Com o **PC Kraken**, você terá a vantagem de um sistema rápido e sem engasgos, garantindo respostas instantâneas e gráficos nítidos.',
+            content: 'CS:GO é um jogo altamente competitivo, e para ter a vantagem sobre os adversários, você precisa de uma máquina que consiga manter a fluidez e a precisão com uma alta taxa de FPS. Com o PC Kraken, você terá a vantagem de um sistema rápido e sem engasgos, garantindo respostas instantâneas e gráficos nítidos.',
             image: Dante,
           },
           {
@@ -247,8 +247,8 @@ const gameData = {
                 A precisão é fundamental em CS:GO. Escolha um PC que ofereça uma taxa de quadros estável e alta, garantindo que você consiga tomar decisões rápidas com gráficos nítidos e sem quedas de desempenho.
               </p>
               <ul>
-                <li><strong>Desempenho sem falhas:</strong> O **Intel Core i5** combinado com a **NVIDIA GTX 1050** proporciona uma performance suave, até nos momentos mais intensos das partidas.</li>
-                <li><strong>Alta taxa de FPS:</strong> Com **8GB de RAM** e a placa gráfica indicada, você experimentará uma jogabilidade fluída, sem travamentos ou delay, essencial para partidas de alta intensidade.</li>
+                <li><strong>Desempenho sem falhas:</strong> O Intel Core i9 combinado com a NVIDIA GTX 1050 proporciona uma performance suave, até nos momentos mais intensos das partidas.</li>
+                <li><strong>Alta taxa de FPS:</strong> Com 16GB de RAM e a placa gráfica indicada, você experimentará uma jogabilidade fluída, sem travamentos ou delay, essencial para partidas de alta intensidade.</li>
                 <li><strong>Visual preciso:</strong> A fluidez nas animações e o tempo de resposta serão perfeitos, permitindo que você reaja com agilidade às mudanças de cenário e nos confrontos diretos com o adversário.</li>
               </ul>
             `,
