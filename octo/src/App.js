@@ -6,7 +6,7 @@ import HomeSlider from './Componentes/HomeSlider';
 import MontePC from './Componentes/PAGINAS/Monte-seu-PC';
 import Atendimento from './Componentes/PAGINAS/Atendimento';
 import PCgamer from './Componentes/PAGINAS/PCSGamer';
-import MinhaConta from './Componentes/PAGINAS/MinhaConta';
+import FuncClientePage from './Componentes/PAGINAS/ClientPage';
 import Carrinho from './Componentes/PAGINAS/Carrinho';
 import PC1 from './Componentes/PAGINAS/PC1';
 import PC2 from './Componentes/PAGINAS/PC2';
@@ -22,7 +22,7 @@ function App() {
           <Route path="/PCs-gamer" element={<PCgamer></PCgamer>}></Route>
           <Route path="/Monte-seu-PC" element={<MontePC />}></Route>
           <Route path="/Atendimento" element={<Atendimento />}></Route>
-          <Route path="/MinhaConta" element={<MinhaConta />}></Route>
+         <Route path = "/ClientPage" element = {<FuncClientePage/>}></Route>
           <Route path="/Carrinho" element={<Carrinho />}></Route>
           <Route path="/PC1" element={<PC1 />} />
           <Route path="/PC2" element={<PC2 />} />

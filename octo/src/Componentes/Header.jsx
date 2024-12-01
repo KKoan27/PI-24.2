@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { Box, Drawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
@@ -20,15 +20,20 @@ const Header = () => {
         email: "",
         password: ""
     })
+
+
+    
+    const navigate = useNavigate();
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isCadastroModalOpen, setIsCadastroModalOpen] = useState(false);
     const [isForgotPasswordModalOpen, setIsForgotPasswordModalOpen] = useState(false);
+    const [Logado, setlogin] = useState(false);
     const location = useLocation();
 
 
     async function handleAuth(e) {
-        const url = "http://localhost/www/OctoCore_API/endpoints/users/auth.php"
+        const url = "http://localhost/OctoCore_API/endpoints/users/auth.php"
         e.preventDefault();
         const payload = {
             email: loginForm.email,
@@ -41,17 +46,29 @@ const Header = () => {
         })
         const response = await requisicao.json()
         if (response['data']['autenticado'] === true){
+           
             console.log("Logado")
-            handleCloseModal();
+            alert("Voce está logado")
+            setlogin(true)
+            const token = response['data']
+            localStorage.setItem('token', JSON.stringify(token));
+            console.log(token)
+            navigate("/ClientPage")
+            handleCloseModal()
+
         }
         else{
-            console.log("Stop right there criminal scum")
+            console.log("Errou nas credenciais")
+            alert("credenciais incorretas, tente novamente")
         }
+
+
+        const token = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : null;
+   
     }
     function handleChange(e) { //atualiza o formulario de login
         const { name, value } = e.target;
         setLoginForm((prevData) => ({ ...prevData, [name]: value }));
-        console.log(loginForm)
     }
     const toggleDrawer = (open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -60,6 +77,12 @@ const Header = () => {
         setIsDrawerOpen(open);
     };
 
+
+    const handleLogout = () =>{
+        localStorage.removeItem('token');
+        navigate ("/")
+        window.location.reload()
+    }
     const handleOpenModal = () => {
         setIsModalOpen(true);
     };
@@ -85,12 +108,14 @@ const Header = () => {
     const handleCloseForgotPasswordModal = () => {
         setIsForgotPasswordModalOpen(false);
     };
-    
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        handleCloseModal();
-    };
 
+    // ---------------- Não estava sendo utilizado!!! --------------// 
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     handleCloseModal();
+    // };
+
+    const token = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : null;
     const drawerList = (
         <Box
             className="sidebar"
@@ -101,11 +126,11 @@ const Header = () => {
         >
             <Box sx={{ display: 'flex', justifyContent: 'space-between', padding: '0' }}>
                 <ListItem disablePadding>
-                    <ListItemButton component={Link} to="/Login">
+                    <ListItemButton component={Link} to="/ClientPage">
                         <ListItemIcon>
                             <PermIdentityIcon />
                         </ListItemIcon>
-                        <ListItemText primary="Minha conta" />
+                        
                     </ListItemButton>
                 </ListItem>
                 <span className="divider"></span>
@@ -200,20 +225,31 @@ const Header = () => {
                     <SupportAgentIcon className="header-icon" />
                     Atendimento
                 </Link>
+                
 
-                <Link
-                    id={location.pathname === "/MinhaConta" ? "active-link" : "MinhaConta-link"}
-                    to="/MinhaConta"
-                    className="header-link"
-                >
+                {token ? (<div>
+                    <Link
+                    id={location.pathname ==="/ClientePage" ? "active-link" : "ClientPage-link"}
+                    to="/ClientPage"
+                    className="header-link">
                     <PermIdentityIcon className="header-icon" />
                     Minha Conta
                 </Link>
-                <span className="divider"></span>
-                <ListItemButton onClick={handleOpenModal} className="header-link">
+
+                <a className="header-link" onClick={handleLogout}> Logout</a> 
+                </div>)
+                 : 
+                (<div>
+                     <ListItemButton onClick={handleOpenModal} className="header-link">
                     <ExitToAppIcon className="header-icon" />
                     Login
                 </ListItemButton>
+
+                </div>)
+                }
+             
+                <span className="divider"></span>
+               
 
                 <Link
                     id={location.pathname === "/Carrinho" ? "active-link" : "Carrinho-link"}
