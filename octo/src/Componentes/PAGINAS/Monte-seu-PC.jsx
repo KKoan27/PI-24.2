@@ -92,8 +92,42 @@ const MonteSeuPC = () => {
     }
   }
 
-  const handleFinalizar = () => {
+  const handleFinalizar = async () => {
     console.log("finalizar");
+  //   {
+  //     "idUsuario": 1,
+  //     "cupom": "INCRIVEL2",
+  //     "valorFrete": 200.00,
+  //     "metodoPagamento" : "Pix",
+  //     "enderecoEntrega" : "Rua 2",
+  //     "listaProdutos": [
+  //         {
+  //             "idProduto": "1",
+  //             "quantidade": 1
+  //         },
+  //         {
+  //             "idProduto": "2",
+  //             "quantidade": 1
+  //         }
+  //     ]
+  // }
+    // enviar para o backend order/order
+    const response = await fetch("http://localhost/octocore_api/endpoints/order/order.php", {
+      method: "POST",
+      body: JSON.stringify({
+        idUsuario: 1,
+        cupom: "",
+        valorFrete: 200.00,
+        metodoPagamento: "Pix",
+        enderecoEntrega: "Rua 2",
+        listaProdutos: carrinho.map((item) => ({
+          idProduto: item.idProduto,
+          quantidade: item.quantidade
+        }))
+      })
+    });
+
+    
   }
 
   return (
