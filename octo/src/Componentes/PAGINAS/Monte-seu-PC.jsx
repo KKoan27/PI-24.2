@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; 
-import '../CompCss/Monte-seu-PC.css';
+import { useNavigate } from "react-router-dom";
+import "../CompCss/Monte-seu-PC.css";
 
 const MonteSeuPC = () => {
   const [categorias] = useState([
-    { label: "Processador", id: 'processador' },
-    { label: "Placa Mãe", id: 'placaMae' },
-    { label: "Memória", id: 'memoriaRam' },
-    { label: "Placa de video", id: 'placaDeVideo' },
-    { label: "SSD", id: 'ssd' },
-    { label: "HD", id: 'hd' },
-    { label: "Cooler", id: 'cooler' },
-    { label: "Fonte", id: 'fonte' },
-    { label: "Gabinete", id: 'gabinete' },
-    { label: "Fans", id: 'fans' },
-    { label: "Sistema Operacional", id: 'so' },
-    { label: "Software", id: 'software' },
+    { label: "Processador", id: "processador" },
+    { label: "Placa Mãe", id: "placaMae" },
+    { label: "Memória", id: "memoriaRam" },
+    { label: "Placa de video", id: "placaDeVideo" },
+    { label: "SSD", id: "ssd" },
+    { label: "HD", id: "hd" },
+    { label: "Cooler", id: "cooler" },
+    { label: "Fonte", id: "fonte" },
+    { label: "Gabinete", id: "gabinete" },
+    { label: "Fans", id: "fans" },
+    { label: "Sistema Operacional", id: "so" },
+    { label: "Software", id: "software" },
   ]);
 
   const [categoriaAtiva, setCategoriaAtiva] = useState(categorias[0]);
@@ -24,13 +24,17 @@ const MonteSeuPC = () => {
   const [carrinho, setCarrinho] = useState([]);
   const [total, setTotal] = useState(0);
   const [finish, setFinish] = useState(false);
-  const [expandDescricao, setExpandDescricao] = useState(false);
-  const [expandTecnicas, setExpandTecnicas] = useState(false);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    const produtoCarrinho = carrinho.find(item => item.categoria === categoriaAtiva.id);
+    // Recuperar carrinho do localStorage ao carregar o componente
+    const carrinhoSalvo = JSON.parse(localStorage.getItem("carrinho")) || [];
+    setCarrinho(carrinhoSalvo);
+  }, []);
+
+  useEffect(() => {
+    const produtoCarrinho = carrinho.find((item) => item.categoria === categoriaAtiva.id);
     setProdutoSelecionado(produtoCarrinho || null);
 
     const buscarProdutosPorCategoria = async (categoria) => {
@@ -54,6 +58,9 @@ const MonteSeuPC = () => {
     setFinish(categorias.every((categoria) =>
       carrinho.some((item) => item.categoria === categoria.id)
     ));
+
+    // Salvar carrinho no localStorage sempre que for atualizado
+    localStorage.setItem("carrinho", JSON.stringify(carrinho));
   }, [carrinho, categorias]);
 
   const handleAdicionar = () => {
@@ -80,7 +87,7 @@ const MonteSeuPC = () => {
       <div className="content">
         <div className="categorias">
           {categorias.map((categoria, index) => {
-            const temProduto = carrinho.some(item => item.categoria === categoria.id);
+            const temProduto = carrinho.some((item) => item.categoria === categoria.id);
             return (
               <button
                 key={index}
@@ -110,30 +117,14 @@ const MonteSeuPC = () => {
             <p className="nenhum-produto">Nenhum produto encontrado.</p>
           )}
         </div>
-
-        <article className="produto-detalhes">
-          {produtoSelecionado ? (
-            <>
-              <section className="detalhes-block">
-                <img src={produtoSelecionado.linkImagem} alt={produtoSelecionado.nome} className="detalhes-imagem" />
-                <div className="detalhes-conteudo detalhes-conteudo--main">
-                  <h1 className="detalhes-nome">{produtoSelecionado.nome}</h1>
-                  <p className="detalhes-preco">
-                    <strong>Preço:</strong> R${produtoSelecionado.valorUnitario}
-                  </p>
-                </div>
-              </section>
-            </>
-          ) : (
-            <p className="nenhum-detalhe">Selecione um produto para ver os detalhes.</p>
-          )}
-        </article>
       </div>
 
       <nav className="botoes-navegacao">
-        <span className="total-preco"><strong>R${Number(total).toFixed(2)}</strong> no pix</span>
+        <span className="total-preco"><strong>R${Number(total).toFixed(2)}</strong></span>
         <div className="botoes-navegacao-container">
-          <button className="botao-navegacao botao-adicionar" onClick={handleAdicionar} disabled={produtoSelecionado === null}>Adicionar</button>
+          <button className="botao-navegacao botao-adicionar" onClick={handleAdicionar} disabled={produtoSelecionado === null}>
+            Adicionar
+          </button>
           {finish && <button className="botao-navegacao botao-finalizar" onClick={handleFinalizar}>Finalizar</button>}
         </div>
       </nav>

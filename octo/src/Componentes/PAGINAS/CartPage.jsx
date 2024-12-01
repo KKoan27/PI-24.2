@@ -17,6 +17,9 @@ const CartPage = () => {
   const [carrinho, setCarrinho] = useState([]);
 
   useEffect(() => {
+    const carrinhoSalvo = JSON.parse(localStorage.getItem("carrinho")) || [];
+    setCarrinho(state?.carrinho || carrinhoSalvo);
+  
     const fetchDados = async () => {
       try {
         const [responseEndereco, responseCartao, responseFrete, responseDesconto] = await Promise.all([
@@ -25,32 +28,32 @@ const CartPage = () => {
           fetch("http://localhost/api/frete"),
           fetch("http://localhost/api/desconto"),
         ]);
-
+  
         if (!responseEndereco.ok || !responseCartao.ok || !responseFrete.ok || !responseDesconto.ok) {
           throw new Error("Erro ao buscar dados");
         }
-
+  
         const [enderecoData, cartaoData, freteData, descontoData] = await Promise.all([
           responseEndereco.json(),
           responseCartao.json(),
           responseFrete.json(),
           responseDesconto.json(),
         ]);
-
+  
         setEnderecos(enderecoData);
         setCartoes(cartaoData);
         setFrete(freteData.valor);
         setDesconto(descontoData.valor);
-        setValorTotal(state?.total + freteData.valor - descontoData.valor);  // Atualizando valor total corretamente
+        setValorTotal(state?.total + freteData.valor - descontoData.valor); // Atualizando o valor total
         setEnderecoSelecionado(enderecoData[0]?.id || "");
         setCartaoSelecionado(cartaoData[0]?.id || "");
       } catch (error) {
         console.error("Erro ao carregar dados:", error);
       }
     };
-
+  
     fetchDados();
-  }, [state?.total, frete, desconto]);  // Dependendo de 'state.total' e outros valores
+  }, [state?.carrinho, state?.total]);
 
   useEffect(() => {
     if (state?.carrinho) {
