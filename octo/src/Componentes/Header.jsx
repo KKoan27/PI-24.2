@@ -186,8 +186,8 @@ const Header = () => {
                 </ListItemButton>
 
                 <Link
-                    id={location.pathname === "/Carrinho" ? "active-link" : "Carrinho-link"}
-                    to="/Carrinho"
+                    id={location.pathname === "/CartPage" ? "active-link" : "cart-link"}
+                    to="/CartPage"
                     className="header-link"
                 >
                     <LocalGroceryStoreIcon className="header-icon" />

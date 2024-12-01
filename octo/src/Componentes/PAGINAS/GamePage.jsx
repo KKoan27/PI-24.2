@@ -45,7 +45,7 @@ const GamePage = () => {
           <h3>{section.title}</h3>
           <p dangerouslySetInnerHTML={{ __html: section.content }}></p>
           {section.image && (
-            <div className="image-container" style={{ display: 'flex', justifyContent: 'center' }}>
+            <div className="image-container" style={{ display: 'flex', justifyContent: 'center', }}>
               <img
                 src={section.image}
                 alt={section.title}

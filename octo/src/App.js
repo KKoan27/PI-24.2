@@ -8,7 +8,7 @@ import Atendimento from './Componentes/PAGINAS/Atendimento';
 import PCgamer from './Componentes/PAGINAS/PCSGamer';
 import MinhaConta from './Componentes/PAGINAS/MinhaConta';
 import GamePage from './Componentes/PAGINAS/GamePage';
-import Carrinho from './Componentes/PAGINAS/ProductPage';
+import CartPage from './Componentes/PAGINAS/CartPage';
 import PC1 from './Componentes/PAGINAS/PC1';
 import PC2 from './Componentes/PAGINAS/PC2';
 import PC3 from './Componentes/PAGINAS/PC3';
@@ -25,7 +25,7 @@ function App() {
           <Route path="/Monte-seu-PC" element={<MontePC />}></Route>
           <Route path="/Atendimento" element={<Atendimento />}></Route>
           <Route path="/MinhaConta" element={<MinhaConta />}></Route>
-          <Route path="/Carrinho" element={<Carrinho />}></Route>
+          <Route path="/CartPage" element={<CartPage />}></Route>
           <Route path="/PC1" element={<PC1 />} />
           <Route path="/PC2" element={<PC2 />} />
           <Route path="/PC3" element={<PC3 />} />

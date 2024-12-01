@@ -1,0 +1,275 @@
+/* Layout básico da página de checkout */
+.cart-page {
+  padding: 20px;
+  max-width: 1800px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+}
+
+/* Título da página */
+.cart-page h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #FFFFFF;
+  margin-bottom: 20px;
+}
+
+/* Estilo para os itens do carrinho */
+.cart-items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  background-color: #171717;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.item-image {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 20px;
+}
+
+.item-details h3 {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.cart-summary {
+  background-color: #f4f4f4;
+  color: #171717;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  margin-bottom: 10px;
+
+}
+
+.checkout-form {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.checkout-form h3 {
+  font-size: 1.5rem;
+  color: #171717;
+}
+.cart-container {
+  display: flex;
+  gap: 40px; /* Mantém uma boa distância entre as colunas */
+  padding: 20px;
+}
+
+.cart-left {
+  width: 50%; /* Mantém o espaço amplo para os itens */
+}
+
+.cart-right {
+  width: 50%; /* Permite que a coluna direita ocupe o restante do espaço */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cart-summary{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .summary-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .summary-item input {
+    margin-left: 10px;
+    width: 120px;
+  }
+  
+  .summary-item.total {
+    font-weight: bold;
+  }
+
+.checkout-form {
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.cart-summary {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.summary-item:last-child {
+  border-bottom: none;
+}
+
+.summary-item span {
+  font-size: 16px;
+  color: #333;
+}
+
+.summary-item.total span {
+  font-size: 18px;
+  font-weight: bold;
+  color: #000;
+}
+
+.summary-item .item-input {
+  display: flex;
+  align-items: center;
+}
+
+.summary-item .item-input input {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+  width: 120px;
+}
+
+
+.summary-item .item-input .button {
+  padding: 8px 15px;
+  background-color: #5cb85c;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.summary-item .item-input button:hover {
+  background-color: #4cae4c;
+}
+
+.summary-item .item-input button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Estilo específico para o cupom de desconto */
+.summary-item .item-input input {
+  width: 180px;
+}
+
+
+.summary-item .item-input button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+
+/* Card com endereço e cartão de crédito */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-size: 1rem;
+  color: #333;
+}
+
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
+}
+
+.form-group select:focus {
+  border-color: #171717;
+  background-color: #fff;
+}
+
+/* Botão de Finalizar */
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.actions button {
+  padding: 15px 25px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  width: 48%;
+}
+
+.actions .checkout {
+  background-color: #FFFFFF;
+  color: #171717;
+}
+
+.actions .checkout:hover {
+  background-color: #FFFFFF;
+  transform: scale(1.05);
+}
+
+.actions .checkout:disabled {
+  background-color: #FFFFFF;
+  cursor: not-allowed;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .cart-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .actions button {
+    width: 100%;
+  }
+}
+
