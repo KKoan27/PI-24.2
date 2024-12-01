@@ -71,6 +71,127 @@
   font-size: 1.5rem;
   color: #171717;
 }
+.cart-container {
+  display: flex;
+  gap: 40px; /* Mantém uma boa distância entre as colunas */
+  padding: 20px;
+}
+
+.cart-left {
+  width: 50%; /* Mantém o espaço amplo para os itens */
+}
+
+.cart-right {
+  width: 50%; /* Permite que a coluna direita ocupe o restante do espaço */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cart-summary{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .summary-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .summary-item input {
+    margin-left: 10px;
+    width: 120px;
+  }
+  
+  .summary-item.total {
+    font-weight: bold;
+  }
+
+.checkout-form {
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.cart-summary {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.summary-item:last-child {
+  border-bottom: none;
+}
+
+.summary-item span {
+  font-size: 16px;
+  color: #333;
+}
+
+.summary-item.total span {
+  font-size: 18px;
+  font-weight: bold;
+  color: #000;
+}
+
+.summary-item .item-input {
+  display: flex;
+  align-items: center;
+}
+
+.summary-item .item-input input {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+  width: 120px;
+}
+
+
+.summary-item .item-input .button {
+  padding: 8px 15px;
+  background-color: #5cb85c;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.summary-item .item-input button:hover {
+  background-color: #4cae4c;
+}
+
+.summary-item .item-input button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Estilo específico para o cupom de desconto */
+.summary-item .item-input input {
+  width: 180px;
+}
+
+
+.summary-item .item-input button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
 
 /* Card com endereço e cartão de crédito */
 .card {
@@ -151,3 +272,4 @@
     width: 100%;
   }
 }
+

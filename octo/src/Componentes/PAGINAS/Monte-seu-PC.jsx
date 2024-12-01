@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; 
 import '../CompCss/Monte-seu-PC.css';
 
 const MonteSeuPC = () => {
@@ -16,6 +17,7 @@ const MonteSeuPC = () => {
     { label: "Sistema Operacional", id: 'so' },
     { label: "Software", id: 'software' },
   ]);
+
   const [categoriaAtiva, setCategoriaAtiva] = useState(categorias[0]);
   const [produtos, setProdutos] = useState([]);
   const [produtoSelecionado, setProdutoSelecionado] = useState(null);
@@ -25,115 +27,57 @@ const MonteSeuPC = () => {
   const [expandDescricao, setExpandDescricao] = useState(false);
   const [expandTecnicas, setExpandTecnicas] = useState(false);
 
-  useEffect(() => {
-    setProdutoSelecionado((() => {
-      // se a categoria ativa tem um produto no carrinho, retorna o produto do carrinho
-      const produtoCarrinho = carrinho.find(item => item.categoria === categoriaAtiva.id);
-      if (produtoCarrinho){
-        return produtoCarrinho;
-      }
+  const navigate = useNavigate();
 
-      return null;
-    }));
-    // Chama os produtos da categoria ativa usando fetch
+  useEffect(() => {
+    const produtoCarrinho = carrinho.find(item => item.categoria === categoriaAtiva.id);
+    setProdutoSelecionado(produtoCarrinho || null);
+
     const buscarProdutosPorCategoria = async (categoria) => {
       try {
         const response = await fetch(
           `http://localhost/octocore_api/endpoints/produtos/produtos.php?categoria=${categoria.id}`
         );
-        const {data} = await response.json();
-        if (Array.isArray(data)){
-          setProdutos(data);        
-        } else {
-          setProdutos([])
-        }
+        const { data } = await response.json();
+        setProdutos(Array.isArray(data) ? data : []);
       } catch (error) {
         console.error("Erro ao buscar produtos:", error);
-        setProdutos([])
+        setProdutos([]);
       }
     };
 
     buscarProdutosPorCategoria(categoriaAtiva);
-  }, [categoriaAtiva]);
+  }, [categoriaAtiva, carrinho]);
 
   useEffect(() => {
     setTotal(carrinho.reduce((acc, curr) => acc + Number(curr.valorUnitario), 0));
-
-    const finish = categorias.every((categoria) => {
-      return carrinho.some((item) => item.categoria === categoria.id);
-    });
-
-    if (finish) {
-      setFinish(true);
-    }
-  }, [carrinho]);
+    setFinish(categorias.every((categoria) =>
+      carrinho.some((item) => item.categoria === categoria.id)
+    ));
+  }, [carrinho, categorias]);
 
   const handleAdicionar = () => {
     setCarrinho((carrinho) => {
-      if (produtoSelecionado){
-        const novoCarrinho = carrinho.reduce((acc, curr) => {
-          if (curr.categoria != categoriaAtiva.id) {
-            return [...acc, curr];
-          }
-
-          return acc;
-        }, []);
-
+      if (produtoSelecionado) {
+        const novoCarrinho = carrinho.filter((item) => item.categoria !== categoriaAtiva.id);
         return [...novoCarrinho, { ...produtoSelecionado, categoria: categoriaAtiva.id }];
       }
-
       return carrinho;
     });
 
-    const categoriaAtualIdx = categorias.findIndex(({id}) => id === categoriaAtiva.id)
-
+    const categoriaAtualIdx = categorias.findIndex(({ id }) => id === categoriaAtiva.id);
     if (categoriaAtualIdx < categorias.length - 1) {
       setCategoriaAtiva(categorias[categoriaAtualIdx + 1]);
     }
-  }
+  };
 
-  const handleFinalizar = async () => {
-    console.log("finalizar");
-  //   {
-  //     "idUsuario": 1,
-  //     "cupom": "INCRIVEL2",
-  //     "valorFrete": 200.00,
-  //     "metodoPagamento" : "Pix",
-  //     "enderecoEntrega" : "Rua 2",
-  //     "listaProdutos": [
-  //         {
-  //             "idProduto": "1",
-  //             "quantidade": 1
-  //         },
-  //         {
-  //             "idProduto": "2",
-  //             "quantidade": 1
-  //         }
-  //     ]
-  // }
-    // enviar para o backend order/order
-    const response = await fetch("http://localhost/octocore_api/endpoints/order/order.php", {
-      method: "POST",
-      body: JSON.stringify({
-        idUsuario: 1,
-        cupom: null,
-        valorFrete: 200.00,
-        metodoPagamento: "Pix",
-        enderecoEntrega: "Rua 2",
-        listaProdutos: carrinho.map((item) => ({
-          idProduto: item.idProduto,
-          quantidade: 1
-        }))
-      })
-    });
-
-    
-  }
+  const handleFinalizar = () => {
+    navigate("/CartPage", { state: { carrinho, total } });
+  };
 
   return (
     <div className="container">
       <div className="content">
-        {/* Coluna lateral de categorias */}
         <div className="categorias">
           {categorias.map((categoria, index) => {
             const temProduto = carrinho.some(item => item.categoria === categoria.id);
@@ -149,20 +93,15 @@ const MonteSeuPC = () => {
           })}
         </div>
 
-        {/* Espaço central: Lista de produtos */}
         <div className="produtos">
           {produtos.length > 0 ? (
             produtos.map((produto, index) => (
               <div
                 className={`produto-card ${produtoSelecionado?.idProduto === produto.idProduto ? "produto-card--selecionado" : ""}`}
                 key={index}
-                onClick={() => setProdutoSelecionado(produto)} // Define o produto selecionado ao clicar
+                onClick={() => setProdutoSelecionado(produto)}
               >
-                <img
-                  src={produto.linkImagem}
-                  alt={produto.nome}
-                  className="produto-imagem"
-                />
+                <img src={produto.linkImagem} alt={produto.nome} className="produto-imagem" />
                 <h3 className="produto-nome">{produto.nome}</h3>
                 <p className="produto-preco">R${produto.valorUnitario}</p>
               </div>
@@ -172,49 +111,16 @@ const MonteSeuPC = () => {
           )}
         </div>
 
-        {/* Detalhes do Produto Selecionado */}
         <article className="produto-detalhes">
           {produtoSelecionado ? (
             <>
               <section className="detalhes-block">
-                <img
-                  src={produtoSelecionado.linkImagem}
-                  alt={produtoSelecionado.nome}
-                  className="detalhes-imagem"
-                />
+                <img src={produtoSelecionado.linkImagem} alt={produtoSelecionado.nome} className="detalhes-imagem" />
                 <div className="detalhes-conteudo detalhes-conteudo--main">
                   <h1 className="detalhes-nome">{produtoSelecionado.nome}</h1>
                   <p className="detalhes-preco">
                     <strong>Preço:</strong> R${produtoSelecionado.valorUnitario}
                   </p>
-                </div>
-              </section>
-              {produtoSelecionado.descricao && (
-                <section className="detalhes-block detalhes-descricao">  
-                  <h2 onClick={() => setExpandDescricao((current) => !current)}>
-                    <span className="detalhes-block-titulo">
-                      <i>icon</i>
-                      Descrição
-                    </span>
-                    <i>--</i>
-                  </h2>
-                  <p className={`detalhes-block-conteudo ${expandDescricao ? "expandido" : ""}`}>
-                    {produtoSelecionado.descricao}
-                  </p>
-                </section>
-              )}
-              <section className="detalhes-block detalhes-informacoes-tecnicas">
-                <h2 onClick={() => setExpandTecnicas((current) => !current)}>
-                  <span className="detalhes-block-titulo">
-                    <i>icon</i>
-                    Informações Técnicas
-                  </span>
-                  <i>--</i>
-                </h2>
-                <div className={`detalhes-block-conteudo ${expandTecnicas ? "expandido" : ""}`}>
-                  <ul>
-                    {produtoSelecionado.consumo && <li>Consumo: {produtoSelecionado.consumo}W</li>}
-                  </ul>
                 </div>
               </section>
             </>
@@ -223,6 +129,7 @@ const MonteSeuPC = () => {
           )}
         </article>
       </div>
+
       <nav className="botoes-navegacao">
         <span className="total-preco"><strong>R${Number(total).toFixed(2)}</strong> no pix</span>
         <div className="botoes-navegacao-container">

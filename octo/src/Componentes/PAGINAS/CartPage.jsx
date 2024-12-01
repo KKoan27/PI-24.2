@@ -1,138 +1,173 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "../CompCss/CartPage.css";
 
 const CartPage = () => {
-  const [carrinho, setCarrinho] = useState([]);
-  const [total, setTotal] = useState(0);
+  const { state } = useLocation();
+  const navigate = useNavigate();
+  const [frete, setFrete] = useState(0);
+  const [desconto, setDesconto] = useState(0);
+  const [cupom, setCupom] = useState("");
+  const [valorTotal, setValorTotal] = useState(0);  // Inicializado com 0
+  const [total, setTotal] = useState(state?.total || 0);
   const [enderecos, setEnderecos] = useState([]);
   const [cartoes, setCartoes] = useState([]);
   const [enderecoSelecionado, setEnderecoSelecionado] = useState("");
   const [cartaoSelecionado, setCartaoSelecionado] = useState("");
-
-  const navigate = useNavigate();
-  const location = useLocation();
+  const [carrinho, setCarrinho] = useState([]);
 
   useEffect(() => {
-    // Recebe os dados do estado passado pela navegação
-    if (location.state) {
-      const { carrinho, total } = location.state;
-      setCarrinho(carrinho || []);
-      setTotal(total || 0);
-    }
-  }, [location.state]);
-
-  useEffect(() => {
-    // Carregar endereços e cartões simulados (pode substituir por API)
     const fetchDados = async () => {
       try {
-        const responseEndereco = await fetch("http://localhost/api/endereco");
-        const responseCartao = await fetch("http://localhost/api/cartao");
-        const enderecoData = await responseEndereco.json();
-        const cartaoData = await responseCartao.json();
+        const [responseEndereco, responseCartao, responseFrete, responseDesconto] = await Promise.all([
+          fetch("http://localhost/api/endereco"),
+          fetch("http://localhost/api/cartao"),
+          fetch("http://localhost/api/frete"),
+          fetch("http://localhost/api/desconto"),
+        ]);
+
+        if (!responseEndereco.ok || !responseCartao.ok || !responseFrete.ok || !responseDesconto.ok) {
+          throw new Error("Erro ao buscar dados");
+        }
+
+        const [enderecoData, cartaoData, freteData, descontoData] = await Promise.all([
+          responseEndereco.json(),
+          responseCartao.json(),
+          responseFrete.json(),
+          responseDesconto.json(),
+        ]);
 
         setEnderecos(enderecoData);
         setCartoes(cartaoData);
-
-        if (enderecoData.length > 0) setEnderecoSelecionado(enderecoData[0].id);
-        if (cartaoData.length > 0) setCartaoSelecionado(cartaoData[0].id);
+        setFrete(freteData.valor);
+        setDesconto(descontoData.valor);
+        setValorTotal(state?.total + freteData.valor - descontoData.valor);  // Atualizando valor total corretamente
+        setEnderecoSelecionado(enderecoData[0]?.id || "");
+        setCartaoSelecionado(cartaoData[0]?.id || "");
       } catch (error) {
-        console.error("Erro ao carregar dados de endereços e cartões:", error);
+        console.error("Erro ao carregar dados:", error);
       }
     };
 
     fetchDados();
-  }, []);
+  }, [state?.total, frete, desconto]);  // Dependendo de 'state.total' e outros valores
+
+  useEffect(() => {
+    if (state?.carrinho) {
+      setCarrinho(state.carrinho);  // Atualiza o carrinho com os dados da rota
+    }
+  }, [state?.carrinho]);
+
+  const aplicarDesconto = () => {
+    if (cupom === "DESCONTO10") {
+      setDesconto(10);
+      setValorTotal(total + frete - 10);
+    } else {
+      alert("Cupom inválido!");
+    }
+  };
 
   const handleFinalizar = () => {
-    console.log("Finalizando compra...");
-    navigate("/finalizado", {
-      state: {
-        carrinho,
-        total,
-        enderecoSelecionado,
-        cartaoSelecionado,
-      },
-    });
+    navigate("/CartPage", { state: { carrinho, total, enderecoSelecionado, cartaoSelecionado } });
   };
 
   return (
     <div className="cart-page">
       <h2>Checkout</h2>
 
-      {/* Itens do Carrinho */}
-      <div className="cart-items">
-        {carrinho.length > 0 ? (
-          carrinho.map((item, index) => (
-            <div key={index} className="cart-item">
-              <img
-                src={item.linkImagem}
-                alt={item.nome}
-                className="item-image"
-              />
-              <div className="item-details">
-                <h3>{item.nome}</h3>
-                <p>R${item.valorUnitario}</p>
-              </div>
-            </div>
-          ))
-        ) : (
-          <p className="nenhum-produto">Nenhum item no carrinho.</p>
-        )}
-      </div>
-
-      {/* Resumo do Carrinho */}
       <div className="cart-summary">
         <div className="summary-item">
           <span>Subtotal</span>
           <span>R${total.toFixed(2)}</span>
         </div>
+        <div className="summary-item">
+          <span>Frete</span>
+          <span>R${frete.toFixed(2)}</span>
+        </div>
+        <div className="summary-item">
+          <span>Cupom de Desconto</span>
+          <input
+            type="text"
+            value={cupom}
+            onChange={(e) => setCupom(e.target.value)}
+            placeholder="Insira o código"
+          />
+          <button onClick={aplicarDesconto}>Aplicar</button>
+        </div>
+        <div className="summary-item total">
+          <span>Total</span>
+          <span>R${valorTotal.toFixed(2)}</span>
+        </div>
       </div>
 
-      {/* Formulário para Endereço e Cartão */}
-      <div className="checkout-form">
-        <h3>Dados para a Compra</h3>
+      <div className="cart-container">
+        {/* Coluna Esquerda */}
+        <div className="cart-left">
+          <h3>Itens no Carrinho</h3>
+          <div className="cart-items">
+            {carrinho.map((item, index) => (
+              <div key={index} className="cart-item">
+                <img src={item.linkImagem} alt={item.nome} className="item-image" />
+                <div className="item-details">
+                  <h3>{item.nome}</h3>
+                  <p>R${Number(item.valorUnitario).toFixed(2)}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
 
-        <div className="card">
-          {/* Seleção de Endereço */}
-          <div className="form-group">
-            <label htmlFor="endereco">Endereço</label>
-            <select
-              id="endereco"
-              value={enderecoSelecionado}
-              onChange={(e) => setEnderecoSelecionado(e.target.value)}
-            >
-              {enderecos.map((endereco) => (
-                <option key={endereco.id} value={endereco.id}>
-                  {endereco.rua}, {endereco.cidade} - {endereco.estado}
-                </option>
-              ))}
-            </select>
+        {/* Coluna Direita */}
+        <div className="cart-right">
+          <h3>Resumo do Carrinho</h3>
+          <div className="cart-summary">
+            <div className="summary-item">
+              <span>Subtotal</span>
+              <span>R${total.toFixed(2)}</span>
+            </div>
           </div>
 
-          {/* Seleção de Cartão */}
-          <div className="form-group">
-            <label htmlFor="cartao">Cartão de Crédito</label>
-            <select
-              id="cartao"
-              value={cartaoSelecionado}
-              onChange={(e) => setCartaoSelecionado(e.target.value)}
-            >
-              {cartoes.map((cartao) => (
-                <option key={cartao.id} value={cartao.id}>
-                  {cartao.bandeira} - Final {cartao.numero.slice(-4)}
-                </option>
-              ))}
-            </select>
+          <div className="checkout-form">
+            <h3>Dados para a Compra</h3>
+            <div className="card">
+              <div className="form-group">
+                <label htmlFor="endereco">Endereço</label>
+                <select
+                  id="endereco"
+                  value={enderecoSelecionado}
+                  onChange={(e) => setEnderecoSelecionado(e.target.value)}
+                >
+                  {enderecos.map((endereco) => (
+                    <option key={endereco.id} value={endereco.id}>
+                      {endereco.rua}, {endereco.cidade} - {endereco.estado}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="cartao">Cartão de Crédito</label>
+                <select
+                  id="cartao"
+                  value={cartaoSelecionado}
+                  onChange={(e) => setCartaoSelecionado(e.target.value)}
+                >
+                  {cartoes.map((cartao) => (
+                    <option key={cartao.id} value={cartao.id}>
+                      {cartao.bandeira} - Final {cartao.numero.slice(-4)}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Botões de Ação */}
       <div className="actions">
         <button
           className="continue-shopping"
-          onClick={() => navigate("/loja")}
+          onClick={() => navigate("/")}
         >
           Continuar Comprando
         </button>
