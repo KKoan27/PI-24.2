@@ -116,7 +116,7 @@ const MonteSeuPC = () => {
       method: "POST",
       body: JSON.stringify({
         idUsuario: 1,
-        cupom: "",
+        cupom: null,
         valorFrete: 200.00,
         metodoPagamento: "Pix",
         enderecoEntrega: "Rua 2",
