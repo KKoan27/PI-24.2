@@ -122,7 +122,7 @@ const MonteSeuPC = () => {
         enderecoEntrega: "Rua 2",
         listaProdutos: carrinho.map((item) => ({
           idProduto: item.idProduto,
-          quantidade: item.quantidade
+          quantidade: 1
         }))
       })
     });
