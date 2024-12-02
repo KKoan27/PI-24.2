@@ -24,22 +24,28 @@ const CartPage = () => {
     async function buscarEnderecos() {
       const user = 1; // exemplo de ID de usuário
       const response = await fetch(`http://localhost/octocore_api/endpoints/users/endereco.php?user=${user}`);
-      const data = await response.json();
-      setEnderecos(data['data']);
+      if (response.ok) {
+        const data = await response.json()
+        const listaEnderecos = data['data']
+        console.log(listaEnderecos)
+        setEnderecos(listaEnderecos);
+        }
     }
-    buscarEnderecos();
-  }, []);
-
-  // Buscar cartões do usuário
-  useEffect(() => {
     async function buscarCartoes() {
       const user = 1; // exemplo de ID de usuário
       const response = await fetch(`http://localhost/octocore_api/endpoints/users/cc.php?user=${user} `);
-      const data = await response.json();
-      setCartoes(data['data']);
+      if (response.ok) {
+        const data = await response.json()
+        const listaCartoes = data['data']
+        console.log(listaCartoes)
+        setCartoes(listaCartoes);
+        }
     }
-    buscarCartoes();
+    buscarEnderecos()
+    buscarCartoes()
   }, []);
+
+
 
   useEffect(() => {
     const carrinhoSalvo = JSON.parse(localStorage.getItem("carrinho")) || [];
@@ -161,39 +167,32 @@ const CartPage = () => {
               <div className="form-group">
                 <label htmlFor="endereco">Endereço</label>
                 <select
-                  id="endereco"
-                  value={enderecoSelecionado}
+                  id="idEndereco"
+                  name="idEndereco"
                   onChange={(e) => setEnderecoSelecionado(e.target.value)}
                 >
-                  {enderecos.map((endereco) => (
-                    <option key={endereco.id} value={endereco.id}>
-                      {endereco.rua}, {endereco.cidade} - {endereco.estado}
+                  {enderecos.map((item, index) => (
+                    <option key={index} value={item.idEndereco}>
+                      {item.nome} - {item.rua} - {item.complemento}
                     </option>
                   ))}
                 </select>
               </div>
               <div className="form-group">
-      <label htmlFor="cep">CEP</label>
-      <input
-        type="text"
-        id="cep"
-        value={cep}
-        onChange={(e) => setCep(e.target.value)}
-        placeholder="Digite seu CEP"
-      />
+      
     </div>
 
 
               <div className="form-group">
                 <label htmlFor="cartao">Cartão de Crédito</label>
                 <select
-                  id="cartao"
-                  value={cartaoSelecionado}
+                  id="idCartao"
+                  name="idCartao"
                   onChange={(e) => setCartaoSelecionado(e.target.value)}
                 >
-                  {cartoes.map((cartao) => (
-                    <option key={cartao.id} value={cartao.id}>
-                      {cartao.bandeira} - Final {cartao.numero ? cartao.numero.slice(-4) : "XXXX"}
+                  {cartoes.map((item, index) => (
+                    <option key={index} value={item.idCartao}>
+                        Final {item.final}
                     </option>
                   ))}
                 </select>
