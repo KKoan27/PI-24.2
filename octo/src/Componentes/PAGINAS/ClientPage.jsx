@@ -1,11 +1,15 @@
 import {React, useState, useRef, useEffect} from "react";
 import '../CompCss/ClientPage.css';
 import Img from "../../Imagens/ekkoicon.jpg"
-
+import PrivateRoute from "../PrivateRoute";
 
 
 export default function FuncClientePage(){
-    
+
+    const[data,setdata] = useState("")
+    const token = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : null;
+
+
     const [activeSection, setActiveSection] = useState('dados'); // Inicializa com 'dados'
   
     // Função para alterar a seção ativa
@@ -14,14 +18,17 @@ export default function FuncClientePage(){
     };
 
     return (
-         
         <div id="ClientePage"> 
         <header className="header">
           <div className="user-info">
-            <div className="user-avatar"></div>
+            <div >
+            <img className="user-avatar" src={token['linkPFP']} alt="Fotinha"/>
+            </div>
             <div className="user-details">
-              <h2> Davi MC Respeito da Silva </h2>
-              <p> DaviRespeitoDaSilva@gmail.com </p>
+            {console.log("Token:", token)}
+
+              <h2> {token ['usuario']}</h2>
+              <p> {token['email']}  </p>
             </div>
           </div>
         </header>
@@ -49,8 +56,8 @@ export default function FuncClientePage(){
             </div>
             <div className="section-content">
               <div className={`section-content-box ${activeSection === 'dados' ? 'show' : 'hide'}`}>
-                    <h2>Nome completo: {} </h2>
-                    <h2>Email: </h2>
+                    <h2>Nome completo: {token['usuario']} </h2>
+                    <h2>Email: {token['email']}</h2>
                     
               </div>
               <div className={`section-content-box ${activeSection === 'endereco' ? 'show' : 'hide'}`}>

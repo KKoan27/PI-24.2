@@ -52,18 +52,16 @@ const Header = () => {
             setlogin(true)
             const token = response['data']
             localStorage.setItem('token', JSON.stringify(token));
-            console.log(token)
             navigate("/ClientPage")
             handleCloseModal()
 
         }
         else{
+            console.log(token)
             console.log("Errou nas credenciais")
             alert("credenciais incorretas, tente novamente")
         }
 
-
-        const token = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : null;
    
     }
     function handleChange(e) { //atualiza o formulario de login
