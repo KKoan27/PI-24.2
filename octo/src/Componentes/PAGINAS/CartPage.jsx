@@ -5,17 +5,41 @@ import "../CompCss/CartPage.css";
 const CartPage = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
-  
+
   const [frete, setFrete] = useState(0);
   const [desconto, setDesconto] = useState(0);
   const [cupom, setCupom] = useState("");
-  const [valorTotal, setValorTotal] = useState(0);  
+  const [valorTotal, setValorTotal] = useState(0);
   const [total, setTotal] = useState(state?.total || 0);
   const [enderecos, setEnderecos] = useState([]);
+  const [cep, setCep] = useState("");
   const [cartoes, setCartoes] = useState([]);
   const [enderecoSelecionado, setEnderecoSelecionado] = useState("");
   const [cartaoSelecionado, setCartaoSelecionado] = useState("");
   const [carrinho, setCarrinho] = useState([]);
+
+
+  // Buscar endereços do usuário
+  useEffect(() => {
+    async function buscarEnderecos() {
+      const user = 1; // exemplo de ID de usuário
+      const response = await fetch(`http://localhost/octocore_api/endpoints/users/endereco.php?user=${user}`);
+      const data = await response.json();
+      setEnderecos(data['data']);
+    }
+    buscarEnderecos();
+  }, []);
+
+  // Buscar cartões do usuário
+  useEffect(() => {
+    async function buscarCartoes() {
+      const user = 1; // exemplo de ID de usuário
+      const response = await fetch(`http://localhost/octocore_api/endpoints/users/cc.php?user=${user} `);
+      const data = await response.json();
+      setCartoes(data['data']);
+    }
+    buscarCartoes();
+  }, []);
 
   useEffect(() => {
     const carrinhoSalvo = JSON.parse(localStorage.getItem("carrinho")) || [];
@@ -45,7 +69,7 @@ const CartPage = () => {
         setCartoes(cartaoData);
         setFrete(freteData.valor);
         setDesconto(descontoData.valor);
-        setValorTotal(state?.total + freteData.valor - descontoData.valor); 
+        setValorTotal(state?.total + freteData.valor - descontoData.valor);
         setEnderecoSelecionado(enderecoData[0]?.id || "");
         setCartaoSelecionado(cartaoData[0]?.id || "");
       } catch (error) {
@@ -148,6 +172,17 @@ const CartPage = () => {
                   ))}
                 </select>
               </div>
+              <div className="form-group">
+      <label htmlFor="cep">CEP</label>
+      <input
+        type="text"
+        id="cep"
+        value={cep}
+        onChange={(e) => setCep(e.target.value)}
+        placeholder="Digite seu CEP"
+      />
+    </div>
+
 
               <div className="form-group">
                 <label htmlFor="cartao">Cartão de Crédito</label>
@@ -158,7 +193,7 @@ const CartPage = () => {
                 >
                   {cartoes.map((cartao) => (
                     <option key={cartao.id} value={cartao.id}>
-                      {cartao.bandeira} - Final {cartao.numero.slice(-4)}
+                      {cartao.bandeira} - Final {cartao.numero ? cartao.numero.slice(-4) : "XXXX"}
                     </option>
                   ))}
                 </select>
