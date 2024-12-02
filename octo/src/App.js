@@ -12,6 +12,7 @@ import CartPage from './Componentes/PAGINAS/CartPage';
 import PC1 from './Componentes/PAGINAS/PC1';
 import PC2 from './Componentes/PAGINAS/PC2';
 import PC3 from './Componentes/PAGINAS/PC3';
+import ThankYouPage from './Componentes/PAGINAS/ThankYouPage'; 
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/PC1" element={<PC1 />} />
           <Route path="/PC2" element={<PC2 />} />
           <Route path="/PC3" element={<PC3 />} />
+          <Route path="/thank-you" element={<ThankYouPage />} /> 
         </Routes>
       </main>
 
