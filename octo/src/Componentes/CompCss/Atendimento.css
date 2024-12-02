@@ -1,0 +1,46 @@
+#formTicket{
+    height: 50rem;
+    width: 50rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem
+}
+  
+#formTicket label { 
+    font-weight: bold;
+  }
+#formTicket button{
+    
+    transition: background-color 0.5s, color 0.5s, border 0.5s;
+}
+
+#formTicket input, textarea , select ,button{
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.4rem;
+  }
+#formTicket select, button {
+    width: 13rem;
+    cursor: pointer;
+}
+
+#formTicket textarea{
+    height: 30rem;   
+}
+#formTicket button:hover {
+    background-color: rgb(133, 2, 233); /* Cor de fundo quando hover */
+    color: rgb(255, 255, 255); /* Cor do texto quando hover */
+    border: 0.1rem solid rgb(63, 0, 110);
+  }
+.AtendiClass{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.AtendiClass h1{
+    margin: 0.5rem;
+    font-size: 0.6;
+    font-weight: bold;
+}
