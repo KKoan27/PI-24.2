@@ -7,7 +7,7 @@ const MonteSeuPC = () => {
     { label: "Processador", id: "processador" },
     { label: "Placa Mãe", id: "placaMae" },
     { label: "Memória", id: "memoriaRam" },
-    { label: "Placa de video", id: "placaDeVideo" },
+    { label: "Placa de Video", id: "placaDeVideo" },
     { label: "SSD", id: "ssd" },
     { label: "HD", id: "hd" },
     { label: "Cooler", id: "cooler" },
@@ -28,7 +28,6 @@ const MonteSeuPC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Recuperar carrinho do localStorage ao carregar o componente
     const carrinhoSalvo = JSON.parse(localStorage.getItem("carrinho")) || [];
     setCarrinho(carrinhoSalvo);
   }, []);
@@ -59,7 +58,6 @@ const MonteSeuPC = () => {
       carrinho.some((item) => item.categoria === categoria.id)
     ));
 
-    // Salvar carrinho no localStorage sempre que for atualizado
     localStorage.setItem("carrinho", JSON.stringify(carrinho));
   }, [carrinho, categorias]);
 

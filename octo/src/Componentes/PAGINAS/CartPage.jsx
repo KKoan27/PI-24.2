@@ -5,10 +5,11 @@ import "../CompCss/CartPage.css";
 const CartPage = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
+  
   const [frete, setFrete] = useState(0);
   const [desconto, setDesconto] = useState(0);
   const [cupom, setCupom] = useState("");
-  const [valorTotal, setValorTotal] = useState(0);  // Inicializado com 0
+  const [valorTotal, setValorTotal] = useState(0);  
   const [total, setTotal] = useState(state?.total || 0);
   const [enderecos, setEnderecos] = useState([]);
   const [cartoes, setCartoes] = useState([]);
@@ -19,7 +20,7 @@ const CartPage = () => {
   useEffect(() => {
     const carrinhoSalvo = JSON.parse(localStorage.getItem("carrinho")) || [];
     setCarrinho(state?.carrinho || carrinhoSalvo);
-  
+
     const fetchDados = async () => {
       try {
         const [responseEndereco, responseCartao, responseFrete, responseDesconto] = await Promise.all([
@@ -28,36 +29,36 @@ const CartPage = () => {
           fetch("http://localhost/api/frete"),
           fetch("http://localhost/api/desconto"),
         ]);
-  
+
         if (!responseEndereco.ok || !responseCartao.ok || !responseFrete.ok || !responseDesconto.ok) {
           throw new Error("Erro ao buscar dados");
         }
-  
+
         const [enderecoData, cartaoData, freteData, descontoData] = await Promise.all([
           responseEndereco.json(),
           responseCartao.json(),
           responseFrete.json(),
           responseDesconto.json(),
         ]);
-  
+
         setEnderecos(enderecoData);
         setCartoes(cartaoData);
         setFrete(freteData.valor);
         setDesconto(descontoData.valor);
-        setValorTotal(state?.total + freteData.valor - descontoData.valor); // Atualizando o valor total
+        setValorTotal(state?.total + freteData.valor - descontoData.valor); 
         setEnderecoSelecionado(enderecoData[0]?.id || "");
         setCartaoSelecionado(cartaoData[0]?.id || "");
       } catch (error) {
         console.error("Erro ao carregar dados:", error);
       }
     };
-  
+
     fetchDados();
   }, [state?.carrinho, state?.total]);
 
   useEffect(() => {
     if (state?.carrinho) {
-      setCarrinho(state.carrinho);  // Atualiza o carrinho com os dados da rota
+      setCarrinho(state.carrinho);
     }
   }, [state?.carrinho]);
 
