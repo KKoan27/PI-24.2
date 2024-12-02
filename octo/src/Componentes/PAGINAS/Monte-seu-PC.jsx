@@ -24,6 +24,8 @@ const MonteSeuPC = () => {
   const [carrinho, setCarrinho] = useState([]);
   const [total, setTotal] = useState(0);
   const [finish, setFinish] = useState(false);
+  const [expandDescricao, setExpandDescricao] = useState(false);
+  const [expandTecnicas, setExpandTecnicas] = useState(false);
 
   const navigate = useNavigate();
 
@@ -85,7 +87,7 @@ const MonteSeuPC = () => {
       <div className="content">
         <div className="categorias">
           {categorias.map((categoria, index) => {
-            const temProduto = carrinho.some((item) => item.categoria === categoria.id);
+            const temProduto = carrinho.some(item => item.categoria === categoria.id);
             return (
               <button
                 key={index}
@@ -115,14 +117,61 @@ const MonteSeuPC = () => {
             <p className="nenhum-produto">Nenhum produto encontrado.</p>
           )}
         </div>
-      </div>
 
+        <article className="produto-detalhes">
+          {produtoSelecionado ? (
+            <>
+              <section className="detalhes-block">
+                <img
+                  src={produtoSelecionado.linkImagem}
+                  alt={produtoSelecionado.nome}
+                  className="detalhes-imagem"
+                />
+                <div className="detalhes-conteudo detalhes-conteudo--main">
+                  <h1 className="detalhes-nome">{produtoSelecionado.nome}</h1>
+                  <p className="detalhes-preco">
+                    <strong>Preço:</strong> R${produtoSelecionado.valorUnitario}
+                  </p>
+                </div>
+              </section>
+              {produtoSelecionado.descricao && (
+                <section className="detalhes-block detalhes-descricao">  
+                  <h2 onClick={() => setExpandDescricao((current) => !current)}>
+                    <span className="detalhes-block-titulo">
+                      <i>icon</i>
+                      Descrição
+                    </span>
+                    <i>--</i>
+                  </h2>
+                  <p className={`detalhes-block-conteudo ${expandDescricao ? "expandido" : ""}`}>
+                    {produtoSelecionado.descricao}
+                  </p>
+                </section>
+              )}
+              <section className="detalhes-block detalhes-informacoes-tecnicas">
+                <h2 onClick={() => setExpandTecnicas((current) => !current)}>
+                  <span className="detalhes-block-titulo">
+                    <i>icon</i>
+                    Informações Técnicas
+                  </span>
+                  <i>--</i>
+                </h2>
+                <div className={`detalhes-block-conteudo ${expandTecnicas ? "expandido" : ""}`}>
+                  <ul>
+                    {produtoSelecionado.consumo && <li>Consumo: {produtoSelecionado.consumo}W</li>}
+                  </ul>
+                </div>
+              </section>
+            </>
+          ) : (
+            <p className="nenhum-detalhe">Selecione um produto para ver os detalhes.</p>
+          )}
+        </article>
+      </div>
       <nav className="botoes-navegacao">
-        <span className="total-preco"><strong>R${Number(total).toFixed(2)}</strong></span>
+        <span className="total-preco"><strong>R${Number(total).toFixed(2)}</strong> no pix</span>
         <div className="botoes-navegacao-container">
-          <button className="botao-navegacao botao-adicionar" onClick={handleAdicionar} disabled={produtoSelecionado === null}>
-            Adicionar
-          </button>
+          <button className="botao-navegacao botao-adicionar" onClick={handleAdicionar} disabled={produtoSelecionado === null}>Adicionar</button>
           {finish && <button className="botao-navegacao botao-finalizar" onClick={handleFinalizar}>Finalizar</button>}
         </div>
       </nav>
