@@ -34,7 +34,8 @@
   font-weight: bold;
   margin-left: 10px;       
   text-decoration: none;    
-  padding: 4px 10px;       
+  padding: 4px 10px;
+  justify-content: center;       
 }
 
 .header-icon {
@@ -61,4 +62,10 @@
   width: 1px;
   background-color: #fff;
   margin: 0 10px;
+}
+
+
+#Logout{
+    align-items: center;
+    justify-content: center;
 }
