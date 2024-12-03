@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Box, Drawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
@@ -16,58 +16,12 @@ import './CompCss/Header.css';
 import './CompCss/Cadastro.css';
 
 const Header = () => {
-    const [loginForm, setLoginForm] = useState({
-        email: "",
-        password: ""
-    })
-
-
-    
-    const navigate = useNavigate();
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isCadastroModalOpen, setIsCadastroModalOpen] = useState(false);
     const [isForgotPasswordModalOpen, setIsForgotPasswordModalOpen] = useState(false);
-    const [Logado, setlogin] = useState(false);
     const location = useLocation();
 
-
-    async function handleAuth(e) {
-        const url = "http://localhost/OctoCore_API/endpoints/users/auth.php"
-        e.preventDefault();
-        const payload = {
-            email: loginForm.email,
-            password: loginForm.password
-        };
-        const requisicao = await fetch(url, {
-            method: "POST",
-            headers: {"Content-Type": "application/json",},
-            body: JSON.stringify(payload),
-        })
-        const response = await requisicao.json()
-        if (response['data']['autenticado'] === true){
-           
-            console.log("Logado")
-            alert("Voce está logado")
-            setlogin(true)
-            const token = response['data']
-            localStorage.setItem('token', JSON.stringify(token));
-            navigate("/ClientPage")
-            handleCloseModal()
-
-        }
-        else{
-            console.log(token)
-            console.log("Errou nas credenciais")
-            alert("credenciais incorretas, tente novamente")
-        }
-
-   
-    }
-    function handleChange(e) { //atualiza o formulario de login
-        const { name, value } = e.target;
-        setLoginForm((prevData) => ({ ...prevData, [name]: value }));
-    }
     const toggleDrawer = (open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
@@ -75,12 +29,6 @@ const Header = () => {
         setIsDrawerOpen(open);
     };
 
-
-    const handleLogout = () =>{
-        localStorage.removeItem('token');
-        navigate ("/")
-        window.location.reload()
-    }
     const handleOpenModal = () => {
         setIsModalOpen(true);
     };
@@ -106,14 +54,13 @@ const Header = () => {
     const handleCloseForgotPasswordModal = () => {
         setIsForgotPasswordModalOpen(false);
     };
+    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log('Formulário enviado');
+        handleCloseModal();
+    };
 
-    // ---------------- Não estava sendo utilizado!!! --------------// 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     handleCloseModal();
-    // };
-
-    const token = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : null;
     const drawerList = (
         <Box
             className="sidebar"
@@ -124,11 +71,11 @@ const Header = () => {
         >
             <Box sx={{ display: 'flex', justifyContent: 'space-between', padding: '0' }}>
                 <ListItem disablePadding>
-                    <ListItemButton component={Link} to="/ClientPage">
+                    <ListItemButton component={Link} to="/Login">
                         <ListItemIcon>
                             <PermIdentityIcon />
                         </ListItemIcon>
-                        
+                        <ListItemText primary="Minha conta" />
                     </ListItemButton>
                 </ListItem>
                 <span className="divider"></span>
@@ -223,31 +170,20 @@ const Header = () => {
                     <SupportAgentIcon className="header-icon" />
                     Atendimento
                 </Link>
-                
 
-                {token ? (<div>
-                    <Link
-                    id={location.pathname ==="/ClientePage" ? "active-link" : "ClientPage-link"}
-                    to="/ClientPage"
-                    className="header-link">
+                <Link
+                    id={location.pathname === "/MinhaConta" ? "active-link" : "MinhaConta-link"}
+                    to="/MinhaConta"
+                    className="header-link"
+                >
                     <PermIdentityIcon className="header-icon" />
                     Minha Conta
                 </Link>
-
-                <a className="header-link" onClick={handleLogout}> Logout</a> 
-                </div>)
-                 : 
-                (<div>
-                     <ListItemButton onClick={handleOpenModal} className="header-link">
+                <span className="divider"></span>
+                <ListItemButton onClick={handleOpenModal} className="header-link">
                     <ExitToAppIcon className="header-icon" />
                     Login
                 </ListItemButton>
-
-                </div>)
-                }
-             
-                <span className="divider"></span>
-               
 
                 <Link
                     id={location.pathname === "/CartPage" ? "active-link" : "cart-link"}
@@ -265,31 +201,31 @@ const Header = () => {
                         <button className="close-button" onClick={handleCloseModal}>×</button>
                         <img src={Logo2} alt="LogoBranca" />
                         <h2>Login</h2>
-                        <form onSubmit={handleAuth}>
+                        <form onSubmit={handleSubmit}>
                             <div className="form-group">
                                 <label htmlFor="email">Email:</label>
-                                <input name = 'email' onChange = {handleChange} type="email" id="email" placeholder="username@gmail.com" required />
+                                <input type="email" id="email" placeholder="username@gmail.com" required />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="password">Senha:</label>    
-                                <input name = 'password' onChange = {handleChange}type="password" id="password" placeholder="Senha" required />
-
+                                <label htmlFor="password">Senha:</label>
+                                <input type="password" id="password" placeholder="Senha" required />
                             </div>
+
                             <Link
                                 onClick={handleOpenForgotPasswordModal} 
                                 className="link-forgot">
                                 Esqueceu a senha?
                             </Link>
-                           <button type="submit" className='login-button'>Entrar</button>
-                           <Link
+
+                            <button type="submit" className='login-button'>Entrar</button>
+
+                            <Link
                                 onClick={handleOpenCadastroModal}
                                 className="link-register">
                                 Criar conta
                             </Link>
+
                         </form>
-
-
-                        
                     </div>
                 </div>
             )}
@@ -302,14 +238,14 @@ const Header = () => {
                         <img src={Logo2} alt="LogoBranca" />
 
                         <h2>Criar Conta</h2>
-                        <form onSubmit={handleAuth}>
+                        <form>
                             <div className="form-group">
                                 <label htmlFor="username">Nome de Usuário:</label>
                                 <input type="text" id="username" placeholder="Nome de usuário" required />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="email">Email:</label>
-                                <input type="email" id="email" placeholder="username@gmail.com" required  />
+                                <input type="email" id="email" placeholder="username@gmail.com" required />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="password">Senha:</label>
