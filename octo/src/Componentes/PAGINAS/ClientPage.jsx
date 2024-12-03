@@ -12,7 +12,7 @@ export default function FuncClientePage() {
         dados: "users/auth",
         pedidos: "order/order",
         endereco: "users/endereco",
-        contato: "users/contact",
+        ticket: "users/contact",
         pagamento: "users/payment",
         config: "users/config",
     };
@@ -77,7 +77,7 @@ export default function FuncClientePage() {
             <li><button onClick={() => changeSection('dados')}>Dados Pessoais</button></li>
             <li><button onClick={() => changeSection('pedidos')}>Pedidos</button></li>
             <li><button onClick={() => changeSection('endereco')}>Endereço de Entrega</button></li>
-            <li><button onClick={() => changeSection('contato')}>Dados de Contato</button></li>
+            <li><button onClick={() => changeSection('ticket')}>TICKETS</button></li>
             <li><button onClick={() => changeSection('pagamento')}>Métodos de Pagamento</button></li>
             <li><button onClick={() => changeSection('config')}>Configurações de Conta</button></li>
           </ul>
@@ -88,7 +88,7 @@ export default function FuncClientePage() {
             <h3 id="section-title">
               {activeSection === 'dados' ? 'Dados Pessoais' :
                activeSection === 'endereco' ? 'Endereço de Entrega' :
-               activeSection === 'contato' ? 'Dados de Contato' :
+               activeSection === 'ticket' ? 'Dados de Contato' :
                activeSection === 'pagamento' ? 'Métodos de Pagamento' :
                activeSection === 'pedidos' ? 'Pedidos' :
                'Configurações de Conta'}
@@ -116,7 +116,7 @@ export default function FuncClientePage() {
           ))
       ) : <p>Nenhum resultado encontrado</p>}
             </div>
-            <div className={`section-content-box ${activeSection === 'contato' ? 'show' : 'hide'}`}>
+            <div className={`section-content-box ${activeSection === 'ticket' ? 'show' : 'hide'}`}>
               <p>Conteúdo de Dados de Contato aqui...</p>
             </div>
             <div className={`section-content-box ${activeSection === 'pagamento' ? 'show' : 'hide'}`}>
