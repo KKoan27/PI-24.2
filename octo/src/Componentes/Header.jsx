@@ -18,7 +18,8 @@ import './CompCss/Cadastro.css';
 const Header = () => {
     const [loginForm, setLoginForm] = useState({
         email: "",
-        password: ""
+        password: "",
+        user: ""
     })
 
 
@@ -28,7 +29,7 @@ const Header = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isCadastroModalOpen, setIsCadastroModalOpen] = useState(false);
     const [isForgotPasswordModalOpen, setIsForgotPasswordModalOpen] = useState(false);
-    const [Logado, setlogin] = useState(false);
+
     const location = useLocation();
 
 
@@ -49,7 +50,7 @@ const Header = () => {
            
             console.log("Logado")
             alert("Voce está logado")
-            setlogin(true)
+
             const token = response['data']
             localStorage.setItem('token', JSON.stringify(token));
             navigate("/ClientPage")
@@ -60,6 +61,35 @@ const Header = () => {
             console.log(token)
             console.log("Errou nas credenciais")
             alert("credenciais incorretas, tente novamente")
+        }
+
+   
+    }
+    async function handleSignup(e) {
+        const url = "http://localhost/OctoCore_API/endpoints/users/signup.php"
+        e.preventDefault();
+        const payload = {
+            email: loginForm.email,
+            password: loginForm.password,
+            user: loginForm.user
+        };
+        const requisicao = await fetch(url, {
+            method: "POST",
+            headers: {"Content-Type": "application/json",},
+            body: JSON.stringify(payload),
+        })
+    
+        if (requisicao.ok){
+           
+
+            alert("Conta criada com sucesso")
+
+            setIsModalOpen(true)
+            setIsCadastroModalOpen(false)
+
+        }
+        else{
+            alert("Erro ao criar a conta, usuário ou email já em uso :c")
         }
 
    
@@ -302,18 +332,18 @@ const Header = () => {
                         <img src={Logo2} alt="LogoBranca" />
 
                         <h2>Criar Conta</h2>
-                        <form onSubmit={handleAuth}>
+                        <form onSubmit={handleSignup}>
                             <div className="form-group">
                                 <label htmlFor="username">Nome de Usuário:</label>
-                                <input type="text" id="username" placeholder="Nome de usuário" required />
+                                <input type="text" name = 'user' id="username" placeholder="Nome de usuário" required onChange = {handleChange} />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="email">Email:</label>
-                                <input type="email" id="email" placeholder="username@gmail.com" required  />
+                                <input type="email" id="email" name = 'email' placeholder="username@gmail.com" required  onChange = {handleChange}/>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="password">Senha:</label>
-                                <input type="password" id="password" placeholder="Crie uma senha" required />
+                                <input type="password" id="password" name = 'password' placeholder="Crie uma senha" required onChange = {handleChange}/>
                             </div>
 
                             <button type="submit" className='send-button'>Enviar</button>
