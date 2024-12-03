@@ -49,7 +49,7 @@ const Header = () => {
         if (response['data']['autenticado'] === true){
            
             console.log("Logado")
-            alert("Voce está logado")
+            
 
             const token = response['data']
             localStorage.setItem('token', JSON.stringify(token));
@@ -60,7 +60,7 @@ const Header = () => {
         else{
             console.log(token)
             console.log("Errou nas credenciais")
-            alert("credenciais incorretas, tente novamente")
+            alert("Credenciais incorretas")
         }
 
    
@@ -255,7 +255,7 @@ const Header = () => {
                 </Link>
                 
 
-                {token ? (<div>
+                {token ? (<div id='login'>
                     <Link
                     id={location.pathname ==="/ClientePage" ? "active-link" : "ClientPage-link"}
                     to="/ClientPage"
@@ -267,7 +267,7 @@ const Header = () => {
                 <a className="header-link" onClick={handleLogout}> Logout</a> 
                 </div>)
                  : 
-                (<div>
+                (<div id='login'> 
                      <ListItemButton onClick={handleOpenModal} className="header-link">
                     <ExitToAppIcon className="header-icon" />
                     Login
