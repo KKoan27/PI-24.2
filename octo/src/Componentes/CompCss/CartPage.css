@@ -5,6 +5,11 @@
   margin: 0 auto;
   font-family: Arial, sans-serif;
 }
+.cart-page button {
+  padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.4rem;
+}
 
 /* Título da página */
 .cart-page h2 {
@@ -75,10 +80,13 @@
   display: flex;
   gap: 40px; /* Mantém uma boa distância entre as colunas */
   padding: 20px;
+  max-height: 60rem;
 }
 
 .cart-left {
   width: 50%; /* Mantém o espaço amplo para os itens */
+  max-height: 50rem;
+  overflow-y: scroll;
 }
 
 .cart-right {
@@ -86,6 +94,8 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  justify-content: center;
+  max-height: 50rem;
 }
 
 .cart-summary{
@@ -124,6 +134,11 @@
   border-radius: 10px;
   background-color: #f9f9f9;
 }
+.cart-summary input{
+  padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.4rem;
+}
 
 .summary-item {
   display: flex;
@@ -131,6 +146,7 @@
   align-items: center;
   padding: 10px 0;
   border-bottom: 1px solid #ddd;
+  margin: 0;
 }
 
 .summary-item:last-child {
@@ -234,25 +250,40 @@
 .actions button {
   padding: 15px 25px;
   font-size: 1rem;
+  width: 48%;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
-  width: 48%;
+  background-color: #FFFFFF;
+  color: #171717;
+  
 }
-
-.actions .checkout {
+.summary-item button{
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
   background-color: #FFFFFF;
   color: #171717;
 }
 
-.actions .checkout:hover {
-  background-color: #FFFFFF;
-  transform: scale(1.05);
+
+.actions :hover {
+  
+  background-color: rgb(133, 2, 233); /* Cor de fundo quando hover */
+  color: rgb(255, 255, 255); /* Cor do texto quando hover */
+  border: 0.1rem solid rgb(63, 0, 110);
+}
+.summary-item button:hover {
+  
+  background-color: rgb(133, 2, 233); /* Cor de fundo quando hover */
+  color: rgb(255, 255, 255); /* Cor do texto quando hover */
+  border: 0.1rem solid rgb(63, 0, 110);
 }
 
 .actions .checkout:disabled {
-  background-color: #FFFFFF;
+ 
   cursor: not-allowed;
 }
 

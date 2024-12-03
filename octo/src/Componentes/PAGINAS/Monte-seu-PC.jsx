@@ -169,7 +169,7 @@ const MonteSeuPC = () => {
         </article>
       </div>
       <nav className="botoes-navegacao">
-        <span className="total-preco"><strong>R${Number(total).toFixed(2)}</strong> no pix</span>
+        <span className="total-preco"><strong>R${Number(total).toFixed(2)}</strong> total</span>
         <div className="botoes-navegacao-container">
           <button className="botao-navegacao botao-adicionar" onClick={handleAdicionar} disabled={produtoSelecionado === null}>Adicionar</button>
           {finish && <button className="botao-navegacao botao-finalizar" onClick={handleFinalizar}>Finalizar</button>}
