@@ -1,0 +1,47 @@
+.modalBackground {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  .formContainer{
+    background-color: blueviolet;
+    width: 28rem;
+    border-radius: 0.5rem;
+    
+  }
+  .formularioLogin{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+  }
+#logoModal {
+    margin-bottom: 50rem;
+}
+#inputLogin {
+    margin: 0.5rem;
+    width: 20rem;
+    border-radius: 0.5rem;
+    height: 2rem;
+  }
+#inputLogin button{
+    width: 25rem;
+}
+#mudarModal{
+    cursor: pointer;
+    text-align: start;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.7rem;
+}
+#mudarModal:hover{
+    text-decoration: underline;
+}

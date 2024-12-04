@@ -1,15 +1,23 @@
-import React from 'react';
-import { Navigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const PrivateRoute = ({ children }) => {
   const token = localStorage.getItem('token');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!token) {
+
+      navigate('/?showModal=true');
+    }
+  }, [token, navigate]);
+
   if (!token) {
-    alert('Não foi possível acessar este recurso. Faça login primeiro.');
-    return <Navigate to="/" />;
+
+    return null;
   }
 
   return children;
 };
-
 
 export default PrivateRoute;

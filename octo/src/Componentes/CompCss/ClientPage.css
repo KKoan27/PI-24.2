@@ -99,7 +99,7 @@
   }
   
   /* Conteúdo da página */
-  .content {
+  .content2 {
     flex-grow: 1;
     padding: 20px;
     background-color: white;
@@ -174,7 +174,7 @@
   }
   
   /* Estilos para exibição de dados */
-  #ClientePage .content p {
+  #ClientePage .content2 p {
     font-size: 1rem;
     color: #222; /* Texto escuro */
     margin: 5px 0;
