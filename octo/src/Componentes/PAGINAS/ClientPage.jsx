@@ -1,23 +1,94 @@
 import React, { useState, useEffect } from "react";
 import '../CompCss/ClientPage.css'
+import { Link } from "react-router-dom";
 export default function FuncClientePage() {
     const url = `http://localhost/OctoCore_API/endpoints/`;
-    const [endpoint, setEndpoint] = useState("users/auth");
+    const [endpoint, setEndpoint] = useState("order/order");
     const [ID, setID] = useState("");
     const [activeSection, setActiveSection] = useState("dados"); // Inicializa com 'dados'
     const token = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : null;
-
+    const [IMGatual,setIMGatual]= useState(token['linkPFP'])
+    const [LinkPic,setLinkPic]= useState('')
     // Mapeamento de seções para endpoints
     const sectionToEndpoint = {
         dados: "users/auth",
         pedidos: "order/order",
         endereco: "users/endereco",
-        ticket: "users/contact",
-        pagamento: "users/payment",
+        ticket: "users/ticket",
+        pagamento: "users/cc",
         config: "users/config",
     };
 
-    // Função para puxar dados
+    function Deletar(idaddress){
+      handleDelete(endpoint, idaddress)
+    }
+
+    async function handleDelete(endpoint,ID){
+      let payload
+      if(endpoint === 'users/endereco'){
+      payload = {
+        idEndereco: ID
+      }
+      }
+      else if(endpoint === 'users/cc'){
+        payload = {
+          IDCC: ID
+        }
+      }
+      const response = await fetch(`${url}${endpoint}.php`,{
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+
+      })
+      if(response.ok){
+        alert("Deu bom")
+      }
+      else{
+        alert("Deu ruim")
+      }
+  }
+
+
+    // function handleChange(e) {
+    //     const { name, value } = e.target;
+    //     setLinkPic((prevData) => ({ ...prevData, [name]: value }));
+    // }
+
+
+    async function handleEdit() {
+      const payload = {
+          idUsuario: token['idUsuario'],
+          linkPFP: LinkPic,
+      };
+  
+      try {
+          const response = await fetch("http://localhost/octocore_api/endpoints/users/picture.php", {
+              method: "PATCH",
+              headers: {
+                  "Content-Type": "application/json",
+                  // Inclua "Authorization" se necessário
+                  // "Authorization": `Bearer ${token}`,
+              },
+              body: JSON.stringify(payload),
+          });
+  
+          if (!response.ok) {
+              // Lança erro se a resposta não estiver OK (ex.: 404, 500)
+              throw new Error(`Erro na requisição: ${response.status} - ${response.statusText}`);
+          }
+          setIMGatual(LinkPic)    
+          token.linkPFP = LinkPic
+          localStorage.setItem("token", JSON.stringify(token));
+     
+        
+
+      } catch (error) {
+          console.error("Erro:", error.message);
+      }
+  }
     const Pulldata = async (id, endpoint) => {
         try {
             const resposta = await fetch(`${url}${endpoint}.php?user=${id}`, {
@@ -44,7 +115,7 @@ export default function FuncClientePage() {
         if (token && token["idUsuario"] ) {
             Pulldata(token["idUsuario"], endpoint);
         }
-    }, [token, endpoint]); // Dependência de 'token' e 'endpoint'
+    }, [endpoint]); // Dependência de 'token' e 'endpoint'
 
     // Função para alterar a seção ativa e o endpoint fora do useEffect
     const changeSection = (section) => {
@@ -60,7 +131,7 @@ export default function FuncClientePage() {
       <header className="header">
         <div className="user-info">
           <div >
-          <img className="user-avatar" src={token['linkPFP']} alt="Fotinha"/>
+          <img className="user-avatar" src={IMGatual} alt="Fotinha"/>
           </div>
           <div className="user-details">
           {console.log("Token:", token)}
@@ -74,7 +145,6 @@ export default function FuncClientePage() {
       <div className="main-container">
         <nav className="sidebaroption">
           <ul>
-            <li><button onClick={() => changeSection('dados')}>Dados Pessoais</button></li>
             <li><button onClick={() => changeSection('pedidos')}>Pedidos</button></li>
             <li><button onClick={() => changeSection('endereco')}>Endereço de Entrega</button></li>
             <li><button onClick={() => changeSection('ticket')}>TICKETS</button></li>
@@ -86,7 +156,7 @@ export default function FuncClientePage() {
         <section className="content">
           <div className="section-header">
             <h3 id="section-title">
-              {activeSection === 'dados' ? 'Dados Pessoais' :
+              {
                activeSection === 'endereco' ? 'Endereço de Entrega' :
                activeSection === 'ticket' ? 'Dados de Contato' :
                activeSection === 'pagamento' ? 'Métodos de Pagamento' :
@@ -95,11 +165,6 @@ export default function FuncClientePage() {
             </h3>
           </div>
           <div className="section-content">
-            <div className={`section-content-box ${activeSection === 'dados' ? 'show' : 'hide'}`}>
-                  <h2>Nome completo: {token['usuario']} </h2>
-                  <h2>Email: {token['email']}</h2>
-                  
-            </div>
             <div className={`section-content-box ${activeSection === 'endereco' ? 'show' : 'hide'}`}>
 
             {ID && Array.isArray(ID["data"]) ? ( //condicional que verifica se o ID está setado para evitar crash
@@ -110,6 +175,8 @@ export default function FuncClientePage() {
                <p>Cep:{item['cep']}</p>
                <p>{item['rua']}</p>
                <p>{item['complemento']}</p>
+               <button value = {item['idEndereco']}onClick={(e)=>(Deletar(e.target.value))}>DELETAR</button>
+              
 
             </div>
             
@@ -117,31 +184,42 @@ export default function FuncClientePage() {
       ) : <p>Nenhum resultado encontrado</p>}
             </div>
             <div className={`section-content-box ${activeSection === 'ticket' ? 'show' : 'hide'}`}>
-              <p>Conteúdo de Dados de Contato aqui...</p>
+              <p> Sem suporte pra voce</p>
+
             </div>
             <div className={`section-content-box ${activeSection === 'pagamento' ? 'show' : 'hide'}`}>
-              <p>Conteúdo de Métodos de Pagamento aqui...</p>
+            {ID && Array.isArray(ID["data"]) ? ( //condicional que verifica se o ID está setado para evitar crash
+          ID['data'].map((item,i) => ( 
+            <div key={i}>
+               <p>ID CARTÃO:{item['idCartao']}</p>
+               <p>Cartão : **** **** **** {item['final']}</p>
+               <button value = {item['idCartao']}onClick={(e)=>(Deletar(e.target.value))}>DELETAR</button>
+
+
+            </div>))):<p>Nenhum resultado encontrado</p>}
             </div>
+
             <div className={`section-content-box ${activeSection === 'config' ? 'show' : 'hide'}`}>
-              <p>Conteúdo de Configurações de Conta aqui...</p>
+              
+              <h2> {token['usuario']}</h2>
+              <p> {token['email']}  </p>
+              <p>Coloque o link da imagem que gostaria:</p>
+              <input type="text" placeholder="Coloque o link" onChange={(e)=>(setLinkPic(e.target.value))}/>
+              <button onClick={handleEdit}>Salvar</button>
+
+
             </div>
+
             <div className={`section-content-box ${activeSection === 'pedidos' ? 'show' : 'hide'}`}>
             {ID && Array.isArray(ID["data"]) ? ( //condicional que verifica se o ID está setado para evitar crash
           ID['data'].map((item,i) => ( 
             <div key={i}>
-              
-               <p>Nome do local:{item['estado']}</p>
-               <p>Cep:{item['idPedido']}</p>
-               <p>{item['valorTotal']}</p>
-               <p>{item['valorFinal']}</p>
-               <p>{item['valorDesconto']}</p>
-               <p>{item['valorFrete']}</p>
-               <p>{item['metodoPagamento']}</p>
-               <p>{item['codigoRastreio']}</p>
-              
-
+               <p>Pedido:{item['idPedido']}</p>    
+               <p>Nome do local:{item['estado']}</p>           
+               <p>SUBTOTAL:   {item['valorFinal']}</p>
+               <p>Cartão:  {item['metodoPagamento']}</p>
             </div>
-            
+ 
           ))
       ) : <p>Nenhum resultado encontrado</p>}
             </div>
