@@ -62,6 +62,7 @@ export default function FuncClientePage() {
       })
       if(response.ok){
         alert("Deu bom")
+        await Pulldata(token['idUsuario'], endpoint); // Atualiza os dados
       }
       else{
         alert("Deu ruim")
@@ -89,6 +90,7 @@ export default function FuncClientePage() {
         if(!resposta){
           throw new Error (`erro na requisição: ${resposta.status}- ${resposta.statusText}`);
         }else{
+          await Pulldata(token['idUsuario'], "users/endereco")
           alert("deu certo")
         }
 
