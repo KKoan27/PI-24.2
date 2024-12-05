@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import '../CompCss/ClientPage.css'
-import { Link } from "react-router-dom";
+
 export default function FuncClientePage() {
     const url = `http://localhost/OctoCore_API/endpoints/`;
     const [endpoint, setEndpoint] = useState("order/order");
@@ -9,6 +9,13 @@ export default function FuncClientePage() {
     const token = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : null;
     const [IMGatual,setIMGatual]= useState(token['linkPFP'])
     const [LinkPic,setLinkPic]= useState('')
+    const [createAddres,setcreateAddress] = useState(false)
+    const [formDataAddress, setFormDataAddress] = useState({
+      nome: '',
+      rua: '',
+      cep: '',
+      complemento: '',
+    });
     // Mapeamento de seções para endpoints
     const sectionToEndpoint = {
         dados: "users/auth",
@@ -52,11 +59,43 @@ export default function FuncClientePage() {
   }
 
 
-    // function handleChange(e) {
-    //     const { name, value } = e.target;
-    //     setLinkPic((prevData) => ({ ...prevData, [name]: value }));
-    // }
+    
+  async function AddAdress({ nome, rua, cep, complemento }) {
+    const payload = {
+      nome,
+      rua,
+      cep,
+      complemento,
+      idUsuario: token['idUsuario'],
+    };
+      try {
+        const resposta = await fetch ("http://localhost/octocore_api/endpoints/users/endereco.php",{
+          method: "POST",
+          headers:{
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload)
+        });
+        if(!resposta){
+          throw new Error (`erro na requisição: ${resposta.status}- ${resposta.statusText}`);
+        }else{
+          alert("deu certo")
+        }
 
+      } catch (error){
+        alert("Erro:", error);
+      }
+    }
+
+
+    function adicionarAdress(event)
+    {
+      event.preventDefault();
+      AddAdress(formDataAddress);
+    }
+    function handleAddress (){
+      setcreateAddress(!createAddres)
+    }
 
     async function handleEdit() {
       const payload = {
@@ -166,8 +205,44 @@ export default function FuncClientePage() {
           </div>
           <div className="section-content">
             <div className={`section-content-box ${activeSection === 'endereco' ? 'show' : 'hide'}`}>
+            <button onClick={handleAddress}>Criar endereco</button>
 
-            {ID && Array.isArray(ID["data"]) ? ( //condicional que verifica se o ID está setado para evitar crash
+
+            {createAddres?(
+
+              <form onSubmit={adicionarAdress}>
+                
+                <h2>Nome do Local:</h2>
+                <input type="text" 
+                name="nome"
+                value={formDataAddress.nome}
+                onChange={(e)=>setFormDataAddress({...formDataAddress,nome:e.target.value})} />
+                
+                <h2>Rua</h2>
+                <input type="text" 
+                name="rua"
+                value={formDataAddress.rua}
+                onChange={(e)=>setFormDataAddress({...formDataAddress,rua:e.target.value})}/>
+                
+                <h2>CEP</h2>
+                <input 
+                type="text"
+                name="cep"
+                value={formDataAddress.cep}
+                onChange={(e)=>setFormDataAddress({...formDataAddress,cep:e.target.value})} />
+
+                <h2>Complemento</h2>
+                <input type="text"
+                name="complemento"
+                value={formDataAddress.complemento}
+                onChange={(e)=>setFormDataAddress({...formDataAddress,complemento:e.target.value})} />
+
+                <button type = "submit">Salvar</button>
+              </form>
+
+            )
+            
+            :ID && Array.isArray(ID["data"]) ? ( //condicional que verifica se o ID está setado para evitar crash
           ID['data'].map((item,i) => ( 
             <div key={i}>
               
