@@ -32,6 +32,12 @@
     color: rgb(255, 255, 255); /* Cor do texto quando hover */
     border: 0.1rem solid rgb(63, 0, 110);
   }
+  #formTicket button:disabled {
+    background-color: grey; /* Cor do botão desativado */
+    color: lightgrey;
+    cursor: not-allowed;
+    border: none;
+}
 
 .AtendiClass{
     display: flex;
