@@ -161,7 +161,7 @@ const CartPage = () => {
       
     </div>
               <div className="form-group">
-                <label htmlFor="cartao">Cartão de Crédito</label>
+                <label htmlFor="cartao">Método de Pagamento</label>
                 <select
                   id="idCartao"
                   name="idCartao"
@@ -173,7 +173,7 @@ const CartPage = () => {
                   <option value='Boleto' selected>Boleto</option>
                   {enderecos.length > 0 ? cartoes.map((item, index) => (
                     <option key={index} value={item.idCartao}>
-                        Final {item.final}
+                        CC Final {item.final}
                     </option>))
                     : <option disabled value=''>Cadastre seus métodos de pagamento na página meu perfil</option>}
                 </select>
