@@ -192,7 +192,7 @@ export default function FuncClientePage() {
           </ul>
         </nav>
 
-        <section className="content">
+        <section className="content2">
           <div className="section-header">
             <h3 id="section-title">
               {

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, Navigate, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { Box, Drawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
@@ -10,100 +10,35 @@ import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import Logo from '../Imagens/Logo.png';
-import Logo2 from '../Imagens/Logo2.png';
 import './CompCss/Sidebar.css';
 import './CompCss/Header.css';
-import './CompCss/Cadastro.css';
+
+import Modal from './Modal';
 
 const Header = () => {
-    const [loginForm, setLoginForm] = useState({
-        email: "",
-        password: "",
-        user: ""
-    })
+    const [searchParams] = useSearchParams();
 
 
     
     const navigate = useNavigate();
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isCadastroModalOpen, setIsCadastroModalOpen] = useState(false);
-    const [isForgotPasswordModalOpen, setIsForgotPasswordModalOpen] = useState(false);
+    
 
     const location = useLocation();
 
 
-    async function handleAuth(e) {
-        const url = "http://localhost/OctoCore_API/endpoints/users/auth.php"
-        e.preventDefault();
-        const payload = {
-            email: loginForm.email,
-            password: loginForm.password
-        };
-        const requisicao = await fetch(url, {
-            method: "POST",
-            headers: {"Content-Type": "application/json",},
-            body: JSON.stringify(payload),
-        })
-        const response = await requisicao.json()
-        if (response['data']['autenticado'] === true){
-           
-            console.log("Logado")
-            
-
-            const token = response['data']
-            localStorage.setItem('token', JSON.stringify(token));
-            navigate("/ClientPage")
-            handleCloseModal()
-
-        }
-        else{
-            console.log(token)
-            console.log("Errou nas credenciais")
-            alert("Credenciais incorretas")
-        }
-
-   
-    }
-    async function handleSignup(e) {
-        const url = "http://localhost/OctoCore_API/endpoints/users/signup.php"
-        e.preventDefault();
-        const payload = {
-            email: loginForm.email,
-            password: loginForm.password,
-            user: loginForm.user
-        };
-        const requisicao = await fetch(url, {
-            method: "POST",
-            headers: {"Content-Type": "application/json",},
-            body: JSON.stringify(payload),
-        })
-    
-        if (requisicao.ok){
-           
-
-            alert("Conta criada com sucesso")
-
-            setIsModalOpen(true)
-            setIsCadastroModalOpen(false)
-
-        }
-        else{
-            alert("Erro ao criar a conta, usuário ou email já em uso :c")
-        }
-
-   
-    }
-    function handleChange(e) { //atualiza o formulario de login
-        const { name, value } = e.target;
-        setLoginForm((prevData) => ({ ...prevData, [name]: value }));
-    }
     const toggleDrawer = (open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
         }
         setIsDrawerOpen(open);
     };
+    useEffect(() => {
+        if (searchParams.get('showModal') === 'true') {
+            setIsModalOpen(true); // Exibe o modal se o parâmetro for true
+        }
+      }, [searchParams]);
 
 
     const handleLogout = () =>{
@@ -114,34 +49,9 @@ const Header = () => {
     const handleOpenModal = () => {
         setIsModalOpen(true);
     };
-
     const handleCloseModal = () => {
-        setIsModalOpen(false);
-    };
-
-    const handleOpenCadastroModal = () => {
-        setIsModalOpen(false); // Fecha o modal de login
-        setIsCadastroModalOpen(true); // Abre o modal de cadastro
-    };
-
-    const handleCloseCadastroModal = () => {
-        setIsCadastroModalOpen(false);
-    };
-
-    const handleOpenForgotPasswordModal = () => {
-        setIsModalOpen(false); // Fecha o modal de login
-        setIsForgotPasswordModalOpen(true); // Abre o modal de recuperação de senha
-    };
-    
-    const handleCloseForgotPasswordModal = () => {
-        setIsForgotPasswordModalOpen(false);
-    };
-
-    // ---------------- Não estava sendo utilizado!!! --------------// 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     handleCloseModal();
-    // };
+        setIsModalOpen(false); 
+      };
 
     const token = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : null;
     const drawerList = (
@@ -185,7 +95,7 @@ const Header = () => {
                     <ListItemIcon>
                         <SportsEsportsIcon />
                     </ListItemIcon>
-                    <ListItemText primary="PC’s Gamer" />
+                    <ListItemText primary="PC's Gamer" />
                 </ListItemButton>
             </ListItem>
 
@@ -208,7 +118,8 @@ const Header = () => {
         </Box>
     );
 
-    return (
+    return (<>
+            
         <header className="Cabecalho">
             <img src={Logo} alt="OctoLogo" />
 
@@ -268,13 +179,15 @@ const Header = () => {
                 </div>)
                  : 
                 (<div id='login'> 
-                     <ListItemButton onClick={handleOpenModal} className="header-link">
+                     <ListItemButton onClick={()=>{setIsModalOpen(true)
+                     }} className="header-link">
                     <ExitToAppIcon className="header-icon" />
                     Login
                 </ListItemButton>
 
                 </div>)
                 }
+                {isModalOpen && <Modal isOpen={true} onClose={handleCloseModal}/>}
              
                 <span className="divider"></span>
                
@@ -288,97 +201,14 @@ const Header = () => {
                 </Link>
             </nav>
 
-            {/* Modal de Login */}
-            {isModalOpen && (
-                <div className="modal-overlay" onClick={handleCloseModal}>
-                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                        <button className="close-button" onClick={handleCloseModal}>×</button>
-                        <img src={Logo2} alt="LogoBranca" />
-                        <h2>Login</h2>
-                        <form onSubmit={handleAuth}>
-                            <div className="form-group">
-                                <label htmlFor="email">Email:</label>
-                                <input name = 'email' onChange = {handleChange} type="email" id="email" placeholder="username@gmail.com" required />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="password">Senha:</label>    
-                                <input name = 'password' onChange = {handleChange}type="password" id="password" placeholder="Senha" required />
-
-                            </div>
-                            <Link
-                                onClick={handleOpenForgotPasswordModal} 
-                                className="link-forgot">
-                                Esqueceu a senha?
-                            </Link>
-                           <button type="submit" className='login-button'>Entrar</button>
-                           <Link
-                                onClick={handleOpenCadastroModal}
-                                className="link-register">
-                                Criar conta
-                            </Link>
-                        </form>
-
-
-                        
-                    </div>
-                </div>
-            )}
-
-            {/* Modal de Cadastro */}
-            {isCadastroModalOpen && (
-                <div className="modal-overlay" onClick={handleCloseCadastroModal}>
-                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                        <button className="close-button" onClick={handleCloseCadastroModal}>×</button>
-                        <img src={Logo2} alt="LogoBranca" />
-
-                        <h2>Criar Conta</h2>
-                        <form onSubmit={handleSignup}>
-                            <div className="form-group">
-                                <label htmlFor="username">Nome de Usuário:</label>
-                                <input type="text" name = 'user' id="username" placeholder="Nome de usuário" required onChange = {handleChange} />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="email">Email:</label>
-                                <input type="email" id="email" name = 'email' placeholder="username@gmail.com" required  onChange = {handleChange}/>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="password">Senha:</label>
-                                <input type="password" id="password" name = 'password' placeholder="Crie uma senha" required onChange = {handleChange}/>
-                            </div>
-
-                            <button type="submit" className='send-button'>Enviar</button>
-                        </form>
-                    </div>
-                </div>
-            )}
-            {/* Modal de Recuperar Senha */}
-            {isForgotPasswordModalOpen && (
-                <div className="modal-overlay" onClick={handleCloseForgotPasswordModal}>
-                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                    <button className="close-button" onClick={handleCloseForgotPasswordModal}>×</button>
-                    <img src={Logo2} alt="LogoBranca" />
-
-                        <h2>Recuperar Senha</h2>
-                        <form>
-                            <div className="form-group">
-                                <label htmlFor="username">Nome de Usuário:</label>
-                                <input type="text" id="username" placeholder="Nome de usuário" required />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="email">Email:</label>
-                                <input type="email" id="email" placeholder="username@gmail.com" required />
-                            </div>
-
-                            <button type="submit" className='register-button'>Link para resetar senha enviado!</button>
-                        </form>
-                    </div>
-                </div>
-            )}
+            
+            
 
             <Drawer anchor="left" open={isDrawerOpen} onClose={toggleDrawer(false)}>
                 {drawerList}
             </Drawer>
         </header>
+        </>
     );
 };
 

@@ -29,7 +29,9 @@ function App() {
           <Route path="/Monte-seu-PC" element={<PrivateRoute> 
                                                 <MontePC/>
                                                 </PrivateRoute>}></Route>
-          <Route path="/Atendimento" element={<Atendimento />}></Route>
+          <Route path="/Atendimento" element={<PrivateRoute>
+                                              <Atendimento />
+                                              </PrivateRoute>}></Route>
          <Route path = "/ClientPage" element ={ <PrivateRoute> 
                                                 <FuncClientePage/>
                                                 </PrivateRoute>}></Route>
