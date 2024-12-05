@@ -142,7 +142,7 @@ const CartPage = () => {
             <h3>Entrega e pagamento</h3>
             <div className="card">
               <div className="form-group">
-                <label htmlFor="endereco">Endereço</label>
+                <label htmlFor="endereco">Endereço de Entrega</label>
                 <select
                   id="idEndereco"
                   name="idEndereco"
