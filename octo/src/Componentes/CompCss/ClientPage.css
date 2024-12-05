@@ -100,6 +100,9 @@
   
   /* Conteúdo da página */
   .content2 {
+    overflow-y: auto;
+    height: 500px;
+    width: 320px;
     flex-grow: 1;
     padding: 20px;
     background-color: white;
@@ -177,7 +180,8 @@
   #ClientePage .content2 p {
     font-size: 1rem;
     color: #222; /* Texto escuro */
-    margin: 5px 0;
+    margin: 5px 0;;
+    width: 200px;
   }
   
   #ClientePage .section-header h3 {

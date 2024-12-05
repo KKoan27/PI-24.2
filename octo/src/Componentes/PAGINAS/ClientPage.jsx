@@ -5,7 +5,7 @@ export default function FuncClientePage() {
     const url = `http://localhost/OctoCore_API/endpoints/`;
     const [endpoint, setEndpoint] = useState("order/order");
     const [ID, setID] = useState("");
-    const [activeSection, setActiveSection] = useState("dados"); // Inicializa com 'dados'
+    const [activeSection, setActiveSection] = useState("pedidos"); // Inicializa com 'dados'
     const token = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : null;
     const [IMGatual,setIMGatual]= useState(token['linkPFP'])
     const [LinkPic,setLinkPic]= useState('')
@@ -265,7 +265,7 @@ export default function FuncClientePage() {
         <nav className="sidebaroption">
           <ul>
             <li><button onClick={() => changeSection('pedidos')}>Pedidos</button></li>
-            <li><button onClick={() => changeSection('endereco')}>Endereço de Entrega</button></li>
+            <li><button onClick={() => changeSection('endereco')}>Endereços de Entrega</button></li>
             <li><button onClick={() => changeSection('ticket')}>TICKETS</button></li>
             <li><button onClick={() => changeSection('pagamento')}>Métodos de Pagamento</button></li>
             <li><button onClick={() => changeSection('config')}>Configurações de Conta</button></li>
@@ -276,11 +276,11 @@ export default function FuncClientePage() {
           <div className="section-header">
             <h3 id="section-title">
               {
-               activeSection === 'endereco' ? 'Endereço de Entrega' :
+               activeSection === 'endereco' ? 'Endereços de Entrega' :
                activeSection === 'ticket' ? 'Dados de Contato' :
                activeSection === 'pagamento' ? 'Métodos de Pagamento' :
                activeSection === 'pedidos' ? 'Pedidos' :
-               'Configurações de Conta'}
+               'Algo ta estranho'}
             </h3>
           </div>
           <div className="section-content">
@@ -326,10 +326,10 @@ export default function FuncClientePage() {
           ID['data'].map((item,i) => ( 
             <div key={i}>
               
-               <p>Nome do local:{item['nome']}</p>
+               <h2>{item['nome']}</h2>
                <p>Cep:{item['cep']}</p>
-               <p>{item['rua']}</p>
-               <p>{item['complemento']}</p>
+               <p>Rua:{item['rua']}</p>
+               <p>Complemento{item['complemento']}</p>
                <button value = {item['idEndereco']}onClick={(e)=>(Deletar(e.target.value))}>DELETAR</button>
               
 
