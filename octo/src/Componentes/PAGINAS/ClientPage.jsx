@@ -10,12 +10,22 @@ export default function FuncClientePage() {
     const [IMGatual,setIMGatual]= useState(token['linkPFP'])
     const [LinkPic,setLinkPic]= useState('')
     const [createAddres,setcreateAddress] = useState(false)
+    const [createCard, setcreateCard] = useState(false)
     const [formDataAddress, setFormDataAddress] = useState({
       nome: '',
       rua: '',
       cep: '',
       complemento: '',
     });
+    const [formDataCard, setFormDataCard] = useState({
+    numeroCC: '',
+    cvv: '',
+    validade:'', 
+    });
+
+
+
+
     // Mapeamento de seções para endpoints
     const sectionToEndpoint = {
         dados: "users/auth",
@@ -97,6 +107,47 @@ export default function FuncClientePage() {
       setcreateAddress(!createAddres)
     }
 
+
+
+    // SEÇÂO DE CARTAO
+    async function AddCard({ numeroCC,cvv, validade }) {
+      const payload = {
+        numeroCC,
+        cvv,
+        validade,
+        idUsuario: token['idUsuario'],
+      };
+        try {
+          const resposta = await fetch (`http://localhost/octocore_api/endpoints/users/cc.php/?user=${token['idUsuario']}`,{
+            method: "POST",
+            headers:{
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload)
+          });
+          if(!resposta){
+            throw new Error (`erro na requisição: ${resposta.status}- ${resposta.statusText}`);
+          }else{
+            alert("deu certo")
+          }
+  
+        } catch (error){
+          alert("Erro:", error);
+        }
+      }
+      
+
+      function adicionarCartão(event)
+      {
+        event.preventDefault();
+        AddCard(formDataCard);
+      }
+      function handleCard (){
+        setcreateCard(!createCard)
+      }
+
+
+      // SEÇÂO DE EDIÇÂO DE FOTO
     async function handleEdit() {
       const payload = {
           idUsuario: token['idUsuario'],
@@ -257,13 +308,47 @@ export default function FuncClientePage() {
             
           ))
       ) : <p>Nenhum resultado encontrado</p>}
-            </div>
+ </div>
+
+
             <div className={`section-content-box ${activeSection === 'ticket' ? 'show' : 'hide'}`}>
               <p> Sem suporte pra voce</p>
 
             </div>
+
+
+
+
             <div className={`section-content-box ${activeSection === 'pagamento' ? 'show' : 'hide'}`}>
-            {ID && Array.isArray(ID["data"]) ? ( //condicional que verifica se o ID está setado para evitar crash
+            <button onClick={handleCard}>Criar Cartao</button>
+
+             {createCard?(
+
+              <form onSubmit={adicionarCartão}>
+                
+                <h2>NumeroCC</h2>
+                <input type="text" 
+                name="numeroCC"
+                value={formDataCard.numeroCC}
+                onChange={(e)=>setFormDataCard({...formDataCard,numeroCC:e.target.value})} />
+                
+                <h2>CVV</h2>
+                <input type="text" 
+                name="cvv"
+                value={formDataCard.cvv}
+                onChange={(e)=>setFormDataCard({...formDataCard,cvv:e.target.value})}/>
+                
+                <h2>validade</h2>
+                <input 
+                type="text"
+                name="validade"
+                value={formDataCard.validade}
+                onChange={(e)=>setFormDataCard({...formDataCard,validade:e.target.value})} />
+
+                <button type = "submit">Salvar</button>
+              </form>
+
+            ):ID && Array.isArray(ID["data"]) ? ( //condicional que verifica se o ID está setado para evitar crash
           ID['data'].map((item,i) => ( 
             <div key={i}>
                <p>ID CARTÃO:{item['idCartao']}</p>
