@@ -148,6 +148,33 @@ export default function FuncClientePage() {
         setcreateCard(!createCard)
       }
 
+      async function toggleActiveCard(cardId) {
+        const payload = {
+            IDCC: cardId,
+            idUsuario: token['idUsuario'],
+            
+        };
+    
+        try {
+            const response = await fetch(`http://localhost/octocore_api/endpoints/users/cc.php`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload),
+            });
+    
+            if (!response.ok) {
+                throw new Error(`Erro ao atualizar cartão: ${response.status} - ${response.statusText}`);
+            }
+    
+            await Pulldata(token['idUsuario'], "users/cc"); // Atualiza a lista de cartões
+        } catch (error) {
+            alert(`Erro ao atualizar cartão: ${error.message}`);
+        }
+    }
+    
+
 
       // SEÇÂO DE EDIÇÂO DE FOTO
     async function handleEdit() {
@@ -353,8 +380,17 @@ export default function FuncClientePage() {
             ):ID && Array.isArray(ID["data"]) ? ( //condicional que verifica se o ID está setado para evitar crash
           ID['data'].map((item,i) => ( 
             <div key={i}>
-               <p>ID CARTÃO:{item['idCartao']}</p>
+              
+               <p>ID CARTÃO:{item['idCartao']}   
+            <input 
+                type="radio" 
+                name="activeCard" 
+                checked={item.isActive} // Exibe como selecionado se for ativo
+                onChange={() => toggleActiveCard(item['idCartao'])} 
+            /></p>
                <p>Cartão : **** **** **** {item['final']}</p>
+           
+        
                <button value = {item['idCartao']}onClick={(e)=>(Deletar(e.target.value))}>DELETAR</button>
 
 
