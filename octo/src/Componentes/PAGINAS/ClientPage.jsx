@@ -61,11 +61,11 @@ export default function FuncClientePage() {
 
       })
       if(response.ok){
-        alert("Deu bom")
+        alert("Deletado com sucesso")
         await Pulldata(token['idUsuario'], endpoint); // Atualiza os dados
       }
       else{
-        alert("Deu ruim")
+        alert("Falha ao deletar :c")
       }
   }
 
@@ -91,11 +91,11 @@ export default function FuncClientePage() {
           throw new Error (`erro na requisição: ${resposta.status}- ${resposta.statusText}`);
         }else{
           await Pulldata(token['idUsuario'], "users/endereco")
-          alert("deu certo")
+          alert("Adicionado com sucesso!")
         }
 
       } catch (error){
-        alert("Erro:", error);
+        alert("Erro ao adicionar:", error);
       }
     }
 
@@ -266,7 +266,6 @@ export default function FuncClientePage() {
           <ul>
             <li><button onClick={() => changeSection('pedidos')}>Pedidos</button></li>
             <li><button onClick={() => changeSection('endereco')}>Endereços de Entrega</button></li>
-            <li><button onClick={() => changeSection('ticket')}>TICKETS</button></li>
             <li><button onClick={() => changeSection('pagamento')}>Métodos de Pagamento</button></li>
             <li><button onClick={() => changeSection('config')}>Configurações de Conta</button></li>
           </ul>
@@ -280,12 +279,13 @@ export default function FuncClientePage() {
                activeSection === 'ticket' ? 'Dados de Contato' :
                activeSection === 'pagamento' ? 'Métodos de Pagamento' :
                activeSection === 'pedidos' ? 'Pedidos' :
-               'Algo ta estranho'}
+               null}
             </h3>
           </div>
           <div className="section-content">
             <div className={`section-content-box ${activeSection === 'endereco' ? 'show' : 'hide'}`}>
             <button onClick={handleAddress}>Criar endereco</button>
+            <p>-------------------------------------</p>
 
 
             {createAddres?(
@@ -326,11 +326,12 @@ export default function FuncClientePage() {
           ID['data'].map((item,i) => ( 
             <div key={i}>
               
-               <h2>{item['nome']}</h2>
-               <p>Cep:{item['cep']}</p>
-               <p>Rua:{item['rua']}</p>
-               <p>Complemento{item['complemento']}</p>
+               <h2 style={{textAlign:"center"}}>{item['nome']}</h2>
+               <p style={{textAlign:"center"}}>Cep:{item['cep']}</p>
+               <p  style={{textAlign:"center"}}>Rua:{item['rua']}</p>
+               <p style={{textAlign:"center"}}>Complemento{item['complemento']}</p>
                <button value = {item['idEndereco']}onClick={(e)=>(Deletar(e.target.value))}>DELETAR</button>
+               <p>-------------------------------------</p>
               
 
             </div>
@@ -350,6 +351,7 @@ export default function FuncClientePage() {
 
             <div className={`section-content-box ${activeSection === 'pagamento' ? 'show' : 'hide'}`}>
             <button onClick={handleCard}>Criar Cartao</button>
+            <p>-------------------------------------</p>
 
              {createCard?(
 
@@ -381,7 +383,7 @@ export default function FuncClientePage() {
           ID['data'].map((item,i) => ( 
             <div key={i}>
               
-               <p>ID CARTÃO:{item['idCartao']}   
+               <p>Cartão principal:   
             <input 
                 type="radio" 
                 name="activeCard" 
@@ -389,9 +391,11 @@ export default function FuncClientePage() {
                 onChange={() => toggleActiveCard(item['idCartao'])} 
             /></p>
                <p>Cartão : **** **** **** {item['final']}</p>
+               
            
         
                <button value = {item['idCartao']}onClick={(e)=>(Deletar(e.target.value))}>DELETAR</button>
+               <p>-------------------------------------</p>
 
 
             </div>))):<p>Nenhum resultado encontrado</p>}
@@ -399,11 +403,11 @@ export default function FuncClientePage() {
 
             <div className={`section-content-box ${activeSection === 'config' ? 'show' : 'hide'}`}>
               
-              <h2> {token['usuario']}</h2>
-              <p> {token['email']}  </p>
-              <p>Coloque o link da imagem que gostaria:</p>
+              <h2 style={{textAlign:"center"}}> {token['usuario']}</h2>
+              <p style={{textAlign:"center"}}> {token['email']}  </p>
+              <p style={{textAlign:"center"}}>Coloque o link da imagem que gostaria:</p>
               <input type="text" placeholder="Coloque o link" onChange={(e)=>(setLinkPic(e.target.value))}/>
-              <button onClick={handleEdit}>Salvar</button>
+              <button  onClick={handleEdit}>Salvar</button>
 
 
             </div>
@@ -413,9 +417,10 @@ export default function FuncClientePage() {
           ID['data'].map((item,i) => ( 
             <div key={i}>
                <p>Pedido:{item['idPedido']}</p>    
-               <p>Nome do local:{item['estado']}</p>           
-               <p>SUBTOTAL:   {item['valorFinal']}</p>
-               <p>Cartão:  {item['metodoPagamento']}</p>
+               <p>Status:{item['estado']}</p>           
+               <p>Total:   {item['valorFinal']}</p>
+               <p>Método de Pagamento:  {item['metodoPagamento']}</p>
+               <p>-------------------------------------</p>
             </div>
  
           ))
