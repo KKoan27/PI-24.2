@@ -189,7 +189,6 @@ const Header = () => {
                 }
                 {isModalOpen && <Modal isOpen={true} onClose={handleCloseModal}/>}
              
-                <span className="divider"></span>
                
 
                 <Link
@@ -197,7 +196,6 @@ const Header = () => {
                     to="/CartPage"
                     className="header-link"
                 >
-                    <LocalGroceryStoreIcon className="header-icon" />
                 </Link>
             </nav>
 
