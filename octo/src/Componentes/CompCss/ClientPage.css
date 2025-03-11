@@ -1,0 +1,254 @@
+/* Resetando margens e padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Definindo fontes padrão */
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: rgba(231, 230, 230, 0.753); /* Cor clara de fundo */
+    color: #222; /* Texto escuro */
+  }
+  
+  /* Container principal */
+  #ClientePage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  /* Estilos do header */
+  .header {
+    width: 100%;
+    background-color: #6A0DAD; /* Cor roxa */
+    padding: 20px;
+    color: white;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .user-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .user-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+  
+  .user-details h2 {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+  }
+  
+  .user-details p {
+    font-size: 1rem;
+    color: rgba(231, 230, 230, 0.753); /* Cor clara para o texto */
+  }
+  
+  /* Container da área principal */
+  .main-container {
+    width: 100%;
+    display: flex;
+    margin-top: 30px;
+  }
+  
+  /* Sidebar */
+  .sidebaroption {
+    width: 250px;
+    background-color: #222; /* Cor escura */
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .sidebaroption ul {
+    list-style: none;
+  }
+  
+  .sidebaroption li {
+    margin: 10px 0;
+  }
+  
+  .sidebaroption button {
+    width: 100%;
+    padding: 10px;
+    background-color: #6A0DAD; /* Cor roxa */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    text-align: left;
+    cursor: pointer;
+  }
+  
+  .sidebaroption button:hover {
+    background-color: #541092; /* Um tom mais escuro do roxo */
+  }
+  
+  .sidebaroption button:active {
+    background-color: #3f007d; /* Tom ainda mais escuro do roxo */
+  }
+  
+  /* Conteúdo da página */
+  .content2 {
+    overflow-y: auto;
+    height: 500px;
+    width: 320px;
+    flex-grow: 1;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .section-header {
+    margin-bottom: 20px;
+  }
+  
+  #section-title {
+    font-size: 2rem;
+    color: #6A0DAD; /* Cor roxa */
+  }
+  
+  /* Box de conteúdo das seções */
+  .section-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .section-content-box {
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: rgba(231, 230, 230, 0.753); /* Cor clara com opacidade */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .section-content-box.show {
+    display: block;
+  }
+  
+  .section-content-box.hide {
+    display: none;
+  }
+  
+  /* Botões e ações dentro das seções */
+  button {
+    padding: 10px 20px;
+    background-color: #6A0DAD; /* Cor roxa */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #541092; /* Tom mais escuro do roxo */
+  }
+  
+  button:active {
+    background-color: #3f007d; /* Tom ainda mais escuro do roxo */
+  }
+  
+  /* Inputs e campos de texto */
+  input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  input[type="text"]:focus {
+    border-color: #6A0DAD; /* Cor roxa no foco */
+    outline: none;
+  }
+  
+  /* Estilos para exibição de dados */
+  #ClientePage .content2 p {
+    font-size: 1rem;
+    color: #222; /* Texto escuro */
+    margin: 5px 0;;
+    width: 200px;
+  }
+  
+  #ClientePage .section-header h3 {
+    font-size: 1.5rem;
+    color: #6A0DAD; /* Cor roxa */
+    margin-bottom: 10px;
+  }
+  
+  #ClientePage .section-content-box p:last-child {
+    font-weight: bold;
+  }
+  
+  #ClientePage .section-content-box h2 {
+    font-size: 1.5rem;
+    color: #6A0DAD; /* Cor roxa */
+  }
+  
+  /* Especificando apenas p, h2 da section-content-box */
+  .section-content-box p {
+    font-size: 1rem;
+    color: #222; /* Texto escuro */
+  }
+  
+  .section-content-box h2 {
+    font-size: 1.5rem;
+    color: #6A0DAD; /* Cor roxa */
+  }
+  
+  /* Estilos para inputs e buttons específicos dentro da .section-content-box */
+  
+  .section-content-box input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  .section-content-box button {
+    padding: 10px 20px;
+    background-color: #6A0DAD; /* Cor roxa */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .section-content-box button:hover {
+    background-color: #541092; /* Tom mais escuro do roxo */
+  }
+  
+  .section-content-box button:active {
+    background-color: #3f007d; /* Tom ainda mais escuro do roxo */
+  }
+  
+  /* Especificando p dentro da section-content-box */
+  .section-content-box p {
+    font-size: 1rem;
+    color: #222;
+  }
+  
+  .section-content-box h2 {
+    font-size: 1.5rem;
+    color: #6A0DAD; /* Cor roxa */
+  }
+  
+  

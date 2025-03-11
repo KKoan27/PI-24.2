@@ -1,0 +1,88 @@
+.modalBackground {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .formularioLogin{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    gap: 1rem;
+  }
+#opcoesModal2{
+    margin: 0;
+
+}
+#logoModal {
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+}
+.inputLogin {
+    margin: 0.5rem;
+    width: 20rem;
+    border-radius: 0.5rem;
+    height: 2rem;
+  }
+.inputLogin button{
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    width: 50rem;
+    height: 110rem;
+
+}
+#mudarModal{
+    cursor: pointer;
+    text-align: start;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.7rem;
+}
+#xizinho{
+    text-align: end;
+    padding-right: 1rem;
+    padding-top: 1rem;
+    margin: 0;
+    cursor: pointer;
+}
+#statusText{
+
+    text-align: start;
+    text-decoration: none;
+    margin-left: 1rem;
+    margin-bottom: 0;
+    padding: 0;
+    font-size: 0.7rem;
+}
+#mudarModal:hover{
+    text-decoration: underline;
+}
+.formContainer {
+    background-color: #441d75; 
+    width: 28rem;
+    border-radius: 0.5rem;
+ 
+    box-shadow: 
+        0 0 5px #9333ea,   
+        0 0 10px #9333ea, 
+        0 0 20px #9333ea,  
+        0 0 40px #9333ea;  
+    transition: box-shadow 0.3s ease; 
+}
+
+.formContainer:hover {
+    box-shadow: 
+        0 0 10px #9333ea,  
+        0 0 20px #9333ea,
+        0 0 50px #9333ea,  
+        0 0 80px #9333ea;
+}
