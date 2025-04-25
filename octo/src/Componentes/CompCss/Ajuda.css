@@ -1,0 +1,61 @@
+.ajuda-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(138, 43, 226, 0.3);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .ajuda-container h1 {
+    color: #b37feb;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .ajuda-container h2 {
+    color: #a783ff;
+    font-size: 1.6rem;
+    margin-top: 30px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 8px;
+  }
+  
+  .ajuda-container p, .ajuda-container li {
+    font-size: 1rem;
+    font-weight: 6  00;
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+  
+  .ajuda-container ol, .ajuda-container ul {
+    padding-left: 20px;
+  }
+  
+  .ajuda-container a {
+    color: #8a63d2;
+    text-decoration: none;
+  }
+  
+  .ajuda-container a:hover {
+    text-decoration: underline;
+    color: #d1b3ff;
+  }
+  
+  @media (max-width: 768px) {
+    .ajuda-container {
+      padding: 15px;
+    }
+  
+    .ajuda-container h1 {
+      font-size: 2rem;
+    }
+  
+    .ajuda-container h2 {
+      font-size: 1.3rem;
+    }
+  }
+  

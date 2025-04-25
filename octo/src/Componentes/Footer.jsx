@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import './CompCss/Footer.css';
 import Logo from '../Imagens/Logo.png';
 import PhoneIcon from '@mui/icons-material/Phone';
@@ -10,12 +12,11 @@ function Rodape() {
             <div className="Rodape__left">
                 <h4>INSTITUCIONAL</h4>
                 <ul>
-                    <li>A OctoCore</li>
-                    <li>Perguntas Frequentes</li>
-                    <li>Formas de Pagamento e Envio</li>
-                    <li>Garantia, Trocas e Devolução</li>
-                    <li>Política e Privacidade</li>
-                    <li>Fale Conosco</li>
+                    <li><Link to="/ajuda">Central de Ajuda</Link></li>
+                    <li><Link to="/ajuda">Perguntas Frequentes</Link></li>
+                    <li><Link to="/ajuda">Formas de Pagamento e Envio</Link></li>
+                    <li><Link to="/ajuda">Garantia, Trocas e Devolução</Link></li>
+                    <li><Link to="/politicas">Políticas e Privacidade</Link></li>
                 </ul>
             </div>
 
