@@ -18,16 +18,22 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding: 30px;
+    height: 80em;
+    width: 97%;
+    
   }
   
+
   /* Estilos do header */
-  .header {
+  .TitleHeader{
     width: 100%;
-    background-color: #6A0DAD; /* Cor roxa */
+    background-color: RGB(34, 34, 34); /* Cor roxa */
     padding: 20px;
     color: white;
     border-radius: 8px;
+    border: #6A0DAD solid;
+    border-width: 4px; 
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -39,14 +45,14 @@
   }
   
   .user-avatar {
-    width: 60px;
-    height: 60px;
+    width: 9em;
+    height: 9em;
     border-radius: 50%;
     margin-right: 20px;
   }
   
   .user-details h2 {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     margin-bottom: 5px;
   }
   
@@ -60,14 +66,17 @@
     width: 100%;
     display: flex;
     margin-top: 30px;
+    height: 100%;
   }
   
   /* Sidebar */
   .sidebaroption {
-    width: 250px;
+    width: 350px;
+    height: 100%;
     background-color: #222; /* Cor escura */
     padding: 20px;
     border-radius: 8px;
+
   }
   
   .sidebaroption ul {
@@ -76,27 +85,31 @@
   
   .sidebaroption li {
     margin: 10px 0;
-  }
-  
-  .sidebaroption button {
-    width: 100%;
+
+     width: 100%;
     padding: 10px;
     background-color: #6A0DAD; /* Cor roxa */
     color: white;
     border: none;
     border-radius: 5px;
-    font-size: 1rem;
-    text-align: left;
+    font-size: 1.5rem;
+    text-align: center;
     cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, color 0.6s ease;
   }
   
-  .sidebaroption button:hover {
-    background-color: #541092; /* Um tom mais escuro do roxo */
+  .sidebaroption .active, .sidebaroption li:hover{
+    background-color: white;
+    color: black;
   }
   
-  .sidebaroption button:active {
-    background-color: #3f007d; /* Tom ainda mais escuro do roxo */
+
+  
+  .sidebaroption li:active {
+      transform: translateY(-10px);
   }
+ 
+
   
   /* Conteúdo da página */
   .content2 {
@@ -134,7 +147,10 @@
   }
   
   .section-content-box.show {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
   }
   
   .section-content-box.hide {
@@ -152,14 +168,8 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
+
   
-  button:hover {
-    background-color: #541092; /* Tom mais escuro do roxo */
-  }
-  
-  button:active {
-    background-color: #3f007d; /* Tom ainda mais escuro do roxo */
-  }
   
   /* Inputs e campos de texto */
   input[type="text"] {

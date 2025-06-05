@@ -90,8 +90,10 @@ export default function FuncClientePage() {
         if(!resposta){
           throw new Error (`erro na requisição: ${resposta.status}- ${resposta.statusText}`);
         }else{
+
           await Pulldata(dados['idUsuario'], "users/endereco")
           alert("Adicionado com sucesso!")
+
         }
 
       } catch (error){
@@ -247,7 +249,7 @@ export default function FuncClientePage() {
     return (
       
       <div id="ClientePage"> 
-      <header className="header">
+      <div className="TitleHeader">
         <div className="user-info">
           <div >
           <img className="user-avatar" src={IMGatual} alt="Fotinha"/>
@@ -259,15 +261,15 @@ export default function FuncClientePage() {
             <p> {dados['email']}  </p>
           </div>
         </div>
-      </header>
-
+      </div>
+      
       <div className="main-container">
         <nav className="sidebaroption">
           <ul>
-            <li><button onClick={() => changeSection('pedidos')}>Pedidos</button></li>
-            <li><button onClick={() => changeSection('endereco')}>Endereços de Entrega</button></li>
-            <li><button onClick={() => changeSection('pagamento')}>Métodos de Pagamento</button></li>
-            <li><button onClick={() => changeSection('config')}>Configurações de Conta</button></li>
+            <li  onClick={() => changeSection('pedidos')}class={`${activeSection === 'pedidos'? 'active': ''}`}>Pedidos</li>
+            <li onClick={() => changeSection('endereco')} class={`${activeSection === 'endereco'? 'active': ''}`} >Endereços de Entrega</li>
+            <li onClick={() => changeSection('pagamento')} class={`${activeSection === 'pagamento'? 'active': ''}`}>Métodos de Pagamento</li>
+            <li onClick={() => changeSection('config')}class={`${activeSection === 'config'? 'active': ''}`}>Configurações de Conta</li>
           </ul>
         </nav>
 
