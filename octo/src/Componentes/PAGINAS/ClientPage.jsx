@@ -6,8 +6,8 @@ export default function FuncClientePage() {
     const [endpoint, setEndpoint] = useState("order/order");
     const [ID, setID] = useState("");
     const [activeSection, setActiveSection] = useState("pedidos"); // Inicializa com 'dados'
-    const token = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : null;
-    const [IMGatual,setIMGatual]= useState(token['linkPFP'])
+    const dados = localStorage.getItem("dados") ? JSON.parse(localStorage.getItem("dados")) : null;
+    const [IMGatual,setIMGatual]= useState(dados['linkPFP'])
     const [LinkPic,setLinkPic]= useState('')
     const [createAddres,setcreateAddress] = useState(false)
     const [createCard, setcreateCard] = useState(false)
@@ -62,7 +62,7 @@ export default function FuncClientePage() {
       })
       if(response.ok){
         alert("Deletado com sucesso")
-        await Pulldata(token['idUsuario'], endpoint); // Atualiza os dados
+        await Pulldata(dados['idUsuario'], endpoint); // Atualiza os dados
       }
       else{
         alert("Falha ao deletar :c")
@@ -77,7 +77,7 @@ export default function FuncClientePage() {
       rua,
       cep,
       complemento,
-      idUsuario: token['idUsuario'],
+      idUsuario: dados['idUsuario'],
     };
       try {
         const resposta = await fetch ("http://localhost/octocore_api/endpoints/users/endereco.php",{
@@ -90,7 +90,7 @@ export default function FuncClientePage() {
         if(!resposta){
           throw new Error (`erro na requisição: ${resposta.status}- ${resposta.statusText}`);
         }else{
-          await Pulldata(token['idUsuario'], "users/endereco")
+          await Pulldata(dados['idUsuario'], "users/endereco")
           alert("Adicionado com sucesso!")
         }
 
@@ -117,10 +117,10 @@ export default function FuncClientePage() {
         numeroCC,
         cvv,
         validade,
-        idUsuario: token['idUsuario'],
+        idUsuario: dados['idUsuario'],
       };
         try {
-          const resposta = await fetch (`http://localhost/octocore_api/endpoints/users/cc.php/?user=${token['idUsuario']}`,{
+          const resposta = await fetch (`http://localhost/octocore_api/endpoints/users/cc.php/?user=${dados['idUsuario']}`,{
             method: "POST",
             headers:{
               "Content-Type": "application/json",
@@ -151,7 +151,7 @@ export default function FuncClientePage() {
       async function toggleActiveCard(cardId) {
         const payload = {
             IDCC: cardId,
-            idUsuario: token['idUsuario'],
+            idUsuario: dados['idUsuario'],
             
         };
     
@@ -168,7 +168,7 @@ export default function FuncClientePage() {
                 throw new Error(`Erro ao atualizar cartão: ${response.status} - ${response.statusText}`);
             }
     
-            await Pulldata(token['idUsuario'], "users/cc"); // Atualiza a lista de cartões
+            await Pulldata(dados['idUsuario'], "users/cc"); // Atualiza a lista de cartões
         } catch (error) {
             alert(`Erro ao atualizar cartão: ${error.message}`);
         }
@@ -179,7 +179,7 @@ export default function FuncClientePage() {
       // SEÇÂO DE EDIÇÂO DE FOTO
     async function handleEdit() {
       const payload = {
-          idUsuario: token['idUsuario'],
+          idUsuario: dados['idUsuario'],
           linkPFP: LinkPic,
       };
   
@@ -199,8 +199,8 @@ export default function FuncClientePage() {
               throw new Error(`Erro na requisição: ${response.status} - ${response.statusText}`);
           }
           setIMGatual(LinkPic)    
-          token.linkPFP = LinkPic
-          localStorage.setItem("token", JSON.stringify(token));
+          dados.linkPFP = LinkPic
+          localStorage.setItem("dados", JSON.stringify(dados));
      
         
 
@@ -229,12 +229,12 @@ export default function FuncClientePage() {
         }
     };
 
-    // useEffect apenas para monitorar mudanças no token e endpoint
+    // useEffect apenas para monitorar mudanças nos dados e endpoint
     useEffect(() => {
-        if (token && token["idUsuario"] ) {
-            Pulldata(token["idUsuario"], endpoint);
+        if (dados && dados["idUsuario"] ) {
+            Pulldata(dados["idUsuario"], endpoint);
         }
-    }, [endpoint]); // Dependência de 'token' e 'endpoint'
+    }, [endpoint]); // Dependência de 'dados' e 'endpoint'
 
     // Função para alterar a seção ativa e o endpoint fora do useEffect
     const changeSection = (section) => {
@@ -253,10 +253,10 @@ export default function FuncClientePage() {
           <img className="user-avatar" src={IMGatual} alt="Fotinha"/>
           </div>
           <div className="user-details">
-          {console.log("Token:", token)}
+          {console.log("dados:", dados)}
 
-            <h2> {token['usuario']}</h2>
-            <p> {token['email']}  </p>
+            <h2> {dados['usuario']}</h2>
+            <p> {dados['email']}  </p>
           </div>
         </div>
       </header>
@@ -403,8 +403,8 @@ export default function FuncClientePage() {
 
             <div className={`section-content-box ${activeSection === 'config' ? 'show' : 'hide'}`}>
               
-              <h2 style={{textAlign:"center"}}> {token['usuario']}</h2>
-              <p style={{textAlign:"center"}}> {token['email']}  </p>
+              <h2 style={{textAlign:"center"}}> {dados['usuario']}</h2>
+              <p style={{textAlign:"center"}}> {dados['email']}  </p>
               <p style={{textAlign:"center"}}>Coloque o link da imagem que gostaria:</p>
               <input type="text" placeholder="Coloque o link" onChange={(e)=>(setLinkPic(e.target.value))}/>
               <button  onClick={handleEdit}>Salvar</button>

@@ -2,17 +2,17 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const PrivateRoute = ({ children }) => {
-  const token = localStorage.getItem('token');
+  const dados = localStorage.getItem('dados');
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!token) {
+    if (!dados) {
 
       navigate('/?showModal=true');
     }
-  }, [token, navigate]);
+  }, [dados, navigate]);
 
-  if (!token) {
+  if (!dados) {
 
     return null;
   }

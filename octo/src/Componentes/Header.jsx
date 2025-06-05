@@ -42,7 +42,7 @@ const Header = () => {
 
 
     const handleLogout = () =>{
-        localStorage.removeItem('token');
+        localStorage.removeItem('dados');
         navigate ("/")
         window.location.reload()
     }
@@ -53,7 +53,7 @@ const Header = () => {
         setIsModalOpen(false); 
       };
 
-    const token = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : null;
+    const dados = localStorage.getItem("dados") ? JSON.parse(localStorage.getItem("dados")) : null;
     const drawerList = (
         <Box
             className="sidebar"
@@ -166,7 +166,7 @@ const Header = () => {
                 </Link>
                 
 
-                {token ? (<div id='login'>
+                {dados ? (<div id='login'>
                     <Link
                     id={location.pathname ==="/ClientePage" ? "active-link" : "ClientPage-link"}
                     to="/ClientPage"

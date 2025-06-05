@@ -15,7 +15,7 @@ function Modal({isOpen, onClose}){
     })
     
     async function handleAuth(e) {
-        const url = "http://localhost/OctoCore_API/endpoints/users/auth.php"
+        const url = "http://localhost/OctoCore_API/user/auth"
         e.preventDefault();
         const payload = {
             email: loginForm.email,
@@ -26,11 +26,11 @@ function Modal({isOpen, onClose}){
             headers: {"Content-Type": "application/json",},
             body: JSON.stringify(payload),
         })
-        const response = await requisicao.json()
-        if (response['data']['autenticado'] === true){
+        if (requisicao.ok){
+            const response = await requisicao.json()
             
-            const token = response['data']
-            localStorage.setItem('token', JSON.stringify(token));
+            const dados = response['data']
+            localStorage.setItem('dados', JSON.stringify(dados));
             
             onClose()
 
@@ -44,7 +44,7 @@ function Modal({isOpen, onClose}){
    
     }
     async function handleSignup(e) {
-        const url = "http://localhost/OctoCore_API/endpoints/users/signup.php"
+        const url = "http://localhost/OctoCore_API/user/signup"
         e.preventDefault();
         const payload = {
             email: loginForm.email,
