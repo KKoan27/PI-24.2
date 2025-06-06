@@ -172,6 +172,7 @@ body * {
   right: 0;
   z-index: 4;
   padding: 8px 50px;
+  padding-right: 8rem;
 }
 
 .botao-navegacao:disabled {
