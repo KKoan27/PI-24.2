@@ -8,7 +8,7 @@ export default function FuncClientePage() {
     const [activeSection, setActiveSection] = useState("pedidos"); // Inicializa com 'dados'
     const dados = localStorage.getItem("dados") ? JSON.parse(localStorage.getItem("dados")) : null;
     const [IMGatual,setIMGatual]= useState(dados['linkPFP'])
-    const [LinkPic,setLinkPic]= useState('')
+    const [pic,setPic]= useState('')
     const [createAddres,setcreateAddress] = useState(false)
     const [createCard, setcreateCard] = useState(false)
     const [formDataAddress, setFormDataAddress] = useState({
@@ -33,7 +33,6 @@ export default function FuncClientePage() {
         endereco: "user/endereco",
         ticket: "user/ticket",
         pagamento: "user/cc",
-        config: "user/config",
     };
 
     function Deletar(idaddress){
@@ -179,26 +178,28 @@ export default function FuncClientePage() {
 
       // SEÇÂO DE EDIÇÂO DE FOTO
     async function handleEdit() {
-      const payload = {
-          linkPFP: LinkPic,
-      };
-  
+      const payload = new FormData();
+      payload.append('imagem', pic); //Adiciona a imagem ao payload
+      
       try {
           const response = await fetch("http://localhost/octocore_api/user/picture", {
               method: "POST",
               headers: {
-                  "Content-Type": "application/json",
                   "Authorization": `Bearer ${dados['token']}`,
               },
-              body: JSON.stringify(payload),
+              body: payload,
           });
   
           if (!response.ok) {
               // Lança erro se a resposta não estiver OK (ex.: 404, 500)
               throw new Error(`Erro na requisição: ${response.status} - ${response.statusText}`);
           }
-          setIMGatual(LinkPic)    
-          dados.linkPFP = LinkPic
+          const linkPic = await response.json();
+          console.log(linkPic)
+
+          setIMGatual(linkPic['data']['linkPFP'])    // Atualiza a imagem atual
+          dados.linkPFP = linkPic['data']['linkPFP']
+          console.log(dados.linkPFP)
           localStorage.setItem("dados", JSON.stringify(dados));
      
         
@@ -230,16 +231,18 @@ export default function FuncClientePage() {
 
     // useEffect apenas para monitorar mudanças nos dados e endpoint
     useEffect(() => {
-        if (dados) {
+        if (dados && endpoint) {
             Pulldata(endpoint);
         }
-    }, [endpoint]); // Dependência de 'dados' e 'endpoint'
+    }, [dados,endpoint]); // Dependência de 'dados' e 'endpoint'
 
     // Função para alterar a seção ativa e o endpoint fora do useEffect
     const changeSection = (section) => {
         if (section !== activeSection) {
             setActiveSection(section); // Atualiza a seção ativa
-            setEndpoint(sectionToEndpoint[section]); // Atualiza o endpoint correspondente
+            if (sectionToEndpoint[section]) {
+            setEndpoint(sectionToEndpoint[section]);
+        }
         }
     };
 
@@ -402,8 +405,8 @@ export default function FuncClientePage() {
               
               <h2 style={{textAlign:"center"}}> {dados['usuario']}</h2>
               <p style={{textAlign:"center"}}> {dados['email']}  </p>
-              <p style={{textAlign:"center"}}>Coloque o link da imagem que gostaria:</p>
-              <input type="text" placeholder="Coloque o link" onChange={(e)=>(setLinkPic(e.target.value))}/>
+              <p style={{textAlign:"center"}}>Fazer upload de nova imagem de perfil:</p>
+              <input type="file" onChange={(e)=>(setPic(e.target.files[0]))}/>
               <button  onClick={handleEdit}>Salvar</button>
 
 
