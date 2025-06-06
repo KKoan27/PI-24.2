@@ -20,23 +20,26 @@ const CartPage = () => {
   const [carrinho, setCarrinho] = useState([]);
   const [items, setItems] = useState([]) 
   
+  const token = JSON.parse(localStorage.getItem("token")) ;
 
 
   // Buscar dados do usuário
   useEffect(() => {
     async function buscarEnderecos() {
-      const user = 1; // exemplo de ID de usuário
-      const response = await fetch(`http://localhost/octocore_api/endpoints/users/endereco.php?user=${user}`);
+       // exemplo de ID de usuário
+      const response = await fetch(`http://localhost/octocore_api/endpoints/users/endereco.php?user=${token['idUsuario']}`);
+      console.log(token)
       if (response.ok) {
         const data = await response.json()
         const listaEnderecos = data['data']
   
         setEnderecos(listaEnderecos);
         }
+      
     }
     async function buscarCartoes() {
-      const user = 1; // exemplo de ID de usuário
-      const response = await fetch(`http://localhost/octocore_api/endpoints/users/cc.php?user=${user} `);
+     
+      const response = await fetch(`http://localhost/octocore_api/endpoints/users/cc.php?user=${token['idUsuario']} `);
       if (response.ok) {
         const data = await response.json()
         const listaCartoes = data['data']
@@ -89,7 +92,7 @@ const CartPage = () => {
    
 
     const payload = {
-      idUsuario: 1,
+      idUsuario: token['idUsuario'],
       cupom: cupomValido,
       valorFrete: frete,
       metodoPagamento: cartaoSelecionado,
@@ -139,7 +142,7 @@ const CartPage = () => {
             <h3>Entrega e pagamento</h3>
             <div className="card">
               <div className="form-group">
-                <label htmlFor="endereco">Endereço</label>
+                <label htmlFor="endereco">Endereço de Entrega</label>
                 <select
                   id="idEndereco"
                   name="idEndereco"
@@ -147,18 +150,18 @@ const CartPage = () => {
                   onChange={(e) => setEnderecoSelecionado(e.target.value)}
                 >
                   <option value='' selected>Selecione uma opção...</option>
-                  {enderecos.map((item, index) => (
+                  {enderecos.length > 0 ? enderecos.map((item, index) => (
                     <option key={index} value={item.rua}>
                       {item.nome} - {item.rua} - {item.complemento}
-                    </option>
-                  ))}
+                    </option>))
+                    : <option disabled value=''>Cadastre seus endereços na página meu perfil</option>}
                 </select>
               </div>
               <div className="form-group">
       
     </div>
               <div className="form-group">
-                <label htmlFor="cartao">Cartão de Crédito</label>
+                <label htmlFor="cartao">Método de Pagamento</label>
                 <select
                   id="idCartao"
                   name="idCartao"
@@ -166,11 +169,13 @@ const CartPage = () => {
                   onChange={(e) => setCartaoSelecionado(e.target.value)}
                 >
                   <option value='' selected>Selecione uma opção...</option>
-                  {cartoes.map((item, index) => (
+                  <option value='Pix' selected>Pix</option>
+                  <option value='Boleto' selected>Boleto</option>
+                  {enderecos.length > 0 ? cartoes.map((item, index) => (
                     <option key={index} value={item.idCartao}>
-                        Final {item.final}
-                    </option>
-                  ))}
+                        CC Final {item.final}
+                    </option>))
+                    : <option disabled value=''>Cadastre seus métodos de pagamento na página meu perfil</option>}
                 </select>
               </div>
               

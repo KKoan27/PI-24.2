@@ -6,7 +6,12 @@
   padding: 0 20px; 
   color: #fff;
 }
-
+#login{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 #HeaderOp {
   display: flex;
@@ -34,7 +39,9 @@
   font-weight: bold;
   margin-left: 10px;       
   text-decoration: none;    
-  padding: 4px 10px;       
+  padding: 4px 10px;
+  justify-content: center;
+  cursor:pointer;       
 }
 
 .header-icon {
@@ -61,4 +68,10 @@
   width: 1px;
   background-color: #fff;
   margin: 0 10px;
+}
+
+
+#Logout{
+    align-items: center;
+    justify-content: center;
 }

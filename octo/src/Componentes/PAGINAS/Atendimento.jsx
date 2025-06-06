@@ -6,10 +6,12 @@ import { color } from "@mui/system";
 export default function Atendimento(){
     const [ids, setIds] = useState([])
     const [resposta, setResposta] = useState(null)
-    const [user, setUser] = useState(1)
+    const token = JSON.parse(localStorage.getItem("token")) ;
+    const [user, setUser] = useState(token['idUsuario'])
+    const [enviado, setEnviado] = useState(false)
 
     const [form, setForm] = useState({
-        idUsuario: user,
+    
         idPedido: 0,
         titulo: "",
         descricao: ""
@@ -40,7 +42,7 @@ export default function Atendimento(){
        
 
         const payload = {
-            idUsuario: form.idUsuario,
+            idUsuario: user,
             idPedido: parseInt(form.idPedido),
             titulo: form.titulo,
             descricao: form.descricao
@@ -56,7 +58,7 @@ export default function Atendimento(){
             setResposta(false);
         }
         else{
-        
+        setEnviado(true)
         setResposta(true)
         }
         
@@ -80,7 +82,7 @@ export default function Atendimento(){
                 <input name="titulo" id="titulo" onChange={handleChange} required/>
                 <label htmlFor="descricao">Descrição do problema:</label>
                 <textarea name="descricao" id="descricao" onChange={handleChange} required/>
-                <button>Enviar Ticket</button>
+                <button disabled={enviado}>Enviar Ticket</button>
                 {resposta !== null ? (resposta ? 
                 (<p style={{color: 'green'}}>Seu ticket de suporte foi criado com sucesso. Por favor, acompanhe seu e-mail para atualizações sobre o status do seu pedido.</p>) :
                 (<p style={{color: 'red'}}>Erro ao criar o ticket</p>)) : null

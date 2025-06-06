@@ -27,11 +27,18 @@
 #formTicket textarea{
     height: 30rem;   
 }
-#formTicket button:hover {
+#formTicket button:not(:disabled):hover { 
     background-color: rgb(133, 2, 233); /* Cor de fundo quando hover */
     color: rgb(255, 255, 255); /* Cor do texto quando hover */
     border: 0.1rem solid rgb(63, 0, 110);
   }
+  #formTicket button:disabled {
+    background-color: grey; /* Cor do botão desativado */
+    color: lightgrey;
+    cursor: not-allowed;
+    border: none;
+}
+
 .AtendiClass{
     display: flex;
     flex-direction: column;
