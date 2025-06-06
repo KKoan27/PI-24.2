@@ -41,7 +41,7 @@ const MonteSeuPC = () => {
     const buscarProdutosPorCategoria = async (categoria) => {
       try {
         const response = await fetch(
-          `http://localhost/octocore_api/endpoints/produtos/produtos.php?categoria=${categoria.id}`
+          `http://localhost/octocore_api/produtos/${categoria.id}`
         );
         const { data } = await response.json();
         setProdutos(Array.isArray(data) ? data : []);

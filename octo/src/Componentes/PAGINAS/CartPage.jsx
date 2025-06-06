@@ -20,15 +20,19 @@ const CartPage = () => {
   const [carrinho, setCarrinho] = useState([]);
   const [items, setItems] = useState([]) 
   
-  const token = JSON.parse(localStorage.getItem("token")) ;
+  const dados = JSON.parse(localStorage.getItem("dados")) ;
 
 
   // Buscar dados do usuário
   useEffect(() => {
     async function buscarEnderecos() {
        // exemplo de ID de usuário
-      const response = await fetch(`http://localhost/octocore_api/endpoints/users/endereco.php?user=${token['idUsuario']}`);
-      console.log(token)
+      const response = await fetch(`http://localhost/octocore_api/user/endereco`, {
+    method: "GET",
+    headers: {
+      "Authorization": `Bearer ${dados['token']}`,
+  },
+});
       if (response.ok) {
         const data = await response.json()
         const listaEnderecos = data['data']
@@ -39,7 +43,12 @@ const CartPage = () => {
     }
     async function buscarCartoes() {
      
-      const response = await fetch(`http://localhost/octocore_api/endpoints/users/cc.php?user=${token['idUsuario']} `);
+      const response = await fetch(`http://localhost/octocore_api/user/cc`, {
+    method: "GET",
+    headers: {
+      "Authorization": `Bearer ${dados['token']}`,
+  },
+});
       if (response.ok) {
         const data = await response.json()
         const listaCartoes = data['data']
@@ -62,13 +71,12 @@ const CartPage = () => {
         idProduto: element.idProduto,
         quantidade: 1,
       }));
-      console.log(listaProdutos)
       setItems(listaProdutos)
     }
   }, [state?.carrinho]);
 
   async function aplicarDesconto() {
-      const response = await fetch(`http://localhost/octocore_api/endpoints//order/cupons.php?cupom=${cupom}`);
+      const response = await fetch(`http://localhost/octocore_api/cupons/${cupom}`);
       if (response.ok) {
         const data = await response.json()
         
@@ -92,17 +100,17 @@ const CartPage = () => {
    
 
     const payload = {
-      idUsuario: token['idUsuario'],
       cupom: cupomValido,
       valorFrete: frete,
       metodoPagamento: cartaoSelecionado,
       enderecoEntrega: enderecoSelecionado,
       listaProdutos: items
     };
-    const response1 = await fetch('http://localhost/octocore_api/endpoints/order/order.php', {
+    const response1 = await fetch('http://localhost/octocore_api/order', {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${dados['token']}`,
         },
         body: JSON.stringify(payload),
     })

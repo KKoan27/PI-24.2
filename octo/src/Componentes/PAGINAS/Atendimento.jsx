@@ -6,8 +6,7 @@ import { color } from "@mui/system";
 export default function Atendimento(){
     const [ids, setIds] = useState([])
     const [resposta, setResposta] = useState(null)
-    const token = JSON.parse(localStorage.getItem("token")) ;
-    const [user, setUser] = useState(token['idUsuario'])
+    const dados = JSON.parse(localStorage.getItem("dados")) ;
     const [enviado, setEnviado] = useState(false)
 
     const [form, setForm] = useState({
@@ -26,7 +25,12 @@ export default function Atendimento(){
     useEffect(() => {
         async function buscarPedidos(){
 
-            const response = await fetch(`http://localhost/octocore_api/endpoints/order/order.php?user=${user}`)
+            const response = await fetch(`http://localhost/octocore_api/order`, {
+  method: "GET",
+  headers: {
+    "Authorization": `Bearer ${dados['token']}`,
+  },
+});
             if (response.ok) {
             const data = await response.json()
             const pedidosIds = data['data'].map(element => element['idPedido'])
@@ -42,15 +46,15 @@ export default function Atendimento(){
        
 
         const payload = {
-            idUsuario: user,
             idPedido: parseInt(form.idPedido),
             titulo: form.titulo,
             descricao: form.descricao
         };
-        const response1 = await fetch('http://localhost/octocore_api/endpoints/users/ticket.php', {
+        const response1 = await fetch('http://localhost/octocore_api/user/ticket', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": `Bearer ${dados['token']}`,
             },
             body: JSON.stringify(payload),
         })

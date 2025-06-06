@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import '../CompCss/ClientPage.css'
 
 export default function FuncClientePage() {
-    const url = `http://localhost/OctoCore_API/endpoints/`;
-    const [endpoint, setEndpoint] = useState("order/order");
+    const url = `http://localhost/OctoCore_API/`;
+    const [endpoint, setEndpoint] = useState("order");
     const [ID, setID] = useState("");
     const [activeSection, setActiveSection] = useState("pedidos"); // Inicializa com 'dados'
     const dados = localStorage.getItem("dados") ? JSON.parse(localStorage.getItem("dados")) : null;
@@ -28,12 +28,12 @@ export default function FuncClientePage() {
 
     // Mapeamento de seções para endpoints
     const sectionToEndpoint = {
-        dados: "users/auth",
-        pedidos: "order/order",
-        endereco: "users/endereco",
-        ticket: "users/ticket",
-        pagamento: "users/cc",
-        config: "users/config",
+        dados: "user/auth",
+        pedidos: "order",
+        endereco: "user/endereco",
+        ticket: "user/ticket",
+        pagamento: "user/cc",
+        config: "user/config",
     };
 
     function Deletar(idaddress){
@@ -42,27 +42,28 @@ export default function FuncClientePage() {
 
     async function handleDelete(endpoint,ID){
       let payload
-      if(endpoint === 'users/endereco'){
+      if(endpoint === 'user/endereco'){
       payload = {
         idEndereco: ID
       }
       }
-      else if(endpoint === 'users/cc'){
+      else if(endpoint === 'user/cc'){
         payload = {
           IDCC: ID
         }
       }
-      const response = await fetch(`${url}${endpoint}.php`,{
+      const response = await fetch(`${url}${endpoint}`,{
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${dados['token']}`,
           },
           body: JSON.stringify(payload),
 
       })
       if(response.ok){
         alert("Deletado com sucesso")
-        await Pulldata(dados['idUsuario'], endpoint); // Atualiza os dados
+        await Pulldata(endpoint); // Atualiza os dados
       }
       else{
         alert("Falha ao deletar :c")
@@ -76,14 +77,14 @@ export default function FuncClientePage() {
       nome,
       rua,
       cep,
-      complemento,
-      idUsuario: dados['idUsuario'],
+      complemento
     };
       try {
-        const resposta = await fetch ("http://localhost/octocore_api/endpoints/users/endereco.php",{
+        const resposta = await fetch ("http://localhost/octocore_api/user/endereco",{
           method: "POST",
           headers:{
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${dados['token']}`,
           },
           body: JSON.stringify(payload)
         });
@@ -91,7 +92,7 @@ export default function FuncClientePage() {
           throw new Error (`erro na requisição: ${resposta.status}- ${resposta.statusText}`);
         }else{
 
-          await Pulldata(dados['idUsuario'], "users/endereco")
+          await Pulldata("user/endereco")
           alert("Adicionado com sucesso!")
 
         }
@@ -119,20 +120,18 @@ export default function FuncClientePage() {
         numeroCC,
         cvv,
         validade,
-        idUsuario: dados['idUsuario'],
       };
         try {
-          const resposta = await fetch (`http://localhost/octocore_api/endpoints/users/cc.php/?user=${dados['idUsuario']}`,{
+          const resposta = await fetch (`http://localhost/octocore_api/user/cc`,{
             method: "POST",
             headers:{
               "Content-Type": "application/json",
+              "Authorization": `Bearer ${dados['token']}`,
             },
             body: JSON.stringify(payload)
           });
-          if(!resposta){
+          if(!resposta.ok){
             throw new Error (`erro na requisição: ${resposta.status}- ${resposta.statusText}`);
-          }else{
-            alert("deu certo")
           }
   
         } catch (error){
@@ -153,15 +152,15 @@ export default function FuncClientePage() {
       async function toggleActiveCard(cardId) {
         const payload = {
             IDCC: cardId,
-            idUsuario: dados['idUsuario'],
             
         };
     
         try {
-            const response = await fetch(`http://localhost/octocore_api/endpoints/users/cc.php`, {
+            const response = await fetch(`http://localhost/octocore_api/user/cc`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
+                    "Authorization": `Bearer ${dados['token']}`,
                 },
                 body: JSON.stringify(payload),
             });
@@ -170,7 +169,7 @@ export default function FuncClientePage() {
                 throw new Error(`Erro ao atualizar cartão: ${response.status} - ${response.statusText}`);
             }
     
-            await Pulldata(dados['idUsuario'], "users/cc"); // Atualiza a lista de cartões
+            await Pulldata("user/cc"); // Atualiza a lista de cartões
         } catch (error) {
             alert(`Erro ao atualizar cartão: ${error.message}`);
         }
@@ -181,17 +180,15 @@ export default function FuncClientePage() {
       // SEÇÂO DE EDIÇÂO DE FOTO
     async function handleEdit() {
       const payload = {
-          idUsuario: dados['idUsuario'],
           linkPFP: LinkPic,
       };
   
       try {
-          const response = await fetch("http://localhost/octocore_api/endpoints/users/picture.php", {
-              method: "PATCH",
+          const response = await fetch("http://localhost/octocore_api/user/picture", {
+              method: "POST",
               headers: {
                   "Content-Type": "application/json",
-                  // Inclua "Authorization" se necessário
-                  // "Authorization": `Bearer ${token}`,
+                  "Authorization": `Bearer ${dados['token']}`,
               },
               body: JSON.stringify(payload),
           });
@@ -210,12 +207,13 @@ export default function FuncClientePage() {
           console.error("Erro:", error.message);
       }
   }
-    const Pulldata = async (id, endpoint) => {
+    const Pulldata = async (endpoint) => {
         try {
-            const resposta = await fetch(`${url}${endpoint}.php?user=${id}`, {
+            const resposta = await fetch(`${url}${endpoint}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
+                    "Authorization": `Bearer ${dados['token']}`,
                 },
             });
 
@@ -224,7 +222,6 @@ export default function FuncClientePage() {
             }
 
             const data = await resposta.json();
-            console.log(data);
             setID(data); // Atualiza o estado com os dados recebidos
         } catch (error) {
             console.error("Erro:", error.message);
@@ -233,8 +230,8 @@ export default function FuncClientePage() {
 
     // useEffect apenas para monitorar mudanças nos dados e endpoint
     useEffect(() => {
-        if (dados && dados["idUsuario"] ) {
-            Pulldata(dados["idUsuario"], endpoint);
+        if (dados) {
+            Pulldata(endpoint);
         }
     }, [endpoint]); // Dependência de 'dados' e 'endpoint'
 
@@ -255,8 +252,6 @@ export default function FuncClientePage() {
           <img className="user-avatar" src={IMGatual} alt="Fotinha"/>
           </div>
           <div className="user-details">
-          {console.log("dados:", dados)}
-
             <h2> {dados['usuario']}</h2>
             <p> {dados['email']}  </p>
           </div>
