@@ -13,6 +13,7 @@ import CartPage from './Componentes/PAGINAS/CartPage';
 import PC1 from './Componentes/PAGINAS/PC1';
 import PC2 from './Componentes/PAGINAS/PC2';
 import PC3 from './Componentes/PAGINAS/PC3';
+import ChatButton from './Componentes/PAGINAS/ChatButton';
 import Politicas from './Componentes/PAGINAS/Politicas';
 import ThankYouPage from './Componentes/PAGINAS/ThankYouPage'; 
 
@@ -39,6 +40,9 @@ function App() {
       </main>
 
       <Rodape />
+      
+      <ChatButton />
+
     </BrowserRouter>
   )
 
