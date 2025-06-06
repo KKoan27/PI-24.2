@@ -128,6 +128,13 @@
   width: 5rem;
   height: 2.8rem;
 }
+.krakinho-input button:disabled {
+  background-color: #785392;
+  cursor: not-allowed;
+}
+.krakinho-input button:disabled:hover {
+  background-color: #785392;
+}
 
 .krakinho-input button:hover {
   background-color: #6a0dad;

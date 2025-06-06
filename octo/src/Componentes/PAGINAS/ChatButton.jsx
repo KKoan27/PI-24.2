@@ -7,7 +7,9 @@ function ChatButton() {
     { sender: 'krakinho', text: 'Olá! Sou o Krakinho. Como posso te ajudar?' }
   ]);
   const [input, setInput] = useState('');
+  const [waiting, setWaiting] = useState(false);
   const bottomRef = useRef(null);
+  const ws = useRef(null);
 
   // Scroll automático para a última mensagem
   useEffect(() => {
@@ -16,15 +18,34 @@ function ChatButton() {
     }
   }, [messages]);
 
+  // Conecta ao WebSocket ao montar o componente
+  useEffect(() => {
+    ws.current = new WebSocket('ws://localhost:8000/chat');
+    ws.current.onmessage = (event) => {
+      setMessages(prev => [...prev, { sender: 'krakinho', text: event.data }]);
+      setWaiting(false);
+    };
+
+
+    return () => {
+      ws.current && ws.current.close();
+    };
+  }, []);
+
   const handleSend = () => {
     if (input.trim() === '') return;
 
+    setWaiting(true);
+
     setMessages(prev => [...prev, { sender: 'user', text: input }]);
+    if (ws.current && ws.current.readyState === WebSocket.OPEN) {
+      ws.current.send(input);
+    }
     setInput('');
     // Simula resposta do Krakinho após 1s
-    setTimeout(() => {
-      setMessages(prev => [...prev, { sender: 'krakinho', text: 'Obrigado pela sua mensagem!' }]);
-    }, 1000);
+    // setTimeout(() => {
+    //   setMessages(prev => [...prev, { sender: 'krakinho', text: 'Obrigado pela sua mensagem!' }]);
+    // }, 1000);
   };
 
   return (
@@ -60,7 +81,7 @@ function ChatButton() {
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSend()}
             />
-            <button onClick={handleSend}>Enviar</button>
+            <button onClick={handleSend} disabled={waiting}>Enviar</button>
           </div>
         </div>
       )}
