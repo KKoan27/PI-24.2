@@ -10,7 +10,7 @@ const CartPage = () => {
   
   const [cupom, setCupom] = useState(null);
   const [cupomValido, setCupomValido] = useState(null)
-  const [subtotal, setSubtotal] = useState(state?.total);
+  const [subtotal, setSubtotal] = useState(Number(state?.total) || 0);
   const [valorTotal, setValorTotal] = useState(subtotal);
   const [enderecos, setEnderecos] = useState([]);
   const [desconto, setDesconto] = useState(0)
@@ -61,7 +61,8 @@ const CartPage = () => {
   }, []);
   useEffect(()=>{
 
-    setValorTotal(subtotal+frete-desconto)
+    const total = subtotal + frete - desconto;
+    setValorTotal(total >= 0 ? total : 0);
   },[subtotal, frete, desconto])
 
   useEffect(() => {
@@ -80,11 +81,10 @@ const CartPage = () => {
       if (response.ok) {
         const data = await response.json()
         
-        const descontoCupom = subtotal * data['data'] / 100;
+        const descontoCupom = subtotal * (data['data']['desconto'] / 100);
         setDesconto(descontoCupom)
         setCupomValido(cupom)
         
-        alert(`Cupom ${cupom} de ${data['data']}% aplicado`)
         }
         else{
           setDesconto(0)
